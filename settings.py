@@ -35,8 +35,8 @@ USE_I18N = True
 USE_L10N = True
 
 
-#MEDIA_ROOT = DIRNAME + '/static_media/'
-MEDIA_ROOT = '/home/electrocoder/webapps/pythontr_org/myproject/static_media'
+MEDIA_ROOT = DIRNAME + '/static_media/'
+#MEDIA_ROOT = '/home/electrocoder/webapps/pythontr_org/myproject/static_media'
 
 MEDIA_URL = 'http://pythontr.org/media/'
 
@@ -102,6 +102,7 @@ INSTALLED_APPS = (
     'myproject.polls',
     'django.contrib.sitemaps',
     'myproject.python',
+    'myproject.pythoncoders',
 )
 
 LOGGING = {

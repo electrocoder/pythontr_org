@@ -9,9 +9,32 @@ from django.http import HttpResponse
 
 DIRNAME = os.path.dirname(__file__)
 
-def index(request, category):
+def index(request):
     """
-    index metodu tum katogorilerde bulunan gonderileri gosterir
+    index metodu tum katogorilerde bulunan en son gonderileri gosterir
+    """
+    try:
+        all_posts = Posts.objects.all().filter().order_by('-post_pubdate')
+        last_posts = Posts.objects.all().order_by('-post_pubdate')[:5]
+        read_count = Posts.objects.all().order_by('-post_read_count')[:5]
+        
+        x = Context({
+                  'all_posts':all_posts,
+                  'last_posts':last_posts,
+                  'read_count':read_count,
+                  })
+        
+    except:
+        raise Http404
+            
+    return render_to_response('python/index.html', x)
+
+def category(request, category):
+    """
+    category metodu secilen katogoriye ait gonderileri gosterir
+    orn :
+            /python/blog
+            /python/kitap
     """
     try:
         all_posts = Posts.objects.all().filter(post_category__category_name=category).order_by('-post_pubdate')

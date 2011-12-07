@@ -7,6 +7,7 @@ from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from myproject.python.models import Posts, Authors, Categories
 from sitemaps import PostsSitemap, CategoriesSitemap
 from feeds import LatestPosts
+from myproject.pythoncoders.models import PythonCoders
 
 admin.autodiscover()
 
@@ -30,9 +31,10 @@ sitemaps = {
 }
 
 urlpatterns = patterns('',
-    (r'^$', 'django.views.generic.simple.redirect_to', { 'url': '/python/blog/' }),
+    (r'^$', 'django.views.generic.simple.redirect_to', { 'url': '/python/' }),
     (r'^/$', 'myproject.python.views.index'),
-    (r'^python/(?P<category>[^/]*)/$', 'myproject.python.views.index'),
+    (r'^python/$', 'myproject.python.views.index'),
+    (r'^python/(?P<category>[^/]*)/$', 'myproject.python.views.category'),
     (r'^python/(?P<category>[^/]*)/(?P<link>[^/]*)/', 'myproject.python.views.show'),
     
     (r'^codebank/$', 'myproject.python.views.codebank'),
@@ -49,6 +51,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     
     (r'^polls/', include('myproject.polls.urls')),
+    (r'^pythoncoders/$', 'myproject.pythoncoders.views.contact'),
 )
 
 urlpatterns += patterns('django.contrib.sitemaps.views',
