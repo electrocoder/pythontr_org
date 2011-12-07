@@ -55,7 +55,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-SECRET_KEY = '8!xvqp_o(971ol72nh$2k)zw$!ns0hf=awdk=47ii&k0c@ru)v'
+SECRET_KEY = '8!xvqp_o(er345zw$!ns0h33f=awdk=47ii&k0c@ru)v'
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -86,7 +86,7 @@ TEMPLATE_DIRS = ("/home/electrocoder/virtual-python/workspace/django-python/pyth
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
-DISQUS_API_KEY = '7hoAnpay9gNr8s7hSI5vs3OBzK5jyKneHJQZqE3jUsgRiWgdzH1ISLlxoos2JpnY' 
+DISQUS_API_KEY = '7hoAnpay9gNr8s7hSI5v2341E3jUsgRiWgdzH122ISLlxoos2JpnY' 
 DISQUS_WEBSITE_SHORTNAME = 'pythonprogramcilari'
 
 INSTALLED_APPS = (
