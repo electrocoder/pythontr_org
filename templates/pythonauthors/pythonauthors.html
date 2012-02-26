@@ -1,0 +1,20 @@
+{% extends "base-pythoncoders.html" %}
+<meta charset='utf-8'>
+{% block main %}
+<br></br>
+<center>Python Programlama Dili Makale Ekleme Formu(BETA)</center>
+<br></br>
+<center>Makalenizi yazdıktan sonra 'Gonder' butonu ile sisteme kaydediniz.</center>
+<br></br>
+<center>Makaleniz incelenip onaylandıktan sonra yayınlanacaktır.</center>
+<br></br>
+<center>Resim eklemeyiniz....</center>
+<center>
+<form action="/pythonauthors/" method="post">{% csrf_token %}
+<table>{{ form.as_table }}</table>
+<br></br>
+<input type="submit" value="Gonder" />
+</form>
+</center>
+<br></br>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+<meta charset='utf-8'>
+{% block main %}
+<script type="text/javascript">
+// Popup window code
+function newPopup(url) {
+	popupWindow = window.open(
+		url,'popUpWindow','height=500,width=630,left=10,top=10,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=yes')
+}
+</script>
+<div id="left">
+<div class="container">
+<div class="post">
+<div class="postcontent"><h2>Python Shell</h2>
+<p>
+<a href="/static/images/python-shell.jpg">
+<img style="margin: 3px; float: left;" src="/static/images/python-shell.jpg" alt="python-shell" border="0" width="129" height="129">
+</a>
+Python ile yazılan programların çalıştırılması için bilgisayarınızda mutlaka bir python
+yorumlayıcısına ihtiyaç vardır. Yorumlayıcı sizin dosyanızı alır ve satır satır yorumlayarak byte
+koda dönüştürür. Oluşturulan .pyc uzantılı byte kod pc nizin belleginde çalıştırılmaya başlanır.
+<br>
+<br>
+Python kodlarını çalıştırmak için bilgisayarınıza kurulum gerektirmeyen "Python Interaktif Shell"
+özellikle python programlama dilini ilk defa deneyecek olan veya kurulum yetkisi bulunmayan
+bilgisayarlarda python ile kodlamayı sağlamak için Google mühendisleri
+tarafından gerçekleştirilmiştir.
+<br>
+<br>
+"Python Interaktif Shell" ajax teknolojisi kullanılarak Google geliştirici mühendislerinden
+<a href="http://code.google.com/u/ryanb.appengine/">"ryanb"</a> tarafından kodlanmıştır.
+<br>
+<br>
+<a href="JavaScript:newPopup('http://shell.appspot.com/');">Python shell popup window</a>
+
+<br></br>
+<br></br>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base-pythoncoders.html" %}
+<meta charset='utf-8'>
+{% block main %}
+<br></br>
+<center>Kartvizitleri yayınlanan kullanıcıların üyelik sistemi ile bir bağlantısı yoktur.</center>
+<br></br>
+<center>Yayınlanan bilgiler genel amaçlı ve tüm kullanıcıların erişimine açıktır.</center>
+<br></br>
+<center>Kartvizit bilgilerinin doğruluğu bilgileri giren kullanıcının sorumluluğundadır.</center>
+<br></br>
+<center><a href="http://pythontr.org/pythoncoders/"><img src="/static/img/author.png" border="1" height="70">KARTVİZİT EKLE</a></center>
+<br></br>
+<center><h3>Python kullanıcıları ;</h3></center>
+
+{%for i in all_coder%}
+	<br></br>
+	<center>
+	<table border="5">
+	<tr>
+	<td><a><img src="/static/img/author.png" border="1" height="70"></a>{{ i.pythoncoders_photo }}</td>
+	<td>&nbsp;&nbsp;{{ i.pythoncoders_name }}&nbsp;&nbsp;</td></tr>
+	<tr>
+	<td>&nbsp;&nbsp;Web Adresi : </td>
+	<td>&nbsp;&nbsp;<a href="{{ i.pythoncoders_web }}">{{ i.pythoncoders_web }}</a>&nbsp;&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;&nbsp;E-Mail : </td>
+	<td>&nbsp;&nbsp;{{ i.pythoncoders_email }}&nbsp;&nbsp;</td>
+	</tr>
+	<td>&nbsp;&nbsp;Kısa Bilgi : </td>
+	<td>&nbsp;&nbsp;{{ i.pythoncoders_bio }}&nbsp;&nbsp;</td>
+	</tr>
+	<td>&nbsp;&nbsp;Okul Durumu : </td>
+	<td>&nbsp;&nbsp;{{ i.pythoncoders_school }}&nbsp;&nbsp;</td>
+	</tr>
+	<td>&nbsp;&nbsp;İş Durumu : </td>
+	<td>&nbsp;&nbsp;{{ i.pythoncoders_job }}&nbsp;&nbsp;</td>
+	</tr>
+	<td>&nbsp;&nbsp;Git Adresi : </td>
+	<td>&nbsp;&nbsp;{{ i.pythoncoders_git }}&nbsp;&nbsp;</td>
+	</tr>
+	<td>&nbsp;&nbsp;Cep Telefonu : </td>
+	<td>&nbsp;&nbsp;{{ i.pythoncoders_mobil }}&nbsp;&nbsp;</td>
+	</tr>
+	<td>&nbsp;&nbsp;Python Eğitim Seviyesi : </td>
+	<td>&nbsp;&nbsp;{{ i.pythoncoders_star }}&nbsp;&nbsp;</td>
+	</tr>
+	</table>
+	</center>
+{%endfor%}
+<br></br>
+{% endblock %}
