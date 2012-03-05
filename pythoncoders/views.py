@@ -5,11 +5,18 @@ from django.http import Http404
 from django.template import Context, loader
 from django.db.models import Max
 from django.views.decorators.csrf import csrf_exempt
+<<<<<<< HEAD
 import os, time, datetime
 from django.http import HttpResponse
 from myproject.pythoncoders.form import PythonCodersForm
 from django.http import HttpResponseRedirect
 
+=======
+import os, time
+from django.http import HttpResponse
+from myproject.pythoncoders.form import PythonCodersForm
+from django.http import HttpResponseRedirect
+>>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
 
@@ -26,13 +33,17 @@ def contact(request):
             web_adresi = form.cleaned_data['web_adresi']
             e_posta = form.cleaned_data['e_posta']
             kisa_bilgi = form.cleaned_data['kisa_bilgi']
+<<<<<<< HEAD
             okul_durumu = form.cleaned_data['okul_durumu']
             is_durumu = form.cleaned_data['is_durumu']
+=======
+>>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
             git_adresi = form.cleaned_data['git_adresi']
             cep_telefonu = form.cleaned_data['cep_telefonu']
             python_bilgi_seviyesi = form.cleaned_data['python_bilgi_seviyesi']
                     
             from django.core.mail import send_mail
+<<<<<<< HEAD
             mesaj="Sorularınız ve proje ihtiyacınız için admin@pythontr.org mail adresimize veya 'python programcilari' Google grubumuza danışabilirsiniz.\n\n www.pythontr.org"
             send_mail('sayin ' + ad_soyad + ' pythoncular arasindasiniz', mesaj, 'admin@pythontr.org', [e_posta], fail_silently=False)
             ret.append("Sayin " + ad_soyad +" katiliminiz icin tesekkur ederiz...")
@@ -52,6 +63,10 @@ def contact(request):
                          pythoncoders_star=python_bilgi_seviyesi,
                          pythoncoders_pubdate=datetime.datetime.now()).save()
             
+=======
+            #send_mail('sayin ' + ad_soyad + ' pythoncular arasindasiniz', 'her turlu sorununuz icin bizler buradayiz', 'admin@pythontr.org', [e_posta])
+            ret.append("Sayin " + ad_soyad +" katiliminiz icin tesekkur ederiz...")
+>>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
             x = Context({
                       'ret':ret,
                       })            
@@ -63,6 +78,7 @@ def contact(request):
         ret.append(" else ")
     return render_to_response('pythoncoders/pythoncoders.html', {'form': form,})
     #return HttpResponse('son...') # Redirect after POST  
+<<<<<<< HEAD
 
 def list(request):
     """
@@ -79,3 +95,5 @@ def list(request):
         raise Http404
             
     return render_to_response('pythoncoders/python-programcilari-liste.html', x)    
+=======
+>>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60

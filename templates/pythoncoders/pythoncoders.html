@@ -1,6 +1,7 @@
 {% extends "base-pythoncoders.html" %}
 <meta charset='utf-8'>
 {% block main %}
+<<<<<<< HEAD
 <br></br>
 <center>Python programlama dili ile ilgili çalışma gruplarının</center>
 <br></br>
@@ -18,4 +19,12 @@
 </form>
 </center>
 <br></br>
+=======
+<center><h3>Python coder' e ait bilgi giris penceresi ;</h3></center>
+<br></br>
+<form action="/pythoncoders/" method="post">{% csrf_token %}
+<table>{{ form.as_table }}</table>
+<input type="submit" value="Gonder" />
+</form>
+>>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
 {% endblock %}

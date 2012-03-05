@@ -126,11 +126,19 @@ def codebank(request):
     file_read = ""
     
     try:
+<<<<<<< HEAD
         #file_list=os.listdir("/home/electrocoder/virtual-python/workspace/django-python/pythontr_org/myproject/static/python-kod-bankasi")
         file_list = os.listdir("/home/electrocoder/webapps/pythontr_org/myproject/static/python-kod-bankasi")
         for i in file_list:            
             #hfile=open("/home/electrocoder/virtual-python/workspace/django-python/pythontr_org/myproject/static/python-kod-bankasi/" + i)
             hfile = open("/home/electrocoder/webapps/pythontr_org/myproject/static/python-kod-bankasi/" + i)
+=======
+        file_list=os.listdir("/home/electrocoder/virtual-python/workspace/django-python/pythontr_org/myproject/static/python-kod-bankasi")
+        #file_list = os.listdir("/home/electrocoder/webapps/pythontr_org/myproject/static/python-kod-bankasi")
+        for i in file_list:            
+            hfile=open("/home/electrocoder/virtual-python/workspace/django-python/pythontr_org/myproject/static/python-kod-bankasi/" + i)
+            #hfile = open("/home/electrocoder/webapps/pythontr_org/myproject/static/python-kod-bankasi/" + i)
+>>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
             file_read = hfile.read(55)
             file_content.append(file_read)
         
