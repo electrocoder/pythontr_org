@@ -1,10 +1,7 @@
 #-*- coding: utf8 -*-
 from django.db import models
 from django.contrib.auth.models import User
-<<<<<<< HEAD
 from datetime import datetime
-=======
->>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
 
 class PythonCoders(models.Model):
     """
@@ -15,7 +12,6 @@ class PythonCoders(models.Model):
     Tarih : 03-12-2011
     Ekleyen : sahin
     """
-<<<<<<< HEAD
     #pythoncoders_name = models.OneToOneField(User, verbose_name = "Isim", unique=True)
     pythoncoders_name = models.CharField(max_length = 75, verbose_name = "Isim", unique=True)
     #pythoncoders_photo = models.ImageField(upload_to = 'user-images', verbose_name = "Resim", help_text ='*.gif veya *.bmp', null = True, blank = True)
@@ -47,26 +43,6 @@ class PythonCoders(models.Model):
     def __unicode__(self):
         #return self.author_name.username
         return self.pythoncoders_name
-=======
-    pythoncoders_name = models.OneToOneField(User, verbose_name = "Isim", unique=True)
-    #pythoncoders_photo = models.ImageField(upload_to = 'user-images', verbose_name = "Resim", help_text ='*.gif veya *.bmp', null = True, blank = True)
-    pythoncoders_photo = models.ImageField(upload_to='coderphotos')
-    pythoncoders_web = models.CharField(max_length = 75, verbose_name = "Web sitesi", blank = True, null = True)
-    pythoncoders_email = models.EmailField(verbose_name = "E-mail")
-    pythoncoders_bio = models.TextField(verbose_name = "Kisa aciklama", blank = True, null = True)
-    pythoncoders_git = models.CharField(max_length = 75, verbose_name = "Git adresi", blank = True, null = True)
-    pythoncoders_mobil = models.CharField(max_length = 11, verbose_name = "Cep Telefonu", blank = True, null = True)
-    pythoncoders_star = models.CharField(max_length = 11, verbose_name = "Python bilgisi", blank = True, null = True)
-    
-    def save(self):
-        for field in self._meta.fields:
-            if field.name == 'pythoncoders_photo':
-                field.upload_to = 'photos/%d' % self.id
-        super(PythonCoders, self).save()    
-
-    def __unicode__(self):
-        return self.author_name.username
->>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
         
     class Meta:
         verbose_name_plural = "Python Severler"

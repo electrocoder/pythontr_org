@@ -2,7 +2,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
-from django.template.defaultfilters import slugify
 
 class PythonAuthors(models.Model):
     """
@@ -26,9 +25,7 @@ class PythonAuthors(models.Model):
         return ('upload-new', )
     
     def save(self, *args, **kwargs):
-        slugoldu = slugify(self.pythonauthors_photo.name)
-        self.slug = slugoldu
-        #self.slug = self.pythonauthors_photo.name
+        self.slug = self.pythonauthors_photo.name
         super(PythonAuthors, self).save(*args, **kwargs)
             
 #    def save(self):

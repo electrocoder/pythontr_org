@@ -91,7 +91,7 @@
 </div>
 <div id="ribbon">
 <h1 id="sitename">
-<a href="/python/blog/"><img src="/static/img/pythontr-logo.png" alt="python" /></a>
+<a href="/python/"><img src="/static/img/pythontr-logo.png" alt="python" /></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="http://twitter.com/#!/pythontr"><img src="/static/img/twitter_newbird_blue.png" alt="twitter python" width=5%; /></a>
 <a href="http://www.facebook.com/group.php?gid=244980241949"><img src="/static/img/facebook-logo.png" alt="facebook python" width=5%; /></a>
@@ -100,16 +100,16 @@
 <a href="mailto:admin@pythontr.org"><img src="/static/img/gmail-logo.png" alt="gmail python" width=5%; /></a>
 <a href="msnim:add?contact=electrocoder@gmail.com"><img src="/static/img/msn-logo.png" alt="msn python" width=5%; /></a>
 <a href="https://groups.google.com/forum/#!forum/python-programcilari"><img src="/static/img/my-google-grub.png" alt="google grub python" width=5%; /></a>
-<a href="/rss"><img src="/static/img/rss.png" alt="rss" width=5%; /></a>
+<a href="/rss/blog"><img src="/static/img/rss.png" alt="rss" width=5%; /></a>
 </h1>
 </div>
-<p><span style="color:white">python programcıları akademisi...</span></p>
+<p><span style="color:white">python programcıları derneği...</span></p>
 	
 <div id="header">
   <div id="topnav">
    <nav> 
     <ul class="nav">
-      <li class="active"><a href="/python/blog">Ana Sayfa</a></li>
+      <li class="active"><a href="/python/">Ana Sayfa</a></li>
       <li><a>Python</a>
         <ul>
 		<li><a href="/python/python">PYTHON</a></li>
@@ -128,10 +128,20 @@
 		<li><a href="/python/myhdl">PY-MyHDL</a></li>
 		<li><a href="/python/pypy">PyPy</a></li>
 		<li><a href="/python/blender">Blender</a></li>
+		<li><a href="/python/biopython">Biopython</a></li>
         </ul>
       </li>
-      <li><a href="/python/mobil">Python Mobil</a></li>
-      <li><a href="/python/kodbankasi">Kod Bankası</a></li>
+      <li><a>Python Mobil</a>
+	      <ul>
+      		<li><a href="/python/mobil">Python Mobil</a></li>
+			<li><a href="/python/android">Android</a></li>
+		  </ul>
+      </li>
+      <li><a href="/python/kodbankasi">Kod Bankası</a>
+      <ul>
+		<li><a href="/codebank">Kod Listesi</a></li>
+		</ul>
+		</li>
       <li><a href="/polls">Anketler</a></li>
       <li><a href="/python/download">Download</a></li>
       <li><a href="/python/yazilimmuhendisligi">Yazılım Mühendisliği</a></li>
@@ -197,15 +207,97 @@ girintili yazım özelliğine sahip güçlü ve dinamik yeni nesil programlama d
 	</form>
 	</table>
 
-</span></p>
+</span>
+</p>
 </div>
-<br></br>
+</div>
 
+
+<div id="header">
+  <div id="topnav">
+   <nav> 
+    <ul class="nav">
+      <li class="active"><a href="/pythoncoders">Kartvizit Ekle</a></li>
+      <li class="active"><a href="/python-programcilari-liste">Başka Kimler Var?</a></li>
+	</div>
 </div>
+
+
 <div id="content">
 
 {% block main %}{% endblock %}
 
+<div id="sidebar">
+<div class="container">
+<h2>Çok Okunanlar</h2>
+{% block readcount %}{% endblock %}
+<h2>Son Gönderiler</h2>
+{% block lastpost %}{% endblock %}
+<h2>Katogoriler</h2>
+<div class="categories">
+<ul>
+	<li><a href="/python/blog">BLOG</a></li>
+		<li><a href="/python/python">PYTHON</a></li>
+		<li><a href="/python/android">ANDROID</a></li>
+		<li><a href="/python/pygtk">PYGTK</a></li>
+		<li><a href="/python/pythonqt">PYQT</a></li>
+		<li><a href="/python/tkinter">TKINTER</a></li>
+		<li><a href="/python/wxpython">WXPYTHON</a></li>
+		<li><a href="/python/pyjamasdesktop">PYJAMAS</a></li>
+		<li><a href="/python/ironpython">IRONPYTHON</a></li>
+		<li><a href="/python/jython">JYTHON</a></li>
+		<li><a href="/python/easygui">EASY GUI</a></li>
+		<li><a href="/python/pykde">PYKDE</a></li>
+		<li><a href="/python/django">DJANGO</a></li>
+		<li><a href="/python/pymatlab">PYMATLAB</a></li>
+		<li><a href="/python/pyopengl">PYOPENGL</a></li>
+		<li><a href="/python/myhdl">PY-MyHDL</a></li>
+		<li><a href="/python/pypy">PyPy</a></li>
+		<li><a href="/python/blender">Blender</a></li>
+		<li><a href="/python/biopython">Biopython</a></li>
+
+      <li><a href="/python/mobil">Python Mobil</a></li>
+      <li><a href="/python/kodbankasi">Kod Bankası</a></li>
+      <li><a href="/polls">Anketler</a></li>
+      <li><a href="/python/download">Download</a></li>
+      <li><a href="/python/yazilimmuhendisligi">Yazılım Mühendisliği</a></li>
+      <li><a href="http://pythontr.net">Forum</a></li>
+      <li><a href="/python/pythonwiki">Python Wiki</a></li>
+      <li><a href="/python/pythontv">Python TV</a></li>
+      <li><a href="/pythonshell">Python Shell</a></li>
+      <li><a href="/python/kitap">Kitap</a></li>
+      
+          <li><a href="/visual-tkinter-1">Visual Python 1.x</a></li>
+          <li><a href="/visual-python-2">Visual Python 2.x</a></li>
+
+          <li><a href="http://electrocoder.net">Şahin MERSİN</a></li>
+          <li><a href="http://yigitsadic.com/">Yigit SADİC</a></li>
+          <li><a href="http://www.osmanfatsa.com/">Osman FATSA</a></li>
+          <li><a href="http://www.erkankeskin.com.tr/">Erkan KESKİN</a></li>
+          <li><a href="http://mturkergultepe.com/">M.Türker GÜLTEPE</a></li>
+
+          <li><a href="/bagisyap">Bağış Yap</a></li>
+          <li><a href="/sitemap.xml">Sitemap</a></li>
+          <li><a href="/iletisim">İletişim</a></li>                
+</ul>
+</div>			
+
+
+<!--<h2>Latest Posts</h2>-->
+<!--<div class="latestposts">-->
+<!--<ul class="shadow">-->
+<!--<li><a href="#">Vestibulum feugiat ante non nunc pellentesque hendrerit</a></li>-->
+<!--<li><a href="#">Ut faucibus quam nec metus </a></li>-->
+<!--<li><a href="#">consequat tincidunt felis ipsum ac nibh</a></li>-->
+<!--<li><a href="#"> Proin tincidunt turpis id nisl mattis</a></li>-->
+<!--<li><a href="#">Lorem ipsum dolor sit amet</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+
+
+
+</div>
+</div>
 
 <div class="clear"></div>
 
@@ -228,11 +320,9 @@ ________________________________________________________________________________
 <br></br>
 ________________________________________________________________________________
 <br></br>
-© Copyright 2008 - 2012 &copy; Python Programcıları Akademik Çalışma Grubu
+2008 - 2011 &copy; Python Programcıları Derneği
 <br></br>
-<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">[Creative Commons BY-SA-NC 3.0]</a>
-<br></br>
-admin [ @ ] pythontr.org 
+admin [ @ ] pythontr.org
 <br></br>
 <center><a href="https://www.djangoproject.com/"><img src="/static/img/django-powered.gif" alt="django python" width=15%; /></a></center>
 <p>

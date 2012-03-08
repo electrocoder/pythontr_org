@@ -6,14 +6,9 @@ from django.conf.urls.defaults import *
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from myproject.python.models import Posts, Authors, Categories
 from sitemaps import PostsSitemap, CategoriesSitemap
-<<<<<<< HEAD
 from feeds import LatestPosts, LatestPostsBlog
 from myproject.pythoncoders.models import PythonCoders
 from myproject.pythonauthors.models import PythonAuthors
-=======
-from feeds import LatestPosts
-from myproject.pythoncoders.models import PythonCoders
->>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
 
 admin.autodiscover()
 
@@ -43,11 +38,7 @@ urlpatterns = patterns('',
     (r'^python/(?P<category>[^/]*)/$', 'myproject.python.views.category'),
     (r'^python/(?P<category>[^/]*)/(?P<link>[^/]*)/', 'myproject.python.views.show'),
     
-<<<<<<< HEAD
     (r'^codebank/', 'myproject.python.views.codebank'),
-=======
-    (r'^codebank/$', 'myproject.python.views.codebank'),
->>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
         
     (r'^pythonshell/$',direct_to_template,{'template': 'pythonshell.html'}),
     (r'^iletisim/$',direct_to_template,{'template': 'iletisim.html'}),
@@ -62,13 +53,10 @@ urlpatterns = patterns('',
     
     (r'^polls/', include('myproject.polls.urls')),
     (r'^pythoncoders/$', 'myproject.pythoncoders.views.contact'),
-<<<<<<< HEAD
     (r'^python-programcilari-liste/$', 'myproject.pythoncoders.views.list'),
 
     (r'^pythonauthors/$', 'myproject.pythonauthors.views.contact'),
 
-=======
->>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
 )
 
 urlpatterns += patterns('django.contrib.sitemaps.views',
@@ -78,9 +66,6 @@ urlpatterns += patterns('django.contrib.sitemaps.views',
 
 urlpatterns += patterns('',
     (r'^rss/$', LatestPosts()),
-<<<<<<< HEAD
     (r'^rss/topluluk/$', LatestPosts()),
     (r'^rss/blog/$', LatestPostsBlog()),
-=======
->>>>>>> b8149290e5e381e24a6bcc14e2a300edf0b9ae60
 ) 
