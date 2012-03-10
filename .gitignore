@@ -3,3 +3,5 @@ database
 *.pyc
 .DS_Store
 database
+.project
+.pydevproject
