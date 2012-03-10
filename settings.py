@@ -127,10 +127,10 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.admin',
 
-    'pythontr_org.polls',
-    'pythontr_org.python',
-    'pythontr_org.pythoncoders',
-    'pythontr_org.pythonauthors',
+    'polls',
+    'posts',
+    'pythoncoders',
+    'pythonauthors',
     
     'disqus',    
     'south',

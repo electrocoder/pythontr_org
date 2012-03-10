@@ -2,8 +2,10 @@
 
 from django.conf.urls.defaults import patterns, include, url
 from django.views.generic.simple import direct_to_template
+
 from django.conf import settings
 from django.contrib import admin
+
 from django.conf.urls.defaults import *
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 
@@ -12,9 +14,11 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
-from pythontr_org.python.models import Posts, Authors, Categories
+from pythontr_org.posts.models import Post, Author, Category
 from sitemaps import PostsSitemap, CategoriesSitemap
-from feeds import LatestPosts, LatestPostsBlog
+
+from feeds import RSS_URLS
+
 from pythontr_org.pythoncoders.models import PythonCoders
 from pythontr_org.pythonauthors.models import PythonAuthors
 
@@ -67,11 +71,9 @@ urlpatterns += patterns('django.contrib.sitemaps.views',
     (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap', {'sitemaps': sitemaps}),
 )
 
-urlpatterns += patterns('',
-    (r'^rss/$', LatestPosts()),
-    (r'^rss/topluluk/$', LatestPosts()),
-    (r'^rss/blog/$', LatestPostsBlog()),
-)
+# rss 
+
+urlpatterns += RSS_URLS
 
 # static ve media klasörlerini sun.
 
