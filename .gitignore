@@ -2,3 +2,4 @@ database
 *~
 *.pyc
 .DS_Store
+database

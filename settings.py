@@ -14,12 +14,29 @@ EMAIL_HOST_PASSWORD = 'xxxxxxxx'
  
 EMAIL_USE_TLS = True
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('xxx', 'xxx@xxxx.xxx'),
 )
+
+
+# Üye işlemleri ile ilgili ayarlar
+
+# Login işlemi yapıldıktan sonra gidilecek adres.
+# LOGIN_REDIRECT_URL = ''
+
+# Login (giriş) adresi
+# LOGIN_URL = '/users/login/'
+
+# Logout (çıkış) adresi
+# LOGOUT_URL = '/users/logout/'
+
+# Profil modeli
+# Kullanım: user.get_profile()
+# AUTH_PROFILE_MODULE = 'uygulama_adi.model_adi'
+
 
 MANAGERS = ADMINS
 
@@ -46,11 +63,10 @@ USE_L10N = True
 
 MEDIA_ROOT = PATH + '/static_media/'
 
-
 MEDIA_URL = '/media/'
 
 
-STATIC_ROOT = PATH + '/static/'
+STATIC_ROOT = PATH + 'static/'
 
 STATIC_URL = 'http://pythontr.org/static/'
 
@@ -89,9 +105,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
-ROOT_URLCONF = 'myproject.urls'
+ROOT_URLCONF = 'pythontr_org.urls'
 
-TEMPLATE_DIRS = ("/home/electrocoder/webapps/pythontr_org/myproject/templates")
+TEMPLATE_DIRS = (
+                 PATH + '/templates',
+)
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
