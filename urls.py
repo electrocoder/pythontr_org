@@ -68,6 +68,4 @@ urlpatterns += patterns('',
     (r'^rss/$', LatestPosts()),
     (r'^rss/topluluk/$', LatestPosts()),
     (r'^rss/blog/$', LatestPostsBlog()),
-) 
-
-# edited by yigit sadic
+)
