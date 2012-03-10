@@ -14,9 +14,10 @@ class Category(models.Model):
     
     def __unicode__(self):
         return self.name
-
+    
+    @models.permalink
     def get_absolute_url(self):
-        return "/python/"# + self.category_name 
+        return ('posts:show_category', [self.pk]) 
 
     class Meta:
         verbose_name = "Kategori"
@@ -54,7 +55,7 @@ class Author(models.Model):
     about = models.TextField(verbose_name = "Yazar hakkında kısa açıklama.", blank = True, null = True)
 
     def __unicode__(self):
-        return self.name.username
+        return self.user.username
         
     class Meta:
         verbose_name = "Yazar"
@@ -66,11 +67,11 @@ class Post(models.Model):
         Gönderileri depolamak için yapılmış model.
         
         Gerekli olan alanlar;
-            author, title, category, link, content, published, tags
+            author, title, category, slug, content, published, tags
     """
     
     author = models.ForeignKey(
-                               Authors,
+                               Author,
                                verbose_name = "Yazar",
                                help_text = "Gönderin yazarı.",
                                )
@@ -83,8 +84,8 @@ class Post(models.Model):
     
     category = models.ForeignKey(Category, verbose_name = "Kategori")
     
-    link = models.SlugField(
-                            "URL için uygun hali.",
+    slug = models.SlugField(
+                            "URL için uygun hali",
     )
     
     content = models.TextField(
@@ -98,20 +99,19 @@ class Post(models.Model):
                                     help_text = "Bu alan gönderinin yayınlanıp yayınlanmayacağını belirler."
     )
     
-    tags = models.TextField("Etiket(ler)", max_length=20, help_text = "Virgül (,) ile birbirlerinden ayırabilirsiniz.")
+    tags = models.CharField("Etiket(ler)", max_length=100, help_text = "Virgül (,) ile birbirlerinden ayırabilirsiniz.")
     read_count = models.IntegerField("Okunma sayısı", default=0)
     
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-    
-    
-    #star = models.IntegerField("Begenilme sayisi", default=1)
+
     
     def __unicode__(self):
         return self.title
 
+    @models.permalink
     def get_absolute_url(self):
-        return "/python/"# + self.post_category.category_name + "/" + self.post_link
+        return ('posts:show', [self.pk, self.slug])
     
     def save(self, force_insert=False, force_update=False):
         super(Post, self).save(force_insert, force_update)

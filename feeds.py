@@ -54,6 +54,6 @@ class LatestPosts(Feed):
 
 RSS_URLS = patterns('',
                     (r'^rss/$', LatestPosts()),
-                    (r'^rss/topluluk/$', LatestCommunityPosts()),
-                    (r'^rss/blog/$', LatestPosts()),
+                    (r'^rss/community/$', LatestCommunityPosts()),
+                    (r'^rss/posts/$', LatestPosts()),
 )

@@ -6,13 +6,13 @@ import os.path
 
 PATH = os.path.dirname(__file__)
 
-EMAIL_HOST = 'xxx.xxx.com'
-EMAIL_PORT = xxx
+#EMAIL_HOST = 'xxx.xxx.com'
+#EMAIL_PORT = xxx
  
-EMAIL_HOST_USER = 'xxxxxx@xxxx.com'
-EMAIL_HOST_PASSWORD = 'xxxxxxxx'
+#EMAIL_HOST_USER = 'xxxxxx@xxxx.com'
+#EMAIL_HOST_PASSWORD = 'xxxxxxxx'
  
-EMAIL_USE_TLS = True
+#EMAIL_USE_TLS = True
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -42,12 +42,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'database',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'database',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -61,19 +61,19 @@ USE_I18N = True
 
 USE_L10N = True
 
-MEDIA_ROOT = PATH + '/static_media/'
+MEDIA_ROOT = PATH + '/media/'
 
 MEDIA_URL = '/media/'
 
 
 STATIC_ROOT = PATH + 'static/'
 
-STATIC_URL = 'http://pythontr.org/static/'
+STATIC_URL = '/static/'
 
-ADMIN_MEDIA_PREFIX = 'http://pythontr.org/media/admin/'
+ADMIN_MEDIA_PREFIX = '/static/admin/' #'http://pythontr.org/media/admin/'
 
 STATICFILES_DIRS = (
-    DIRNAME + '/static/',
+    PATH + '/static',
 )
 
 STATICFILES_FINDERS = (
@@ -111,8 +111,6 @@ TEMPLATE_DIRS = (
                  PATH + '/templates',
 )
 
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
-
 DISQUS_API_KEY = 'rr3r45gg7hoAnpar32erwr32432rerSLlxoos2JpnY' 
 DISQUS_WEBSITE_SHORTNAME = 'pythonprogramcilari'
 
@@ -127,12 +125,13 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.admin',
 
-    'polls',
-    'posts',
-    'pythoncoders',
-    'pythonauthors',
+    'pythontr_org.polls',
+    'pythontr_org.posts',
     
-    'disqus',    
+    #'pythoncoders',
+    #'pythonauthors',
+    
+    #'disqus',
     'south',
 )
 

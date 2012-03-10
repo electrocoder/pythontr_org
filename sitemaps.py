@@ -1,23 +1,30 @@
-from django.contrib.sitemaps import Sitemap
-from myproject.python.models import Posts, Categories
+# -*- coding: utf-8 -*-
 
-class PostsSitemap(Sitemap):
-    changefreq = "daily"
-    priority = 0.5
+from pythontr_org.posts.models import Post, Category
 
-    def items(self):
-        return Posts.objects.all()
 
-    def lastmod(self, obj):
-        return obj.post_pubdate
+from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
+from django.conf.urls.defaults import patterns
 
-class CategoriesSitemap(Sitemap):
-    changefreq = "weekly"
-    priority = 1
 
-    def items(self):
-        return Categories.objects.all()
+post_dict = {
+    'queryset': Post.objects.all(),
+    'date_field': 'created_at',
+}
 
-#    def lastmod(self, obj):
-#        return obj.post_pubdate
+category_dict = {
+    'queryset': Category.objects.all(),
+}
 
+
+sitemaps = {
+    'flatpages': FlatPageSitemap,
+    
+    'posts': GenericSitemap(post_dict, priority=0.5),
+    'categories': GenericSitemap(category_dict, priority=1),
+}
+
+SITEMAPS_URLS = patterns('django.contrib.sitemaps.views',
+    (r'^sitemap\.xml$', 'index', {'sitemaps': sitemaps}),
+    (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap', {'sitemaps': sitemaps}),
+)
