@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
+
 # Django settings for pythontr project.
 
-import os
+import os.path
 
-DIRNAME = os.path.dirname(__file__)
+PATH = os.path.dirname(__file__)
 
 EMAIL_HOST = 'xxx.xxx.com'
 EMAIL_PORT = xxx
@@ -24,7 +26,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': DIRNAME + '/xxxxxxx.xxxx',                      # Or path to database file if using sqlite3.
+        'NAME': 'database',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -42,13 +44,13 @@ USE_I18N = True
 
 USE_L10N = True
 
-MEDIA_ROOT = os.path.abspath(os.path.dirname(__file__)) + '/static_media/'
+MEDIA_ROOT = PATH + '/static_media/'
 
 
 MEDIA_URL = '/media/'
 
 
-STATIC_ROOT = DIRNAME + '/static/'
+STATIC_ROOT = PATH + '/static/'
 
 STATIC_URL = 'http://pythontr.org/static/'
 
@@ -103,14 +105,17 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'disqus',
-    'django.contrib.admin',
     'django.contrib.flatpages',
-    'myproject.polls',
     'django.contrib.sitemaps',
-    'myproject.python',
-    'myproject.pythoncoders',
-    'myproject.pythonauthors',
+    'django.contrib.admin',
+
+    'pythontr_org.polls',
+    'pythontr_org.python',
+    'pythontr_org.pythoncoders',
+    'pythontr_org.pythonauthors',
+    
+    'disqus',    
+    'south',
 )
 
 LOGGING = {

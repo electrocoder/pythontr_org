@@ -1,19 +1,24 @@
+# -*- coding: utf-8 -*-
+
 from django.conf.urls.defaults import patterns, include, url
 from django.views.generic.simple import direct_to_template
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.defaults import *
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
-from myproject.python.models import Posts, Authors, Categories
+
+# STATIC ve MEDIA dosyaları için
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+
+from pythontr_org.python.models import Posts, Authors, Categories
 from sitemaps import PostsSitemap, CategoriesSitemap
 from feeds import LatestPosts, LatestPostsBlog
-from myproject.pythoncoders.models import PythonCoders
-from myproject.pythonauthors.models import PythonAuthors
+from pythontr_org.pythoncoders.models import PythonCoders
+from pythontr_org.pythonauthors.models import PythonAuthors
 
 admin.autodiscover()
-
-import os.path
-DIRNAME = os.path.dirname(__file__)
 
 info_dict = {
     'queryset': Posts.objects.all(),
@@ -45,8 +50,6 @@ urlpatterns = patterns('',
     (r'^visual-tkinter-1/$',direct_to_template,{'template': 'visual-python-1.html'}),
     (r'^visual-python-2/$',direct_to_template,{'template': 'visual-python-2.html'}),
     (r'^bagisyap/$',direct_to_template,{'template': 'bagisyap.html'}),
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(DIRNAME, "static/")}),    
-    (r'^static_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(DIRNAME, settings.MEDIA_ROOT)}),    
 
     (r'^admin/doc/', include('django.contrib.admindocs.urls')), 
     (r'^admin/', include(admin.site.urls)),
@@ -69,3 +72,8 @@ urlpatterns += patterns('',
     (r'^rss/topluluk/$', LatestPosts()),
     (r'^rss/blog/$', LatestPostsBlog()),
 )
+
+# static ve media klasörlerini sun.
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += staticfiles_urlpatterns()
