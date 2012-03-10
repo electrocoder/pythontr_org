@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block title %} {{ flatpage.title }} {% endblock %}
+
+{% block content %}
+	<div class="hero-unit">
+		<h1>{{ flatpage.title }}</h1>
+	</div>
+	
+	<div class="span8">
+		{{ flatpage.content }}
+	</div>
+{% endblock %}
