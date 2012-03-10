@@ -1,0 +1,4 @@
+database
+*~
+*.pyc
+.DS_Store
