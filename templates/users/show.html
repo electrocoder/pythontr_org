@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+{% block title %} {{ tuser.username }} {% endblock %}
+
+{% block content %}
+	<div class="page-header">
+		<h1>Profil</h1>
+	</div>
+	
+	<div class="span8">
+
+		{% if is_me %}
+			{% include 'users/_controls.html' %}
+		{% endif %}
+		
+		<table class="table">
+			<tr>
+				<th>Kullanıcı adım</th>
+				<td>{{ tuser.username }}</td>
+			</tr>
+			<tr>
+				<th>Adım</th>
+				<td>{{ tuser.first_name }}</td>
+			</tr>
+			<tr>
+				<th>Soyadım</th>
+				<td>{{ tuser.last_name }}</td>
+			</tr>
+			<tr>
+				<th>Email adresim</th>
+				<td><a href="mailto:{{ tuser.email }}">{{ tuser.email }}</a></td>
+			</tr>
+			<tr>
+				<th>Kayıt tarihim</th>
+				<td>{{ tuser.date_joined.date }}</td>
+			</tr>
+			<tr>
+				<th>Web adresim</th>
+				<td>
+					<a href="{{ profile.web_site }}" target="_blank">
+						{{ profile.web_site }}
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Hakkında
+				</th>
+				<td>
+					{{ profile.about }}
+				</td>
+			</tr>
+			<tr>
+				<th>Şehrim</th>
+				<td>
+					{{ profile.get_city_display }}
+				</td>
+			</tr>
+		</table>	
+	</div>
+	
+{% endblock %}

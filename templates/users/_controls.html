@@ -1,0 +1,19 @@
+<div class="well">
+	<ul>
+		<li>
+			<a href="{% url users:password_change %}">Şifre değiştirme</a>
+		</li>
+		<li>
+			<a href="{% url users:disable_account %}">Hesabımı sil</a>
+		</li>
+		<li>
+			<a href="{% url users:show_profile user.id %}">Profilim</a>
+		</li>
+		<li>
+			<a href="{% url users:update_informations %}">Kişisel bilgilerimi düzenle</a>
+		</li>
+		<li>
+			<a href="{% url users:update_profile %}">Profilimi düzenle</a>
+		</li>
+	</ul>
+</div>

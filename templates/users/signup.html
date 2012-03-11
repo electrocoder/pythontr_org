@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block title %} Kayıt ol {% endblock %}
+
+{% block content %}
+
+	<div class="page-header">
+		<h1>Kayıt ol</h1>
+	</div>
+
+	<div class="div8">
+		
+		<form class="form-horizontal" method="POST" action="{% url users:signup %}">{% csrf_token %}
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="{{ form.username.html_name }}">{{ form.username.label }}</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" name="{{ form.username.html_name }}" id="{{ form.username.html_name }}" />
+						<p class="help-block">
+							{{ form.username.help_text }}
+						</p>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="{{ form.password1.html_name }}">{{ form.password1.label }}</label>
+					<div class="controls">
+						<input type="password" class="input-xlarge" name="{{ form.password1.html_name }}" id="{{ form.password1.html_name }}" />
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="{{ form.password2.html_name }}">{{ form.password2.label }}</label>
+					<div class="controls">
+						<input type="password" class="input-xlarge" name="{{ form.password2.html_name }}" id="{{ form.password2.html_name }}" />
+					</div>
+				</div>
+				
+				<div class="form-actions">
+					<input type="hidden" name="next" value="{{ next }}" />
+					<button class="btn btn-primary" type="submit">Gönder</button>
+					<a href="/posts" class="btn">Geri</a>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	
+{% endblock %}

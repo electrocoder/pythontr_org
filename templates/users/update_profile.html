@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+
+{% block title %} Profilini güncelle {% endblock %}
+
+{% block content %}
+	<div class="page-header">
+		<h1>Profil bilgilerin</h1>
+	</div>
+	
+	<form class="form-horizontal" method="post" action="{% url users:update_profile %}">{% csrf_token %}
+	<fieldset>
+		<legend>Profil bilgileri güncelleme formu</legend>
+		
+		<div class="control-group">
+			<label for="{{ form.web_site.html_name }}" class="control-label">{{ form.web_site.label }}</label>
+			<div class="controls">
+				<input type="url" name="{{ form.web_site.html_name }}" id="{{ form.web_site.html_name }}" class="input-xlarge" value="{{ form.web_site.value }}" />
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label for="{{ form.about.html_name }}" class="control-label">{{ form.about.label }}</label>
+			<div class="controls">
+				<textarea type="text" id="{{ form.about.html_name }}" name="{{ form.about.html_name }}" class="input-xlarge">{{ form.about.value }}</textarea>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label for="id_city" class="control-label">{{ form.city.label }}</label>
+			<div class="controls">
+				{{ form.city }}
+			</div>
+		</div>						
+		
+		<div class="form-actions">
+			<input type="hidden" name="next" value="{{ next }}" />
+			<button class="btn btn-primary" type="submit">Değişiklikleri kaydet</button>
+			<a href="{% url users:settings %}" class="btn">Geri</a>
+		</div>
+		
+	</fieldset>
+</form>
+{% endblock %}
