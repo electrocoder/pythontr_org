@@ -98,13 +98,13 @@ class Post(models.Model):
             pass
     
          
-    def small_title(self):
+    def short_title(self):
         if len(self.title) > 34:
             return self.title[:35] + '...'
         else:
             return self.title
      
-    def small_content(self):
+    def short_content(self):
         if len(self.content) > 124:
             return self.content[:125] + '...'
         else:
