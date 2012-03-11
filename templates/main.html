@@ -1,4 +1,5 @@
 {% load url from future %}
+{% load post_tags %}
 
 <!DOCTYPE html>
 <html lang="en"><head>
@@ -48,14 +49,74 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="{% url 'posts:index' %}">Python programcıları</a>
+          <a class="brand" href="{% url 'posts:index' %}">Python Programcıları</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="{% url 'posts:index' %}">Anasayfa</a></li>
+              <li><a href="{% url 'posts:index' %}">Anasayfa</a></li>
+              <li>
+              	<a href="/polls/">Anketler</a>
+              </li>
+              <li>
+              	<a href="{% url 'users:authors' %}">Yazarlar</a>
+              </li>
               <li><a href="/about/">Hakkımızda</a></li>
               <li><a href="/contact/">İletişim</a></li>
             </ul>
-            <p class="navbar-text pull-right">Merhaba <a href="#">username</a></p>
+            
+			<form class="navbar-search pull-left" method="get" action="{% url 'posts:search' %}">
+        		<input type="text" value="{{ q }}" name="q" class="search-query" placeholder="Gönderi ara...">
+        	</form>
+            
+            {% if user.is_authenticated %}
+				<div class="btn-group pull-right">
+					<a class="btn btn-success" href="{% url 'users:show_profile' user.pk %}">{{ user.username }}</a>
+					<a class="btn btn-success dropdown-toggle" href="#" data-toggle="dropdown">
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{% url 'users:show_profile' user.pk %}">
+								<i class="icon-user"></i> Profilim
+							</a>
+						</li>
+						<li>
+							<a href="{% url 'users:settings' %}">
+								<i class="icon-cog"></i> Ayarlar
+							</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="{% url 'users:logout' %}">
+								<i class="icon-off"></i> Çıkış
+							</a>
+						</li>
+					</ul>
+        		</div>
+            {% else %}
+				<div class="btn-group pull-right">
+					<a class="btn btn-danger" href="#">Ziyaretçi</a>
+					<a class="btn btn-danger dropdown-toggle" href="#" data-toggle="dropdown">
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{% url 'users:login' %}">
+								<i class="icon-ok"></i> Giriş
+							</a>
+						</li>
+						<li>
+							<a href="{% url 'users:signup' %}">
+								<i class="icon-user"></i> Kayıt ol
+							</a>
+						</li>
+					</ul>
+        		</div>            
+            {% endif %}
+
+
+
+
+
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -67,21 +128,11 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Kategoriler</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
+              	{% get_categories %}
               <li class="nav-header">Son gönderilenler</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
+              	{% get_five_latest_posts %}
               <li class="nav-header">En çok okunanlar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
+              	{% get_most_reads %}
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
@@ -154,7 +205,9 @@ mollis euismod. Donec sed odio dui. </p>
       <hr>
 
       <footer>
-        <p>PythonTr</p>
+      	<center>
+        	<p>Bazı hakları saklıdır. &copy; PythonTR 2012 </p>
+        </center>
       </footer>
 
     </div><!--/.fluid-container-->

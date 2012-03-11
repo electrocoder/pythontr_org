@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block title %} {{ category.name }} {% endblock %}
+
+{% block content %}
+	
+	<div class="page-header">
+		<h1>{{ category.name }}</h1>
+	</div>
+	
+	<div class="span8">
+		<b>{{ category.name }}</b> ile ilişkili gönderiler;
+		{% if posts %}
+			<ul>
+				{% for post in posts %}
+					<li>
+						<a href="{{ post.get_absolute_url }}">
+							{{ post.title }}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			Maalesef hiç kayıt bulunamadı :(
+		{% endif %}
+	</div>
+	
+{% endblock %}

@@ -16,7 +16,7 @@ class LatestCommunityPosts(Feed):
     description = ">>> Son 5 makale..."
 
     def items(self):
-        return Post.objects.filter(tags__contains = 'topluluk')[:5]
+        return Post.objects.filter(published = True, tags__icontains = 'topluluk')[:5]
 
     def item_title(self, item):
         return item.title

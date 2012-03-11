@@ -12,29 +12,20 @@ class Migration(SchemaMigration):
         db.create_table('posts_category', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=50)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(db_index=True, max_length=255, null=True, blank=True)),
         ))
         db.send_create_signal('posts', ['Category'])
-
-        # Adding model 'Author'
-        db.create_table('posts_author', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
-            ('web_site', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('about', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-        ))
-        db.send_create_signal('posts', ['Author'])
 
         # Adding model 'Post'
         db.create_table('posts_post', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['posts.Author'])),
+            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['posts.Category'])),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, db_index=True)),
             ('content', self.gf('django.db.models.fields.TextField')()),
             ('published', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('tags', self.gf('django.db.models.fields.TextField')(max_length=20)),
+            ('tags', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('read_count', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
@@ -46,9 +37,6 @@ class Migration(SchemaMigration):
         
         # Deleting model 'Category'
         db.delete_table('posts_category')
-
-        # Deleting model 'Author'
-        db.delete_table('posts_author')
 
         # Deleting model 'Post'
         db.delete_table('posts_post')
@@ -91,22 +79,15 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'posts.author': {
-            'Meta': {'object_name': 'Author'},
-            'about': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'}),
-            'web_site': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
-        },
         'posts.category': {
             'Meta': {'object_name': 'Category'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '50'})
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '50'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '255', 'null': 'True', 'blank': 'True'})
         },
         'posts.post': {
             'Meta': {'ordering': "['-created_at']", 'object_name': 'Post'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['posts.Author']"}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['posts.Category']"}),
             'content': ('django.db.models.fields.TextField', [], {}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
@@ -114,7 +95,7 @@ class Migration(SchemaMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'read_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
-            'tags': ('django.db.models.fields.TextField', [], {'max_length': '20'}),
+            'tags': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         }

@@ -1,11 +1,16 @@
-#Sat Mar 10 17:03:04 EET 2012
+#Sun Mar 11 14:02:58 EET 2012
 eclipse.preferences.version=1
 encoding//posts/admin.py=utf-8
 encoding//posts/models.py=utf-8
+encoding//posts/templatetags/post_tags.py=utf-8
+encoding//posts/tests.py=utf-8
 encoding//posts/urls.py=utf-8
 encoding//posts/views.py=utf-8
-encoding//pythonauthors/models.py=utf8
-encoding//pythoncoders/models.py=utf8
+encoding//users/admin.py=utf-8
+encoding//users/forms.py=utf-8
+encoding//users/models.py=utf-8
+encoding//users/urls.py=utf-8
+encoding//users/views.py=utf-8
 encoding/feeds.py=utf-8
 encoding/settings.py=utf-8
 encoding/sitemaps.py=utf-8

@@ -1,21 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from pythontr_org.posts.models import Post, Category, Author
+from pythontr_org.posts.models import Post, Category
 from django.contrib import admin
 
 class CategoryAdmin(admin.ModelAdmin):
     
     
     search_fields = ['name']
-
-
-    
-class AuthorAdmin(admin.ModelAdmin):
-    
-    
-    search_fields = ['user', 'web_site', 'about']    
-    list_display = ('user', 'web_site')
-
+    prepopulated_fields = {'slug': ('name', )}
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -23,12 +15,29 @@ class PostAdmin(admin.ModelAdmin):
     
     prepopulated_fields = {'slug': ('title', )}
     
-    list_display = ('title', 'published', 'created_at')    
-    search_fields = ['title', 'content']    
+    list_display = ('title', 'category', 'author', 'published', 'read_count', 'created_at')    
+    search_fields = ['title', 'content', 'tags']    
     list_filter = ('published', )
     
     date_hierarchy = 'created_at'
+    
+    # admin actions
+    
+    actions = ['publish', 'unpublish']
+    
+    def publish(self, request, queryset):
+        rows_updated = queryset.update(published = True)
+        
+        self.message_user(request, "%s gönderi başarı ile yayınlandı!" % rows_updated)
+    publish.short_description = u'Seçili gönderileri yayınla'
+    
+    def unpublish(self, request, queryset):
+        rows_updated = queryset.update(published = False)
+        
+        self.message_user(request, "%s gönderi başarı ile yayından kaldırıldı!" % rows_updated)
+    unpublish.short_description = u'Seçili gönderileri yayından kaldır'
+    
 
-admin.site.register(Author, AuthorAdmin)
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)

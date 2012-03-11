@@ -25,17 +25,17 @@ ADMINS = (
 # Üye işlemleri ile ilgili ayarlar
 
 # Login işlemi yapıldıktan sonra gidilecek adres.
-# LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = '/posts/'
 
 # Login (giriş) adresi
-# LOGIN_URL = '/users/login/'
+LOGIN_URL = '/accounts/login/'
 
 # Logout (çıkış) adresi
-# LOGOUT_URL = '/users/logout/'
+LOGOUT_URL = '/accounts/logout/'
 
 # Profil modeli
 # Kullanım: user.get_profile()
-# AUTH_PROFILE_MODULE = 'uygulama_adi.model_adi'
+AUTH_PROFILE_MODULE = 'users.Profile'
 
 
 MANAGERS = ADMINS
@@ -111,6 +111,12 @@ TEMPLATE_DIRS = (
                  PATH + '/templates',
 )
 
+# fixtures
+
+FIXTURE_DIRS = (
+                PATH + '/fixtures',
+)
+
 DISQUS_API_KEY = 'rr3r45gg7hoAnpar32erwr32432rerSLlxoos2JpnY' 
 DISQUS_WEBSITE_SHORTNAME = 'pythonprogramcilari'
 
@@ -124,12 +130,12 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.sitemaps',
     'django.contrib.admin',
-
-    'pythontr_org.polls',
-    'pythontr_org.posts',
+    'django.contrib.localflavor',
     
-    #'pythoncoders',
-    #'pythonauthors',
+    'pythontr_org.polls',
+    
+    'pythontr_org.posts',
+    'pythontr_org.users',
     
     #'disqus',
     'south',

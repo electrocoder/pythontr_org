@@ -7,9 +7,9 @@ urlpatterns = patterns('pythontr_org.posts.views',
                        
                        url(r'^$', 'index', name = 'index'),
                        url(r'^(?P<id>\d+)-(?P<slug>[^/]*)/$', 'show', name = 'show'),
+                       url(r'^search/$', 'search', name = 'search'),
                        
                        # kategoriler için;
                        
-                       url(r'^categories/$', 'category_index', name = 'index_category'),
-                       url(r'^category/(?P<id>\d+)/$', 'category_show', name = 'show_category'),
+                       url(r'^category/(?P<id>\d+)-(?P<slug>[^/]*)/$', 'category_show', name = 'show_category'),
 )

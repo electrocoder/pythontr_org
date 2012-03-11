@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+
+{% block content %}
+	<div class="page-header">
+		<h1>
+			{{ post.title }}
+			<small>
+				{{ post.author }} - {{ post.created_at.date }}
+			</small>
+		</h1>
+	</div>
+	
+	<div class="span8">
+		{{ post.content }}
+		
+		<br />
+		<br />
+				
+		<center>~</center>
+		
+		<div class="well">
+			<table class="table">
+				<tr>
+					<th>
+						Yazar:
+					</th>
+					<td>
+						<a href="{% url users:show_profile post.author.user.pk %}">
+							{{ post.author }}
+						</a>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>
+						Kategori
+					</th>
+					<td>
+						<a href="{{ post.category.get_absolute_url }}">
+							{{ post.category }}
+						</a>
+					</td>
+				</tr>				
+				
+				<tr>
+					<th>
+						Okunma sayısı
+					</th>
+					<td>
+						{{ post.read_count }}
+					</td>
+				</tr>
+				
+				<tr>
+					<th>
+						Eklenme tarihi:
+					</th>
+					<td>
+						{{ post.created_at }}
+					</td>
+				</tr>
+				
+				<tr>
+					<th>
+						Güncellenme tarihi:
+					</th>
+					<td>
+						{{ post.updated_at }}
+					</td>
+				</tr>
+								
+				<tr>
+					<th>
+						Etiketler
+					</th>
+					<td>
+						<ul>
+																			
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+{% endblock %}

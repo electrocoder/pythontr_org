@@ -1,8 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.sitemaps import ping_google
+
+from django.core.exceptions import ValidationError
+
+
+
+def validate_user_is_in_authors_group(self, value):
+    pass
+        
+
+
 
 class Category(models.Model):
     """
@@ -11,56 +21,18 @@ class Category(models.Model):
     """
     
     name = models.CharField("Adı", unique=True, max_length=50)
+    slug = models.SlugField('Slug', max_length = 255, blank = True, null = True)
     
     def __unicode__(self):
         return self.name
     
     @models.permalink
     def get_absolute_url(self):
-        return ('posts:show_category', [self.pk]) 
+        return ('posts:show_category', [self.pk, self.slug]) 
 
     class Meta:
         verbose_name = "Kategori"
         verbose_name_plural = "Kategoriler"
-
-    
-class Author(models.Model):
-    """
-        Yazar alanını depolamak için kullanılan model.
-        'user', 'photo', 'web_site', 'bio' alanlarını içerir.
-        
-        'user' alanı django.contrib.auth.models.User modeli ile bire-bir ilişkilir.
-        
-        Gerekli alanlar;
-            'user', ayrıca benzersiz olması gerekir.
-    
-    """
-    
-    user = models.OneToOneField(User, verbose_name = "Üye", unique=True)
-    
-    photo = models.ImageField(
-                              upload_to = 'user-images',
-                              verbose_name = "Resim",
-                              help_text ='Sadece BMP, GIF veya PNG formatında resim kullanılabilir.',
-                              null = True, blank = True
-    )
-    
-    web_site = models.CharField(
-                                max_length = 255,
-                                verbose_name = "Web sitesi",
-                                help_text = "Yazarın web adresi.",
-                                blank = True, null = True
-    )
-    
-    about = models.TextField(verbose_name = "Yazar hakkında kısa açıklama.", blank = True, null = True)
-
-    def __unicode__(self):
-        return self.user.username
-        
-    class Meta:
-        verbose_name = "Yazar"
-        verbose_name_plural = "Yazarlar"
-
 
 class Post(models.Model):
     """
@@ -70,10 +42,12 @@ class Post(models.Model):
             author, title, category, slug, content, published, tags
     """
     
+    
     author = models.ForeignKey(
-                               Author,
+                               User,
                                verbose_name = "Yazar",
                                help_text = "Gönderin yazarı.",
+                               validators = [validate_user_is_in_authors_group]
                                )
     
     title = models.CharField(
@@ -113,13 +87,39 @@ class Post(models.Model):
     def get_absolute_url(self):
         return ('posts:show', [self.pk, self.slug])
     
+    
     def save(self, force_insert=False, force_update=False):
         super(Post, self).save(force_insert, force_update)
         try:
             ping_google()
         except Exception:
             pass
-             
+    
+         
+    def small_title(self):
+        if len(self.title) > 34:
+            return self.title[:35] + '...'
+        else:
+            return self.title
+     
+    def small_content(self):
+        if len(self.content) > 124:
+            return self.content[:125] + '...'
+        else:
+            return self.content 
+
+    def increase_read_count(self):
+        self.read_count += 1
+        self.save()
+
+    def get_tags_as_list(self):
+        tags = []
+        for tag in self.tags.split(','):
+            tags.append(tag.strip())
+        
+        return tags
+    
+         
     class Meta:
         verbose_name = "Gönderi"
         verbose_name_plural = "Gönderiler"
