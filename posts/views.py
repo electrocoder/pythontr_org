@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 from django.contrib import messages
 
@@ -57,6 +57,7 @@ def category_show(request, id, slug):
 
 # yeni gönderi ekleme, düzenleme ve silme
 
+@permission_required('posts.add_post')
 @login_required
 def new(request):
     """
@@ -64,7 +65,7 @@ def new(request):
     """
     
     if request.method == 'POST':
-        post = Post(author = request.user, published = False)
+        post = Post(author = request.user)
         
         form = PostForm(request.POST, instance = post)
         
@@ -75,3 +76,30 @@ def new(request):
             return redirect('posts:index')
     else:
         form = PostForm()
+        
+
+    return render(request, 'posts/new.html', locals())
+
+@permission_required('posts.change_post')
+@login_required
+def edit(request, id):
+    """
+        Gönderiyi düzenlemek için kullanılır.
+    """
+    
+    post = get_object_or_404(Post, id = id)
+    
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance = post)
+        
+        if form.is_valid():
+            form.save()
+            
+            messages.success(request, 'Gönderi başarı ile düzenlendi.')
+            
+            return redirect(post)
+    else:
+        form = PostForm(instance = post)
+    
+    
+    return render(request, 'posts/edit.html', locals())

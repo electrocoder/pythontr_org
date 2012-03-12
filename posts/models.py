@@ -9,6 +9,13 @@ from django.core.exceptions import ValidationError
 
 
 def validate_user_is_in_authors_group(value):
+    """
+        Gönderiyi ekleyen üyenin
+        yazar olup olmadığını kontrol eder.
+        
+        Yazar değilse uyarı verir.
+    """
+    
     user = User.objects.get(id = value)
     group = Group.objects.get(name = 'Yazarlar')
     if not user in group.user_set.all():

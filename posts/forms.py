@@ -9,4 +9,4 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         
-        exclude = ('published', 'created_at', 'updated_at', 'read_count', 'author')
+        exclude = ('created_at', 'updated_at', 'read_count', 'author')
