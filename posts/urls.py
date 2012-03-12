@@ -12,4 +12,6 @@ urlpatterns = patterns('pythontr_org.posts.views',
                        # kategoriler için;
                        
                        url(r'^category/(?P<id>\d+)-(?P<slug>[^/]*)/$', 'category_show', name = 'show_category'),
+                       
+                       url(r'^new/$', 'new', name = 'new'),
 )

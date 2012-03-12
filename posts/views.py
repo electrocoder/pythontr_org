@@ -58,7 +58,6 @@ def category_show(request, id, slug):
 # yeni gönderi ekleme, düzenleme ve silme
 
 @permission_required('posts.add_post')
-@login_required
 def new(request):
     """
         Yeni gönderi eklemek için kullanılır.
@@ -81,7 +80,6 @@ def new(request):
     return render(request, 'posts/new.html', locals())
 
 @permission_required('posts.change_post')
-@login_required
 def edit(request, id):
     """
         Gönderiyi düzenlemek için kullanılır.
