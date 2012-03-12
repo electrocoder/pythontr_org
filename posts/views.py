@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+
+from django.contrib import messages
 
 from pythontr_org.posts.models import Post, Category
-
+from pythontr_org.posts.forms import PostForm
 
 # Gönderiler için
 
@@ -50,3 +53,25 @@ def category_show(request, id, slug):
     posts = category.post_set.all()
     
     return render(request, 'posts/category_show.html', locals())
+
+
+# yeni gönderi ekleme, düzenleme ve silme
+
+@login_required
+def new(request):
+    """
+        Yeni gönderi eklemek için kullanılır.
+    """
+    
+    if request.method == 'POST':
+        post = Post(author = request.user, published = False)
+        
+        form = PostForm(request.POST, instance = post)
+        
+        if form.is_valid():
+            form.save()
+            
+            messages.success(request, 'Gönderi başarı ile eklendi.')
+            return redirect('posts:index')
+    else:
+        form = PostForm()
