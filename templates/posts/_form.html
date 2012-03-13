@@ -1,0 +1,47 @@
+<form class="form-horizontal" method="POST">{% csrf_token %}
+	<fieldset>
+		<div class="control-group">
+			<label class="control-label" for="{{ form.title.html_name }}">{{ form.title.label }}</label>
+			<div class="controls">
+				<input type="text" value="{{ form.title.value }}" class="input-xlarge" name="{{ form.title.html_name }}" id="{{ form.title.html_name }}" />
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="id_category">{{ form.category.label }}</label>
+			<div class="controls">
+				{{ form.category }}
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="{{ form.content.html_name }}">{{ form.content.label }}</label>
+			<div class="controls">
+				<textarea type="text" class="input-xlarge" name="{{ form.content.html_name }}" id="{{ form.content.html_name }}">{{ form.content.value }}</textarea>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="{{ form.published.html_name }}">{{ form.published.label }}</label>
+			<div class="controls">
+				<input type="checkbox" value="{{ form.published.value }}" class="input-xlarge" name="{{ form.published.html_name }}" id="{{ form.published.html_name }}" />
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="{{ form.tags.html_name }}">{{ form.tags.label }}</label>
+			<div class="controls">
+				<input type="text" value="{{ form.tags.value }}" class="input-xlarge" name="{{ form.tags.html_name }}" id="{{ form.tags.html_name }}" />
+				<p class="help-text">
+					Virgül (,) ile etiketleri birbirlerinden ayırabilirsiniz.
+				</p>
+			</div>
+		</div>
+		
+		<div class="form-actions">
+			<input type="hidden" name="next" value="{{ next }}" />
+			<button class="btn btn-primary" type="submit">Kaydet</button>
+			<a href="{% url posts:my_posts %}" class="btn">Geri</a>
+		</div>
+	</fieldset>
+</form>

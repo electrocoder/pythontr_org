@@ -60,7 +60,7 @@
               	<a href="{% url 'users:authors' %}">Yazarlar</a>
               </li>
               <li><a href="/about/">Hakkımızda</a></li>
-              <li><a href="/contact/">İletişim</a></li>
+              <li><a href="{% url 'contact' %}">İletişim</a></li>
             </ul>
             
 			<form class="navbar-search pull-left" method="get" action="{% url 'posts:search' %}">
@@ -84,6 +84,7 @@
 								<i class="icon-cog"></i> Ayarlar
 							</a>
 						</li>
+												
 						<li class="divider"></li>
 						<li>
 							<a href="{% url 'users:logout' %}">
@@ -127,6 +128,11 @@
         <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
+            	{% if perms.posts.add_post %}
+            		<li class="nav-header">Gönderi yönetimi</li>
+            		{% include 'posts/_administration.html' %}
+            	{% endif %}
+            
               <li class="nav-header">Kategoriler</li>
               	{% get_categories %}
               <li class="nav-header">Son gönderilenler</li>
@@ -138,66 +144,6 @@
         </div><!--/span-->
         <div class="span9">
         	{% block content %}
-          <div class="hero-unit">
-            <h1>Hello, world! - /static/</h1>
-            <p>This is a template for a simple marketing or 
-informational website. It includes a large callout called the hero unit 
-and three supporting pieces of content. Use it as a starting point to 
-create something more unique.</p>
-            <p><a class="btn btn-primary btn-large">Learn more »</a></p>
-          </div>
-          <div class="row-fluid">
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce
- dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut 
-fermentum massa justo sit amet risus. Etiam porta sem malesuada magna 
-mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details »</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce
- dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut 
-fermentum massa justo sit amet risus. Etiam porta sem malesuada magna 
-mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details »</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce
- dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut 
-fermentum massa justo sit amet risus. Etiam porta sem malesuada magna 
-mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details »</a></p>
-            </div><!--/span-->
-          </div><!--/row-->
-          <div class="row-fluid">
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce
- dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut 
-fermentum massa justo sit amet risus. Etiam porta sem malesuada magna 
-mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details »</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce
- dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut 
-fermentum massa justo sit amet risus. Etiam porta sem malesuada magna 
-mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details »</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce
- dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut 
-fermentum massa justo sit amet risus. Etiam porta sem malesuada magna 
-mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details »</a></p>
-            </div><!--/span-->
-          </div><!--/row-->
           {% endblock %}
         </div><!--/span-->
       </div><!--/row-->

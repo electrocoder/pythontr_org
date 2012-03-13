@@ -6,7 +6,7 @@ from django.contrib.sitemaps import ping_google
 
 from django.core.exceptions import ValidationError
 
-
+from pythontr_org.slughifi import slughifi
 
 def validate_user_is_in_authors_group(value):
     """
@@ -98,7 +98,12 @@ class Post(models.Model):
     
     
     def save(self, force_insert=False, force_update=False):
+        
+        if not self.id:
+            self.slug = slughifi(self.title)
+        
         super(Post, self).save(force_insert, force_update)
+        
         try:
             ping_google()
         except Exception:

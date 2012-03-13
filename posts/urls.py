@@ -14,4 +14,8 @@ urlpatterns = patterns('pythontr_org.posts.views',
                        url(r'^category/(?P<id>\d+)-(?P<slug>[^/]*)/$', 'category_show', name = 'show_category'),
                        
                        url(r'^new/$', 'new', name = 'new'),
+                       url(r'^(?P<id>\d+)/edit/$', 'edit', name = 'edit'),
+                       
+                       
+                       url(r'^my_posts/$', 'my_posts', name = 'my_posts'),
 )

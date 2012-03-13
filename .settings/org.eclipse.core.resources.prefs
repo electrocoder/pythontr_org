@@ -1,5 +1,7 @@
-#Mon Mar 12 10:38:01 EET 2012
+#Tue Mar 13 11:33:57 EET 2012
 eclipse.preferences.version=1
+encoding//extra/forms.py=utf-8
+encoding//extra/views.py=utf-8
 encoding//posts/admin.py=utf-8
 encoding//posts/forms.py=utf-8
 encoding//posts/models.py=utf-8

@@ -20,6 +20,10 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
+                       url(r'^errors/access_denied/$', 'pythontr_org.extra.views.access_denied', name = 'access_denied'),
+                       
+                       url(r'^contact/$', 'pythontr_org.extra.views.contact', name = 'contact'),
+                       
                        url(r'^posts/', include('pythontr_org.posts.urls', namespace = 'posts')),
     
                        url(r'^polls/', include('pythontr_org.polls.urls')),

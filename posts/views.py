@@ -79,13 +79,20 @@ def new(request):
 
     return render(request, 'posts/new.html', locals())
 
-@permission_required('posts.change_post')
+
+@permission_required('posts.change_post', 'access_denied')
 def edit(request, id):
     """
         Gönderiyi düzenlemek için kullanılır.
     """
     
     post = get_object_or_404(Post, id = id)
+    
+    # eğer request.user gönderinin sahibi değilse
+    # erişim engellendi sayfasına yönlendir.
+    
+    if not post.author == request.user:
+        return redirect('access_denied')
     
     if request.method == 'POST':
         form = PostForm(request.POST, instance = post)
@@ -101,3 +108,18 @@ def edit(request, id):
     
     
     return render(request, 'posts/edit.html', locals())
+
+
+@permission_required('posts.add_post')
+def my_posts(request):
+    """
+        Yazarın kendi gönderdiği gönderilerin listelendiği
+        düzenle ve sil bağlantılarının yer aldığı sayfa.
+    """
+    
+    posts = request.user.post_set.all()
+    
+    return render(request, 'posts/my_posts.html', locals())
+    
+    
+    
