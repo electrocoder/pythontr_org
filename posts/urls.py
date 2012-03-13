@@ -15,6 +15,7 @@ urlpatterns = patterns('pythontr_org.posts.views',
                        
                        url(r'^new/$', 'new', name = 'new'),
                        url(r'^(?P<id>\d+)/edit/$', 'edit', name = 'edit'),
+                       url(r'^(?P<id>\d+)/delete/$', 'delete', name = 'delete'),
                        
                        
                        url(r'^my_posts/$', 'my_posts', name = 'my_posts'),

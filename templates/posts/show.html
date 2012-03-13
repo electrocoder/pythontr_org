@@ -11,7 +11,9 @@
 	</div>
 	
 	<div class="span8">
-		{{ post.content }}
+		{% autoescape off %}
+			{{ post.content }}
+		{% endautoescape %}
 		
 		<br />
 		<br />
@@ -25,7 +27,7 @@
 						Yazar:
 					</th>
 					<td>
-						<a href="{% url users:show_profile post.author.user.username %}">
+						<a href="{% url users:show_profile post.author.username %}">
 							{{ post.author }}
 						</a>
 					</td>

@@ -71,8 +71,8 @@ def new(request):
         if form.is_valid():
             form.save()
             
-            messages.success(request, 'Gönderi başarı ile eklendi.')
-            return redirect('posts:index')
+            messages.success(request, u'Gönderi başarı ile eklendi.')
+            return redirect('posts:my_posts')
     else:
         form = PostForm()
         
@@ -80,7 +80,7 @@ def new(request):
     return render(request, 'posts/new.html', locals())
 
 
-@permission_required('posts.change_post', 'access_denied')
+@permission_required('posts.change_post')
 def edit(request, id):
     """
         Gönderiyi düzenlemek için kullanılır.
@@ -100,9 +100,9 @@ def edit(request, id):
         if form.is_valid():
             form.save()
             
-            messages.success(request, 'Gönderi başarı ile düzenlendi.')
+            messages.success(request, u'Gönderi başarı ile düzenlendi.')
             
-            return redirect(post)
+            return redirect('posts:my_posts')
     else:
         form = PostForm(instance = post)
     
@@ -122,4 +122,20 @@ def my_posts(request):
     return render(request, 'posts/my_posts.html', locals())
     
     
+@permission_required('posts.delete_post')
+def delete(request, id):
+    """
+        Gönderi silmek için kullanılır.
+    """
+    
+    post = get_object_or_404(Post, id = id)
+    
+    if not request.user == post.author:
+        return redirect('access_denied')
+    
+    post.delete()
+    
+    messages.success(request, u'"%s" başlıklı gönderi başarı ile silindi' % post.title)
+    
+    return redirect('posts:my_posts')
     

@@ -8,6 +8,15 @@
 		<h1>Gönderilerim</h1>
 	</div>
 	
+	{% if messages %}
+		{% for message in messages %}
+			<div class="alert alert-success">
+				<a class="close" data-dismiss="alert">×</a>
+				{{ message }}
+			</div>
+		{% endfor %}	
+	{% endif %}	
+	
 	<div class="span8">
 		
 		{% if posts %}
@@ -45,7 +54,7 @@
 							<a href="{% url posts:edit post.id %}" class="btn">Düzenle</a>
 						</td>
 						<td>
-							<a href="#" class="btn">Sil</a>
+							<a href="{% url posts:delete post.id %}" class="btn">Sil</a>
 						</td>
 					</tr>
 				{% endfor %}

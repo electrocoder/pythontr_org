@@ -11,7 +11,7 @@
 		<ul>
 			{% for author in users %}
 				<li>
-					<a href="{% url users:show_profile author.pk %}">
+					<a href="{% url users:show_profile author.username %}">
 						{{ author.username }}
 					</a>
 				</li>

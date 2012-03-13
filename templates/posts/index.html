@@ -9,7 +9,7 @@
 	<div class="span8">
 		{% for post in posts %}
 			<h2>{{ post.title }}</h2>
-			<p>{{ post.short_content }}</p>
+			<p>{% autoescape off %} {{ post.short_content }} {% endautoescape %}</p>
 			<p>
 				<a href="{{ post.get_absolute_url }}" class="btn">Devamını oku</a>
 			</p>
