@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from django.conf.urls.defaults import patterns, include, url
-from django.views.generic.simple import direct_to_template
 
 from django.conf import settings
 from django.contrib import admin
+
+from django.views.generic.simple import redirect_to
 
 from django.conf.urls.defaults import *
 
@@ -20,6 +21,7 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
+                       url(r'^$', redirect_to, {'url': '/posts/'}),
                        url(r'^errors/access_denied/$', 'pythontr_org.extra.views.access_denied', name = 'access_denied'),
                        
                        url(r'^contact/$', 'pythontr_org.extra.views.contact', name = 'contact'),

@@ -69,13 +69,13 @@
             
             {% if user.is_authenticated %}
 				<div class="btn-group pull-right">
-					<a class="btn btn-success" href="{% url 'users:show_profile' user.pk %}">{{ user.username }}</a>
+					<a class="btn btn-success" href="{% url 'users:show_profile' user.username %}">{{ user.username }}</a>
 					<a class="btn btn-success dropdown-toggle" href="#" data-toggle="dropdown">
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="{% url 'users:show_profile' user.pk %}">
+							<a href="{% url 'users:show_profile' user.username %}">
 								<i class="icon-user"></i> Profilim
 							</a>
 						</li>
