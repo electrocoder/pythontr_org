@@ -9,3 +9,7 @@ class ContactForm(forms.Form):
     email = forms.EmailField(required = False)
     web_site = forms.URLField(required = False)
     content = forms.CharField(widget = forms.Textarea)
+    
+    
+class AuthorForm(forms.Form):
+    pass

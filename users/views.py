@@ -101,13 +101,13 @@ def disable(request):
     return redirect('posts:index')
 
 
-def show(request, id):
+def show(request, username):
     """
         Üyenin herkes tarafından görülebilen profili.
         Temel bilgileri ve eğer yazarsa yazar bilgileri gösterilir.
     """
     
-    tuser = get_object_or_404(User, pk = id)
+    tuser = get_object_or_404(User, username = username)
     profile = tuser.get_profile()
     
     is_me = tuser.username == request.user.username
