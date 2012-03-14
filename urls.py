@@ -24,7 +24,7 @@ urlpatterns = patterns('',
                        url(r'^$', redirect_to, {'url': '/posts/'}),
                        url(r'^errors/access_denied/$', 'pythontr_org.extra.views.access_denied', name = 'access_denied'),
                        
-                       url(r'^accounts/became_an_author/$', 'pythontr_org.extra.views.became_an_author', name = 'users:became_an_author'),
+                       url(r'^accounts/became_an_author/$', 'pythontr_org.extra.views.became_an_author', name = 'became_an_author'),
                        
                        url(r'^contact/$', 'pythontr_org.extra.views.contact', name = 'contact'),
                        

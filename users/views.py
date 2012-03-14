@@ -39,7 +39,8 @@ def settings(request):
         Şifre değiştirme, hesabı silme, profili düzenleme,
         kişisel bilgileri düzenleme formlarına ulaşılır.
     """
-        
+    
+    
     return render(request, 'users/settings.html')
 
 @login_required

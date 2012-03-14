@@ -1,1 +1,30 @@
 {% extends 'main.html' %}
+
+{% block title %} Yazar olma isteği {% endblock %}
+
+{% block content %}
+	
+	<div class="page-header">
+		<h1>Yazar olma isteği</h1>
+	</div>
+	
+	<div class="span8">
+		
+		İsteğiniz yöneticilere iletilecek, onlar kabul ettiğinde şu yetkilere
+		sahip olacaksınız;
+		
+		<ul>
+			<li>Gönderi ekleyebilme.</li>
+			<li>Gönderilerinizi düzenleyebilme</li>
+			<li>Gönderilerinizi silebilme</li>
+		</ul>
+		
+		<form method="POST">
+			{% csrf_token %}
+			
+			<button class="btn btn-primary btn-large">Yazar olmak istiyorum!</button>
+		</form>		
+		
+	</div>
+	
+{% endblock %}

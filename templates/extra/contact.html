@@ -10,7 +10,46 @@
 
 	<div class="span8">
 		
-		
+		<form class="form-horizontal" method="POST"> {% csrf_token %}
+			<fieldset>
+				<legend>İletişim formu</legend>
+				
+				<div class="control-group">
+					<label class="control-label" for="{{ form.title.html_name }}">{{ form.title.label }}</label>
+					<div class="controls">
+						<input type="text" value="{{ form.title.value }}" class="input-xlarge" name="{{ form.title.html_name }}" id="{{ form.title.html_name }}" />
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="{{ form.email.html_name }}">{{ form.email.label }}</label>
+					<div class="controls">
+						<input type="email" value="{{ form.email.value }}" class="input-xlarge" name="{{ form.email.html_name }}" id="{{ form.email.html_name }}" />
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="{{ form.web_site.html_name }}">{{ form.web_site.label }}</label>
+					<div class="controls">
+						<input type="text" value="{{ form.web_site.value }}" class="input-xlarge" name="{{ form.web_site.html_name }}" id="{{ form.web_site.html_name }}" />
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="{{ form.content.html_name }}">{{ form.content.label }}</label>
+					<div class="controls">
+						<textarea type="text" class="input-xlarge" name="{{ form.content.html_name }}" id="{{ form.content.html_name }}">{{ form.content.value }}</textarea>
+					</div>
+				</div>
+				
+				<div class="form-actions">
+					<input type="hidden" name="next" value="{{ next }}" />
+					<button class="btn btn-primary" type="submit">Gönder</button>
+					<a href="{% url posts:index %}" class="btn">Geri</a>
+				</div>
+
+			</fieldset>
+		</form>
 		
 	</div>
 

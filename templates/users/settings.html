@@ -20,6 +20,9 @@
 		{% endif %}
 		
 		{% include 'users/_controls.html' %}
-				
+		
+		{% if not perms.posts.add_post %}
+			<a href="{% url became_an_author %}" class="btn btn-primary btn-large">Yazar olmak istiyorum!</a>
+		{% endif %}
 	</div>
 {% endblock %}

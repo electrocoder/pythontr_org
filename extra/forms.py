@@ -6,10 +6,6 @@ class ContactForm(forms.Form):
     
     
     title = forms.CharField()
-    email = forms.EmailField(required = False)
+    email = forms.EmailField()
     web_site = forms.URLField(required = False)
     content = forms.CharField(widget = forms.Textarea)
-    
-    
-class AuthorForm(forms.Form):
-    pass

@@ -3,11 +3,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from pythontr_org.extra.forms import ContactForm, AuthorForm
+from pythontr_org.extra.forms import ContactForm
+from pythontr_org.extra.mails import ContactMail, AuthorMail
 
-from django.contrib.auth.decorators import login_required
+
 
 def access_denied(request):
     return render(request, 'extra/access_denied.html')
@@ -22,6 +24,13 @@ def contact(request):
     
     if request.method == 'POST':
         form = ContactForm(request.POST)
+        
+        if form.is_valid():
+            
+            ContactMail(form).send()
+            
+            return redirect('posts:index')
+                
     else:
         form = ContactForm()        
     
@@ -38,17 +47,22 @@ def became_an_author(request):
     
     group = Group.objects.get(name = 'Yazar olmak isteyenler')
     
-    if request.method == 'POST':
-        form = AuthorForm(request.POST)
+    if group.user_set.filter(username = request.user):
+        messages.success(request, u'Hali hazırda bir isteğiniz bulunmaktadır. Lütfen isteğinizin işlenmesini bekleyin.')
         
-        if form.is_valid():
-            
-            group.user_set.add(request.user) # üyeyi yazar olmak isteyenler adlı
-            # gruba ekle
-            
-            messages.success(request, u'İsteğiniz gönderilmiştir. Onaylandığında gönderi ekleyebileceksiniz.')
-            
-            return redirect('users:settings')
+        return redirect('users:settings')
+    
+    
+    if request.method == 'POST':
+        group.user_set.add(request.user) # üyeyi yazar olmak isteyenler adlı
+        # gruba ekle
+        
+        AuthorMail(request.user).send()
+        
+        messages.success(request, u'İsteğiniz gönderilmiştir. Onaylandığında gönderi ekleyebileceksiniz.')
+        
+        return redirect('users:settings')
+    
     else:
         form = AuthorForm()
         

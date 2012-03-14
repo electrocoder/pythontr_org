@@ -6,13 +6,11 @@ import os.path
 
 PATH = os.path.dirname(__file__)
 
-#EMAIL_HOST = 'xxx.xxx.com'
-#EMAIL_PORT = xxx
- 
-#EMAIL_HOST_USER = 'xxxxxx@xxxx.com'
-#EMAIL_HOST_PASSWORD = 'xxxxxxxx'
- 
-#EMAIL_USE_TLS = True
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'yigitsadic@gmail.com'
+EMAIL_HOST_PASSWORD = '' # şşt uzaklaş bakalım ;-)
+EMAIL_PORT = 587
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
