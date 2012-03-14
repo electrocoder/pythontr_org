@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 from django.contrib.localflavor.tr.tr_provinces import PROVINCE_CHOICES
 
+from hashlib import md5
+
 class Profile(models.Model):
     """
         Üye bilgilerini depolamak için kullanılacak olan
@@ -25,6 +27,21 @@ class Profile(models.Model):
     
     def __unicode__(self):
         return self.user.username
+
+
+    def get_image(self, size=200):
+        """
+            Gravatdan resmi bulmaya çalış.
+        """
+        
+        url = 'http://www.gravatar.com/avatar/'
+        
+        
+        m = md5()
+        m.update(self.user.email)
+        
+        return url + m.hexdigest() + '?s=%s' % size
+        
         
     class Meta:
         verbose_name = 'Profil'

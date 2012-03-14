@@ -112,6 +112,12 @@ def show(request, username):
     profile = tuser.get_profile()
     
     is_me = tuser.username == request.user.username
+
+    group = Group.objects.get(name = 'Yazarlar')    
+    if group.user_set.filter(username = tuser): # üye yazarsa
+        
+        is_author = True
+        posts = tuser.post_set.filter(published = True)
     
     return render(request, 'users/show.html', locals())
 

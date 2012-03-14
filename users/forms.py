@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 
 from pythontr_org.users.models import Profile
 
-from django.contrib.localflavor.tr.tr_provinces import PROVINCE_CHOICES
 
 class UserSettings(ModelForm):
     class Meta:
@@ -17,12 +16,12 @@ class UserSettings(ModelForm):
         
         
 class ProfileForm(ModelForm):
-    
-    city = forms.ChoiceField(PROVINCE_CHOICES,
-                             widget = forms.Select(attrs = {'class': 'input-xlarge'})
-                             )
-    
     class Meta:
         model = Profile
         
         exclude = ('user', )
+        
+        widgets = {
+                   'city': forms.Select(attrs = {'class': 'input-xlarge'}),
+        }
+        

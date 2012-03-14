@@ -12,6 +12,14 @@
 		{% if is_me %}
 			{% include 'users/_controls.html' %}
 		{% endif %}
+
+	    <ul class="thumbnails">
+		    <li class="span3">
+			    <a href="{{ tuser.get_profile.get_image }}" class="thumbnail">
+			    	<img src="{{ tuser.get_profile.get_image }}" alt="">
+			    </a>
+		    </li>
+	    </ul>
 		
 		<table class="table">
 			<tr>
@@ -56,6 +64,22 @@
 					{{ profile.get_city_display }}
 				</td>
 			</tr>
+			{% if is_author %}
+				<tr>
+					<th>Yazıları</th>
+					<td>
+						<ul>
+							{% for post in posts %}
+								<li>
+									<a href="{{ post.get_absolute_url }}">{{ post }}</a>
+									/
+									<a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+			{% endif %}
 		</table>	
 	</div>
 	
