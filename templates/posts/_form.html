@@ -1,9 +1,9 @@
 <form class="form-horizontal" method="POST">{% csrf_token %}
 	<fieldset>
 		<div class="control-group">
-			<label class="control-label" for="{{ form.title.html_name }}">{{ form.title.label }}</label>
+			<label class="control-label" for="id_title">{{ form.title.label }}</label>
 			<div class="controls">
-				<input type="text" value="{{ form.title.value }}" class="input-xlarge" name="{{ form.title.html_name }}" id="{{ form.title.html_name }}" />
+				{{ form.title }}
 			</div>
 		</div>
 
@@ -15,25 +15,30 @@
 		</div>
 
 		<div class="control-group">
-			<label class="control-label" for="{{ form.content.html_name }}">{{ form.content.label }}</label>
+			<label class="control-label" for="id_content">{{ form.content.label }}</label>
 			<div class="controls">
-				<textarea type="text" class="input-xlarge" rows="26" name="{{ form.content.html_name }}" id="{{ form.content.html_name }}">{{ form.content.value }}</textarea>
+				{{ form.content }}
+				
+				<p class="help-block">
+					{{ form.content.help_text }}
+				</p>
 			</div>
 		</div>
 
 		<div class="control-group">
-			<label class="control-label" for="{{ form.published.html_name }}">{{ form.published.label }}</label>
+			<label class="control-label" for="id_published">{{ form.published.label }}</label>
 			<div class="controls">
-				<input type="checkbox" value="{{ form.published.value }}" class="input-xlarge" name="{{ form.published.html_name }}" id="{{ form.published.html_name }}" />
+				{{ form.published }}
 			</div>
 		</div>
 
 		<div class="control-group">
-			<label class="control-label" for="{{ form.tags.html_name }}">{{ form.tags.label }}</label>
+			<label class="control-label" for="id_tags">{{ form.tags.label }}</label>
 			<div class="controls">
-				<input type="text" value="{{ form.tags.value }}" class="input-xlarge" name="{{ form.tags.html_name }}" id="{{ form.tags.html_name }}" />
-				<p class="help-text">
-					Virgül (,) ile etiketleri birbirlerinden ayırabilirsiniz.
+				{{ form.tags }}
+				
+				<p class="help-block">
+					{{ form.tags.help_text }}
 				</p>
 			</div>
 		</div>

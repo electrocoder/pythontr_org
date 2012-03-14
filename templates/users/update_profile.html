@@ -12,16 +12,16 @@
 		<legend>Profil bilgileri güncelleme formu</legend>
 		
 		<div class="control-group">
-			<label for="{{ form.web_site.html_name }}" class="control-label">{{ form.web_site.label }}</label>
+			<label for="id_web_site" class="control-label">{{ form.web_site.label }}</label>
 			<div class="controls">
-				<input type="url" name="{{ form.web_site.html_name }}" id="{{ form.web_site.html_name }}" class="input-xlarge" value="{{ form.web_site.value }}" />
+				{{ form.web_site }}
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<label for="{{ form.about.html_name }}" class="control-label">{{ form.about.label }}</label>
+			<label for="id_about" class="control-label">{{ form.about.label }}</label>
 			<div class="controls">
-				<textarea type="text" id="{{ form.about.html_name }}" name="{{ form.about.html_name }}" class="input-xlarge">{{ form.about.value }}</textarea>
+				{{ form.about }}
 			</div>
 		</div>
 		

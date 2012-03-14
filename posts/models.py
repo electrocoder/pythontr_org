@@ -73,7 +73,7 @@ class Post(models.Model):
     
     content = models.TextField(
                                "Gönderinin içeriği",
-                               help_text = 'Bu alanda HTML kullanabilirsiniz.',
+                               help_text = 'Bu alanda Textile işaretleme dili kullanabilirsiniz.',
     )
     
     published = models.BooleanField(

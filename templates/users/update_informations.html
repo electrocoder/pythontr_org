@@ -12,23 +12,24 @@
 		<legend>Bilgi güncelleme formu</legend>
 		
 		<div class="control-group">
-			<label for="{{ form.email.html_name }}" class="control-label">{{ form.email.label }}</label>
+
+			<label for="id_email" class="control-label">{{ form.email.label }}</label>
 			<div class="controls">
-				<input type="email" name="{{ form.email.html_name }}" id="{{ form.email.html_name }}" class="input-xlarge" value="{{ form.email.value }}" />
+				{{ form.email }}
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<label for="{{ form.first_name.html_name }}" class="control-label">{{ form.first_name.label }}</label>
+			<label for="id_first_name" class="control-label">{{ form.first_name.label }}</label>
 			<div class="controls">
-				<input type="text" id="{{ form.first_name.html_name }}" name="{{ form.first_name.html_name }}" value="{{ form.first_name.value }}" class="input-xlarge" />
+				{{ form.first_name }}
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<label for="{{ form.last_name.html_name }}" class="control-label">{{ form.last_name.label }}</label>
+			<label for="id_last_name" class="control-label">{{ form.last_name.label }}</label>
 			<div class="controls">
-				<input name="{{ form.last_name.html_name }}" id="{{ form.last_name.html_name }}" value="{{ form.last_name.value }}" type="text" class="input-xlarge" />
+				{{ form.last_name }}
 			</div>
 		</div>								
 		
