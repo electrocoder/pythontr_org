@@ -62,9 +62,6 @@ def became_an_author(request):
         messages.success(request, u'İsteğiniz gönderilmiştir. Onaylandığında gönderi ekleyebileceksiniz.')
         
         return redirect('users:settings')
-    
-    else:
-        form = AuthorForm()
         
     return render(request, 'extra/became_an_author.html', locals())
     
