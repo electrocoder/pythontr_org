@@ -54,7 +54,7 @@
 							<a href="{% url posts:edit post.id %}" class="btn">Düzenle</a>
 						</td>
 						<td>
-							<a href="{% url posts:delete post.id %}" class="btn">Sil</a>
+							<a href="{% url posts:delete post.id %}" id="confirm" title="Bu işlem geri alınamaz. Devam etmek istediğinize emin misiniz?" class="btn">Sil</a>
 						</td>
 					</tr>
 				{% endfor %}

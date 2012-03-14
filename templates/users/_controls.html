@@ -4,7 +4,7 @@
 			<a href="{% url users:password_change %}">Şifre değiştirme</a>
 		</li>
 		<li>
-			<a href="{% url users:disable_account %}">Hesabımı sil</a>
+			<a href="{% url users:disable_account %}" id="confirm" title="Bu işlem geri alınamaz. Devam etmek istediğinize emin misiniz?">Hesabımı sil</a>
 		</li>
 		<li>
 			<a href="{% url users:show_profile user.username %}">Profilim</a>
