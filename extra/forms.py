@@ -11,7 +11,7 @@ class ContactForm(forms.Form):
             self.fields[myField].widget.attrs['class'] = 'input-xlarge'
     
     
-    title = forms.CharField()
+    title = forms.CharField(label = u'Başlık')
     email = forms.EmailField()
     web_site = forms.URLField(initial = 'http://', required = False)
-    content = forms.CharField(widget = forms.Textarea)
+    content = forms.CharField(label = u'Mesaj içeriği', widget = forms.Textarea)

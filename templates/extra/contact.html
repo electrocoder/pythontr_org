@@ -14,33 +14,22 @@
 			<fieldset>
 				<legend>İletişim formu</legend>
 				
-				<div class="control-group">
-					<label class="control-label" for="id_title">{{ form.title.label }}</label>
-					<div class="controls">
-						{{ form.title }}
+				{% for field in form %}
+					<div class="control-group{% if field.errors %} error {% endif %}">
+						<label class="control-label" for="id_{{ field.html_name }}">{{ field.label }}</label>
+						<div class="controls">
+							{{ field }}
+							
+							{% if field.errors %}
+								<p class="help-block">{{ field.errors }}</p>
+							{% endif %}
+							
+							{% if field.help_text %}
+								<p class="help-block">{{ field.help_text }}</p>
+							{% endif %}
+						</div>
 					</div>
-				</div>
-
-				<div class="control-group">
-					<label class="control-label" for="id_email">{{ form.email.label }}</label>
-					<div class="controls">
-						{{ form.email }}
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label" for="id_web_site">{{ form.web_site.label }}</label>
-					<div class="controls">
-						{{ form.web_site }}
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label" for="id_content">{{ form.content.label }}</label>
-					<div class="controls">
-						{{ form.content }}
-					</div>
-				</div>
+				{% endfor %}
 				
 				<div class="form-actions">
 					<input type="hidden" name="next" value="{{ next }}" />

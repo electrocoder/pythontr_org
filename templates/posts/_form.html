@@ -1,47 +1,22 @@
 <form class="form-horizontal" method="POST">{% csrf_token %}
 	<fieldset>
-		<div class="control-group">
-			<label class="control-label" for="id_title">{{ form.title.label }}</label>
-			<div class="controls">
-				{{ form.title }}
+		
+		{% for field in form %}
+			<div class="control-group{% if field.errors %} error {% endif %}">
+				<label class="control-label" for="id_{{ field.html_name }}">{{ field.label }}</label>
+				<div class="controls">
+					{{ field }}
+					
+					{% if field.errors %}
+						<p class="help-block">{{ field.errors }}</p>
+					{% endif %}
+					
+					{% if field.help_text %}
+						<p class="help-block">{{ field.help_text }}</p>
+					{% endif %}
+				</div>
 			</div>
-		</div>
-
-		<div class="control-group">
-			<label class="control-label" for="id_category">{{ form.category.label }}</label>
-			<div class="controls">
-				{{ form.category }}
-			</div>
-		</div>
-
-		<div class="control-group">
-			<label class="control-label" for="id_content">{{ form.content.label }}</label>
-			<div class="controls">
-				{{ form.content }}
-				
-				<p class="help-block">
-					{{ form.content.help_text }}
-				</p>
-			</div>
-		</div>
-
-		<div class="control-group">
-			<label class="control-label" for="id_published">{{ form.published.label }}</label>
-			<div class="controls">
-				{{ form.published }}
-			</div>
-		</div>
-
-		<div class="control-group">
-			<label class="control-label" for="id_tags">{{ form.tags.label }}</label>
-			<div class="controls">
-				{{ form.tags }}
-				
-				<p class="help-block">
-					{{ form.tags.help_text }}
-				</p>
-			</div>
-		</div>
+		{% endfor %}
 		
 		<div class="form-actions">
 			<input type="hidden" name="next" value="{{ next }}" />
