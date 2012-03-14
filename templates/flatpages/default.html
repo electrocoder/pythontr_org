@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load markup %}
 
 {% block title %} {{ flatpage.title }} {% endblock %}
 
@@ -8,6 +9,6 @@
 	</div>
 	
 	<div class="span8">
-		{{ flatpage.content }}
+		{{ flatpage.content|textile }}
 	</div>
 {% endblock %}

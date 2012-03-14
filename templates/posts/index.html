@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-{% load post_tags %}
+{% load markup %}
 
 {% block content %}
 	<div class="page-header">
@@ -9,7 +9,7 @@
 	<div class="span8">
 		{% for post in posts %}
 			<h2>{{ post.title }}</h2>
-			<p>{% autoescape off %} {{ post.short_content }} {% endautoescape %}</p>
+			<p>{% autoescape off %} {{ post.short_content|textile }} {% endautoescape %}</p>
 			<p>
 				<a href="{{ post.get_absolute_url }}" class="btn">Devamını oku</a>
 			</p>

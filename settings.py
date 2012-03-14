@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.admin',
     'django.contrib.localflavor',
+    'django.contrib.markup',
     
     'pythontr_org.polls',
     

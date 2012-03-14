@@ -4,4 +4,21 @@ Twitter-Bootstrap kullanılarak tekrar üretilmiştir.
 
 www.pythontr.org
 
-ilgilenenler icin iletisim adresim : electrocoder@gmail.com
+İlgilenenler için iletişim adresleri:
+
+	Şahin MERSIN: electrocoder@gmail.com
+	Yiğit SADIÇ: yigitsadic@gmail.com
+
+Gerekli modüller:
+
+	South - http://south.aeracode.org/
+	disqus
+	textile - https://github.com/jsamsa/python-textile
+
+
+Eksikler:
+
+	Form hata mesajları
+	Formları yazdırmadaki çirkinliklerin düzeltilmesi
+	
+	Daha iyi bir gönderi listeleme, gösterme
