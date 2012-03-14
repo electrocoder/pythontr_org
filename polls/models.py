@@ -1,11 +1,11 @@
 # -*- coding: utf-8-*-
 
 from django.db import models
-import datetime
+
 
 class Poll(models.Model):
 	question = models.CharField(max_length=200, verbose_name = "Sorusu")
-	pub_date = models.DateTimeField("Yayınlanma tarihi")
+	pub_date = models.DateTimeField("Yayınlanma tarihi", auto_now_add = True)
 	
 	def __unicode__(self):
 		return self.question
@@ -16,13 +16,18 @@ class Poll(models.Model):
 	class Meta:
 		verbose_name_plural = "Anketler"
 		verbose_name = "Anket"
-
+		
+		ordering = ['-pub_date']
 
 
 class Choice(models.Model):
 	poll = models.ForeignKey(Poll, verbose_name = "Anket")
 	choice = models.CharField(max_length=200, verbose_name = "Seçenek")
-	votes = models.IntegerField(verbose_name = "Oylar")
+	votes = models.IntegerField(verbose_name = "Oylar", blank = True, null = True)
 	
 	def __unicode__(self):
 		return self.choice
+	
+	class Meta:
+		verbose_name = 'Seçenek'
+		verbose_name_plural = 'Seçenekler'

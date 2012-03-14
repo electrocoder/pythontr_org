@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block title %} {{ poll.question }} için sonuçlar {% endblock %}
+
+{% block content %}
+	<div class="page-header">
+		<h1>{{ poll.question }} için sonuçlar</h1>
+	</div>
+	
+	<div class="span8">
+		
+		<a href="{% url polls:index %}">Anketler</a>
+		<a href="{% url polls:detail poll.id %}">Geri</a>
+		
+		<br />
+		
+		<ul>
+			{% for choice in poll.choice_set.all %}
+			    <li>{{ choice.choice }} - {{ choice.votes }} oy</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

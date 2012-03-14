@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block title %} Anketler {% endblock %}
+
+{% block content %}
+
+	<div class="page-header">
+		<h1>Anketler</h1>
+	</div>
+	
+	<div class="span8">
+		{% if latest_poll_list %}
+		    <ul>
+		    {% for poll in latest_poll_list %}
+		        <li>
+		        	<a href="{% url polls:detail poll.id %}">{{ poll.question }}</a>
+			        <ul>
+				        {% for choice in poll.choice_set.all %}
+				        	<li>
+					          	{{ choice.choice }}:
+					        	{{ choice.votes }} oy
+				        	</li>
+						{% endfor %}
+					</ul>
+		        </li>
+		    {% endfor %}
+		    </ul>
+		{% else %}
+		    <p> Henüz sistemde anket bulunmamaktadır. </p>
+		{% endif %}
+	</div>
+{% endblock %}
