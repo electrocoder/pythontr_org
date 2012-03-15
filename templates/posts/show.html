@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% load markup %}
+{% load disqus_tags %} <!-- Çalışmıyor -->
 
 {% block content %}
 	<div class="page-header">
@@ -20,6 +21,8 @@
 		<br />
 				
 		<center>~</center>
+		
+		{% disqus_show_comments %} <!-- Çalışmıyor -->
 		
 		<div class="well">
 			<table class="table">
