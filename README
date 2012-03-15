@@ -12,7 +12,7 @@ www.pythontr.org
 Gerekli modüller:
 
 	South - http://south.aeracode.org/
-	disqus
+	disqus - https://github.com/arthurk/django-disqus
 	textile - https://github.com/jsamsa/python-textile
 
 

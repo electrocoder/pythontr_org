@@ -136,7 +136,7 @@ INSTALLED_APPS = (
     'pythontr_org.posts',
     'pythontr_org.users',
     
-    #'disqus',
+    'disqus',
     'south',
 )
 
