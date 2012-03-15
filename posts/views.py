@@ -94,19 +94,16 @@ def edit(request, id):
     if not post.author == request.user:
         return redirect('access_denied')
     
-    if request.method == 'POST':
-        form = PostForm(request.POST, instance = post)
+    form = PostForm(request.POST or None, instance = post)
+    
+    if form.is_valid():
+        form.save()
         
-        if form.is_valid():
-            form.save()
-            
-            messages.success(request, u'Gönderi başarı ile düzenlendi.')
-            
-            return redirect('posts:my_posts')
-    else:
-        form = PostForm(instance = post)
+        messages.success(request, u'Gönderi başarı ile düzenlendi.')
+        
+        return redirect('posts:my_posts')
     
-    
+        
     return render(request, 'posts/edit.html', locals())
 
 

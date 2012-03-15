@@ -20,22 +20,19 @@ def signup(request):
         Kayıt olma işlemi için kullanılır.
     """
     
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+    form = UserCreationForm(request.POST or None)
+    
+    if form.is_valid():
+        user = form.save()
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
         
-        if form.is_valid():
-            user = form.save()
-            user.backend = 'django.contrib.auth.backends.ModelBackend'
-            
-            login(request, user)
-            
-            Profile.objects.create(user = user)
-            
-            messages.success(request, u'Sisteme hoşgeldiniz. Sizi aramızda görmek bize büyük bir mutluluk verdi.')
-            
-            return redirect('users:settings')
-    else:
-        form = UserCreationForm()
+        login(request, user)
+        
+        Profile.objects.create(user = user)
+        
+        messages.success(request, u'Sisteme hoşgeldiniz. Sizi aramızda görmek bize büyük bir mutluluk verdi.')
+        
+        return redirect('users:settings')
         
     return render(request, 'users/signup.html', locals())
 
@@ -58,17 +55,15 @@ def update_informations(request):
         first_name, email, last_name
     """
     
-    if request.method == 'POST':
-        form = UserSettings(request.POST, instance = request.user)
+    form = UserSettings(request.POST or None, instance = request.user)
+    
+    if form.is_valid():
+        form.save()
         
-        if form.is_valid():
-            form.save()
-            
-            messages.success(request, 'Kişisel bilgileriniz başarı ile kaydedildi.')
-            
-            return redirect('users:settings')
-    else:
-        form = UserSettings(instance = request.user)
+        messages.success(request, 'Kişisel bilgileriniz başarı ile kaydedildi.')
+        
+        return redirect('users:settings')
+
         
     return render(request, 'users/update_informations.html', locals())
 
@@ -80,17 +75,14 @@ def update_profile(request):
         web_site, about, city
     """
     
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, instance = request.user.get_profile())
+    form = ProfileForm(request.POST or None, instance = request.user.get_profile())
 
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Profil bilgileriniz başarı ile kaydedildi.')
-            
-            return redirect('users:settings')
-    else:
-        form = ProfileForm(instance = request.user.get_profile())
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Profil bilgileriniz başarı ile kaydedildi.')
         
+        return redirect('users:settings')
+            
     return render(request, 'users/update_profile.html', locals())
     
 
