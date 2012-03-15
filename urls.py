@@ -14,8 +14,8 @@ from django.conf.urls.defaults import *
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from pythontr_org.feeds import RSS_URLS
-from pythontr_org.sitemaps import SITEMAPS_URLS
+from pythontr_org.extra.feeds import RSS_URLS
+from pythontr_org.extra.sitemaps import SITEMAPS_URLS
 
 admin.autodiscover()
 
