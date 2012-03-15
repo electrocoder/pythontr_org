@@ -8,7 +8,7 @@ from django.conf.urls.defaults import patterns
 
 
 post_dict = {
-    'queryset': Post.objects.all(),
+    'queryset': Post.objects.filter(published = True),
     'date_field': 'created_at',
 }
 
