@@ -31,7 +31,9 @@ def signup(request):
             
             Profile.objects.create(user = user)
             
-            return redirect('posts:index')
+            messages.success(request, u'Sisteme hoşgeldiniz. Sizi aramızda görmek bize büyük bir mutluluk verdi.')
+            
+            return redirect('users:settings')
     else:
         form = UserCreationForm()
         
