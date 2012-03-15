@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.contrib import messages
 from django.contrib.auth import logout
@@ -44,9 +44,9 @@ def settings(request):
         Şifre değiştirme, hesabı silme, profili düzenleme,
         kişisel bilgileri düzenleme formlarına ulaşılır.
     """
-    
-    
+        
     return render(request, 'users/settings.html')
+
 
 @login_required
 def update_informations(request):
@@ -114,10 +114,7 @@ def show(request, username):
     is_me = tuser.username == request.user.username
 
     group = Group.objects.get(name = 'Yazarlar')    
-    if group.user_set.filter(username = tuser): # üye yazarsa
-        
-        is_author = True
-        posts = tuser.post_set.filter(published = True)
+    posts = tuser.post_set.filter(published = True) if group.user_set.filter(username = tuser) else None
     
     return render(request, 'users/show.html', locals())
 
