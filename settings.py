@@ -4,7 +4,12 @@
 
 import os.path
 
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
 PATH = os.path.dirname(__file__)
+
+# Email ayarları;
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -12,16 +17,15 @@ EMAIL_HOST_USER = 'yigitsadic@gmail.com'
 EMAIL_HOST_PASSWORD = '' # şşt uzaklaş bakalım ;-)
 EMAIL_PORT = 587
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    (u'Yiğit Sadıç', 'yigitsadic@gmail.com'),
-    (u'Şahin Mersin', 'electrocoder@gmail.com'), 
+    (u'Şahin Mersin', 'electrocoder@gmail.com'),
+    (u'Yiğit Sadıç', 'yigitsadic@gmail.com'),     
 )
 
 
-# Üye işlemleri ile ilgili ayarlar
+# Üye işlemleri ile ilgili ayarlar;
+
 LOGIN_REDIRECT_URL = '/posts/'
 LOGIN_URL = '/accounts/login/'
 
