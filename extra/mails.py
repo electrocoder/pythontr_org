@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.core.mail import EmailMultiAlternatives
-
 from django.template import Context, loader
 
 FROM_EMAIL = 'yigitsadic@gmail.com'

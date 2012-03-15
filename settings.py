@@ -16,23 +16,16 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('xxx', 'xxx@xxxx.xxx'),
+    (u'Yiğit Sadıç', 'yigitsadic@gmail.com'),
+    (u'Şahin Mersin', 'electrocoder@gmail.com'), 
 )
 
 
 # Üye işlemleri ile ilgili ayarlar
-
-# Login işlemi yapıldıktan sonra gidilecek adres.
 LOGIN_REDIRECT_URL = '/posts/'
-
-# Login (giriş) adresi
 LOGIN_URL = '/accounts/login/'
 
-# Logout (çıkış) adresi
 LOGOUT_URL = '/accounts/logout/'
-
-# Profil modeli
-# Kullanım: user.get_profile()
 AUTH_PROFILE_MODULE = 'users.Profile'
 
 
