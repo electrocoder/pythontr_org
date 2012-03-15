@@ -3,6 +3,8 @@
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
+from django.contrib.auth import authenticate, login
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
@@ -23,6 +25,10 @@ def signup(request):
         
         if form.is_valid():
             user = form.save()
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            
+            login(request, user)
+            
             Profile.objects.create(user = user)
             
             return redirect('posts:index')

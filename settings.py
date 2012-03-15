@@ -61,7 +61,7 @@ USE_L10N = True
 
 MEDIA_ROOT = PATH + '/media/'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/' 
 
 
 STATIC_ROOT = PATH + 'static/'

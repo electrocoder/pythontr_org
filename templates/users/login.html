@@ -11,6 +11,13 @@
 	<div class="div8">
 		<form class="form-horizontal" method="POST" action="{% url users:login %}">{% csrf_token %}
 			<fieldset>
+				{% if form.errors %}
+				    <div class="alert alert-error">
+ 						<a class="close" data-dismiss="alert">&times;</a>
+				    	Kullanıcı adı ve parola uyuşmuyor.
+					</div>
+				{% endif %}
+				
 				<div class="control-group">
 					<label class="control-label" for="{{ form.username.html_name }}">{{ form.username.label }}</label>
 					<div class="controls">
