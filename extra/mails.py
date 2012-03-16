@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+from django.contrib.sites.models import Site
 
 from django.core.mail import EmailMultiAlternatives
 from django.template import Context, loader
 
+
 FROM_EMAIL = 'yigitsadic@gmail.com'
 TO = 'yigitsadic@gmail.com'
+
 
 def ContactMail(form):
     """
@@ -45,19 +48,21 @@ def AuthorMail(user):
         Yöneticilere mail gönderir.
     """
     
+    site = Site.objects.get_current()
+    
     subject = u'Yazar olmak isteyen var!'
     
     t = loader.get_template('mails/author.html')
-    c = Context({'user': user})
+    c = Context({'user': user, 'site': site})
     
     html_content = t.render(c)
     text_content = u"""
     Yazar olmak isteyen var.
     ----
     Üye: %s
-    Admin sayfa linki: http://pythontr.org/admin/auth/user/%s/
+    Admin sayfa linki: %s/admin/auth/user/%s/
     
-    """ % (user, user.id)
+    """ % (user, user.id, site.domain)
     
     message = EmailMultiAlternatives(subject, text_content, FROM_EMAIL, [TO])
     message.attach_alternative(html_content, 'text/html')
