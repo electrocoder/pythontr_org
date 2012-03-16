@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'pythontr_org.polls',
     
     'pythontr_org.posts',
+    'pythontr_org.links',
     'pythontr_org.users',
     
     'disqus',
