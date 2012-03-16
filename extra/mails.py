@@ -4,9 +4,10 @@ from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
 from django.template import Context, loader
 
+from pythontr_org.settings import ADMINS
 
 FROM_EMAIL = 'yigitsadic@gmail.com'
-TO = 'yigitsadic@gmail.com'
+TO = [ email for name, email in ADMINS ]
 
 
 def ContactMail(form):
@@ -35,7 +36,7 @@ def ContactMail(form):
     """ % (form.cleaned_data['title'], form.cleaned_data['email'], form.cleaned_data['web_site'], form.cleaned_data['content'])
     
     
-    message = EmailMultiAlternatives(subject, text_content, FROM_EMAIL, [TO])
+    message = EmailMultiAlternatives(subject, text_content, FROM_EMAIL, TO)
     message.attach_alternative(html_content, 'text/html')
     
     return message
@@ -64,7 +65,7 @@ def AuthorMail(user):
     
     """ % (user, user.id, site.domain)
     
-    message = EmailMultiAlternatives(subject, text_content, FROM_EMAIL, [TO])
+    message = EmailMultiAlternatives(subject, text_content, FROM_EMAIL, TO)
     message.attach_alternative(html_content, 'text/html')
     
     return message

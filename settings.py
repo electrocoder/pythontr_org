@@ -19,7 +19,7 @@ EMAIL_PORT = 587
 
 
 ADMINS = (
-    (u'Şahin Mersin', 'electrocoder@gmail.com'),
+    (u'Şahin Mersin', 'electrocoder@gmail.com'), 
     (u'Yiğit Sadıç', 'yigitsadic@gmail.com'),     
 )
 
