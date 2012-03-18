@@ -13,7 +13,7 @@ from pythontr_org.posts.forms import PostForm
 def index(request):
     """
         Gönderileri listeler.
-    """
+    """    
     
     posts = Post.objects.filter(published = True)
     
