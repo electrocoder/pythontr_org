@@ -7,12 +7,16 @@
 	</div>
 	
 	<div class="span8">
-		{% for post in posts %}
-			<h2>{{ post.title }}</h2>
-			<p>{% autoescape off %} {{ post.short_content|textile }} {% endautoescape %}</p>
-			<p>
-				<a href="{{ post.get_absolute_url }}" class="btn">Devamını oku</a>
-			</p>
-		{% endfor %}
+		<ul>
+			{% for post in object_list %}
+				<li>
+					<a href="{{ post.get_absolute_url }}">{{ post }}</a>
+					
+					<i> {{ post.created_at|timesince }} önce gönderildi.</i>
+				</li>
+			{% endfor %}
+		</ul>
+		
+		{% include 'posts/_pagination.html' %}
 	</div>
 {% endblock %}

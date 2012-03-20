@@ -37,7 +37,7 @@ class Category(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('posts:show_category', [self.pk, self.slug]) 
+        return ('posts:show_category', [self.slug]) 
 
     class Meta:
         verbose_name = "Kategori"
@@ -94,7 +94,7 @@ class Post(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('posts:show', [self.pk, self.slug])
+        return ('posts:show', [self.category.slug, self.slug])
     
     
     def save(self, force_insert=False, force_update=False):

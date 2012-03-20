@@ -10,22 +10,22 @@ from pythontr_org.posts.forms import PostForm
 
 # Gönderiler için
 
-def index(request):
-    """
-        Gönderileri listeler.
-    """    
-    
-    posts = Post.objects.filter(published = True)
-    
-    return render(request, 'posts/index.html', locals())
+# def index(request):
+#    """
+#        Gönderileri listeler.
+#    """    
+#    
+#    posts = Post.objects.filter(published = True)
+#    
+#    return render(request, 'posts/index.html', locals())
 
-def show(request, id, slug):
+def show(request, category_slug, slug):
     """
         Gönderiyi göstermek için kullanılır.
         Eğer gönderi bulunamazsa 404 döndürür.
     """
     
-    post = get_object_or_404(Post, pk = id, published = True)
+    post = get_object_or_404(Post, slug = slug, published = True)
     post.increase_read_count()
     
     return render(request, 'posts/show.html', locals())
@@ -43,13 +43,13 @@ def search(request):
 
 # Kategoriler ile ilgili.
 
-def category_show(request, id, slug):
+def category_show(request, slug):
     """
         Bu kategoriye bağlı gönderileri bulmak için kullanılır.
         Eğer kategori bulunmazsa 404 döndürür.
     """
     
-    category = get_object_or_404(Category, pk = id)
+    category = get_object_or_404(Category, slug = slug)
     posts = category.post_set.all()
     
     return render(request, 'posts/category_show.html', locals())
