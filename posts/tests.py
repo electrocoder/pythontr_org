@@ -18,7 +18,12 @@ class PostFunctionals(TestCase):
         
     """
     
-    fixtures = ['posts.json', 'auth.json']        
+    fixtures = ['posts.json', 'auth.json']
+    
+    def setUp(self):
+        
+        self.client.login(username='yigit', password='1234') 
+        
     
     def test_get_index(self):
         """
@@ -84,7 +89,20 @@ class PostFunctionals(TestCase):
             response = self.client.get(reverse('posts:search'), {'q': q})
             
             self.assertIsNotNone(response.context['posts'])
+    
+    
+    def test_get_my_posts(self):
+        """
+            
+            Gönderilerim sayfasına erişmelidir.
+            
+        """
+
+        response = self.client.get('posts:my_posts')
         
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.context['posts'])
+            
 
         
 class CategoryFunctionals(TestCase):
