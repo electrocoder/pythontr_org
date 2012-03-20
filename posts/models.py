@@ -82,7 +82,9 @@ class Post(models.Model):
                                     help_text = "Bu alan gönderinin yayınlanıp yayınlanmayacağını belirler."
     )
     
-    tags = models.CharField("Etiket(ler)", max_length=100, help_text = "Virgül (,) ile birbirlerinden ayırabilirsiniz.")
+    tags = models.CharField("Etiket(ler)", max_length=100, help_text = "Virgül (,) ile birbirlerinden ayırabilirsiniz.",
+                            blank = True, null = True
+                            )
     read_count = models.IntegerField("Okunma sayısı", default=0)
     
     created_at = models.DateTimeField(auto_now_add = True)
