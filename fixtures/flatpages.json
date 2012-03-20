@@ -1,0 +1,17 @@
+[
+    {
+        "pk": 1, 
+        "model": "flatpages.flatpage", 
+        "fields": {
+            "registration_required": false, 
+            "title": "Hakk\u0131m\u0131zda", 
+            "url": "/about/", 
+            "template_name": "", 
+            "sites": [
+                1
+            ], 
+            "content": "Cras ligula nunc, sagittis non rhoncus non, facilisis quis magna. Vivamus mattis vehicula pharetra. Mauris pellentesque lacinia nisi, interdum mattis mauris porta quis. Sed mattis aliquam turpis, eu sollicitudin leo tristique nec. Nullam eu elementum velit. Curabitur cursus metus suscipit tortor imperdiet fringilla. Etiam molestie orci non purus commodo non tempor dolor fringilla. Mauris et accumsan metus. Nulla ornare neque eu sem viverra cursus. Suspendisse sit amet nibh magna, nec varius felis.\r\n\r\nPraesent a libero nisi, non porta lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam vel orci id ipsum vulputate bibendum eget at massa. Praesent eu augue vitae metus vestibulum auctor. Integer pulvinar, leo at tincidunt molestie, risus orci sagittis ante, ac ultricies lacus sem eget sem. Vivamus ligula leo, condimentum et accumsan et, pharetra ultrices arcu. Quisque libero justo, vehicula sit amet dapibus ac, hendrerit nec nisi. Duis auctor purus nec ante aliquet et pharetra lorem aliquet. In ligula ante, tempor in mollis ut, mattis quis sapien. Proin iaculis felis eu purus mollis vel commodo enim ornare. Nullam feugiat ipsum elementum libero semper commodo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam ultrices justo ac neque elementum iaculis. Donec congue mi id ipsum ornare imperdiet. Donec volutpat enim sit amet dolor sodales mollis sagittis mi mollis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;\r\n\r\nVestibulum accumsan, metus nec suscipit vestibulum, ante turpis euismod neque, sit amet sagittis nibh quam pretium ante. Suspendisse ligula leo, interdum sit amet vestibulum id, ultrices at lorem. Phasellus nisl lacus, sagittis a lacinia et, placerat eget nisl. Mauris condimentum, mi vel eleifend convallis, massa augue faucibus erat, vel porttitor enim sapien a sem. Vivamus ac ullamcorper ipsum. Phasellus libero justo, mollis sit amet vulputate vitae, auctor ut eros. Etiam malesuada odio non lorem molestie consequat. Vestibulum tristique, tellus at varius eleifend, augue sapien lacinia libero, sed interdum nunc eros sed eros. ", 
+            "enable_comments": false
+        }
+    }
+]
