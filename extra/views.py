@@ -17,22 +17,19 @@ def access_denied(request):
 
 def contact(request):
     """
+    
         İletişim sayfasını çalıştırır.
         Eğer form gönderilmeye uygun ise
         yöneticilere mail atar.
-    """
-    
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
         
-        if form.is_valid():
-            
-            ContactMail(form).send()
-            
-            return redirect('posts:index')
-                
-    else:
-        form = ContactForm()        
+    """
+        
+    form = ContactForm(request.POST or None)
+    
+    if form.is_valid():
+        
+        ContactMail(form).send()
+        return redirect('posts:index')                    
     
     return render(request, 'extra/contact.html', locals())
 
@@ -40,9 +37,11 @@ def contact(request):
 @login_required
 def became_an_author(request):
     """
+    
         Yazar olma istek formu.
         'Yazar olmak isteyenler' adlı gruba ekle üyeyi.
         Yöneticiye mail gönder.
+        
     """
     
     group = Group.objects.get(name = 'Yazar olmak isteyenler')
