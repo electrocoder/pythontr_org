@@ -141,4 +141,5 @@ class Post(models.Model):
         verbose_name_plural = "Gönderiler"
         
         ordering = ['-created_at']
+        get_latest_by = 'created_at'
 

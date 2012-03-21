@@ -9,11 +9,15 @@ from pythontr_org.links.models import Link
 
 
 class LinksFunctionalTests(TestCase):
+    
+    fixtures = ['links.json']
+    
+    
     def test_index_page(self):
         """
             Bağlantılar anasayfasını test eder.
         """
-        
+
         response = self.client.get(reverse('links:index'))
         
         self.assertEqual(response.status_code, 200)

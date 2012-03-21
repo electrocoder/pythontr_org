@@ -8,7 +8,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 
 from pythontr_org.posts.models import Post, Category
-
+from django.contrib.auth.models import User
 
 
 class PostFunctionals(TestCase):
@@ -18,8 +18,16 @@ class PostFunctionals(TestCase):
         
     """
     
+    fixtures = ['auth.json', 'posts.json']
+    
     def setUp(self):        
         self.client.login(username='yigit', password='1234')
+        
+        self.post_information = {
+                                 'title': 'Lorem',
+                                 'category': '1',
+                                 'content': u'laba laba löp löp',
+        }
         
     
     def test_get_index(self):
@@ -94,13 +102,75 @@ class PostFunctionals(TestCase):
             Gönderilerim sayfasına erişmelidir.
             
         """
-
+        
         response = self.client.get(reverse('posts:my_posts'))        
         
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)        
         self.assertIsNotNone(response.context['posts'])
 
+        
+    def test_get_new_post(self):
+        """
             
+            Yeni gönderi ekleme sayfasına girmeyi dener.
+        
+        """
+        
+        response = self.client.get(reverse('posts:new'))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.context['form'])
+        
+        
+    def test_post_new_post(self):
+        """
+        
+            Yeni gönderi ekleme sayfasına bilgileri gönderir.
+        
+        """
+        
+        count = len(Post.objects.all())
+        latest_post = Post.objects.latest()
+        
+        response = self.client.post(reverse('posts:new'), self.post_information)
+        
+        
+        latest_post_now = Post.objects.latest()
+        
+        self.assertRedirects(response, reverse('posts:my_posts'))
+        self.assertEqual(latest_post_now.title, self.post_information['title'])        
+        
+        self.assertNotEqual(count, len(Post.objects.all()))
+        self.assertNotEqual(latest_post.title, latest_post_now.title)
+            
+
+    def test_edit_post(self):
+        """
+        
+            Gönderiyi düzenleme testi.
+        
+        """
+        
+        post = Post.objects.latest()
+        
+        response = self.client.get(reverse('posts:edit', args=[post.id]))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.context['post'])
+        
+        self.assertEqual(response.context['post'].title, post.title)
+        self.assertIsNotNone(response.context['form'])
+        
+        
+    def test_update_post(self):
+        """
+        
+            Gönderiyi bilgilere göre düzenleme testi.
+        
+        """
+        
+        post = Post.objects.latest()
+
 
         
 class CategoryFunctionals(TestCase):
@@ -109,6 +179,8 @@ class CategoryFunctionals(TestCase):
         'Category' modeli ile ilgili functional test.
         
     """
+    
+    fixtures = ['posts.json']
         
     
     def test_should_get_show_category(self):

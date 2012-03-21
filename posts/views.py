@@ -63,18 +63,16 @@ def new(request):
         Yeni gönderi eklemek için kullanılır.
     """
     
-    if request.method == 'POST':
-        post = Post(author = request.user)
+    
+    post = Post(author = request.user)
+    
+    form = PostForm(request.POST or None, instance = post)
+    
+    if form.is_valid():
+        form.save()
         
-        form = PostForm(request.POST, instance = post)
-        
-        if form.is_valid():
-            form.save()
-            
-            messages.success(request, u'Gönderi başarı ile eklendi.')
-            return redirect('posts:my_posts')
-    else:
-        form = PostForm()
+        messages.success(request, u'Gönderi başarı ile eklendi.')
+        return redirect('posts:my_posts')    
         
 
     return render(request, 'posts/new.html', locals())
