@@ -95,10 +95,10 @@ class PostFunctionals(TestCase):
             
         """
 
-        response = self.client.get('posts:my_posts')        
+        response = self.client.get(reverse('posts:my_posts'))        
         
-        #self.assertEqual(response.status_code, 200)
-        #self.assertIsNotNone(response.context['posts'])
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.context['posts'])
 
             
 
