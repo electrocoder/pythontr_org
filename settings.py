@@ -26,7 +26,7 @@ ADMINS = (
 
 # Üye işlemleri ile ilgili ayarlar;
 
-LOGIN_REDIRECT_URL = '/posts/'
+LOGIN_REDIRECT_URL = '/py/'
 LOGIN_URL = '/accounts/login/'
 
 LOGOUT_URL = '/accounts/logout/'
