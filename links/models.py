@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.utils.safestring import mark_safe
 
 
 class Link(models.Model):
     """
-        Bağlantıları depolamak için kullanılacak
-        model.
+    
+        Bağlantıları depolamak için kullanılan model.
         
         title, href, description alanlarını içerir.
+        
+        'anchor_tag' fonksiyonu HTML <a> tagını oluşturur.
+        
     """
     
     title = models.CharField('Başlık', max_length = 255)
@@ -22,7 +26,7 @@ class Link(models.Model):
         return self.title
     
     def anchor_tag(self):
-        return "<a href='%s' target='_blank'>%s</a>" % (self.href, self.title)
+        return mark_safe("<a href='%s' target='_blank'>%s</a>" % (self.href, self.title))
     
     class Meta:
         verbose_name = 'Bağlantı'

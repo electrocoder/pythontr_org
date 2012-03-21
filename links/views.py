@@ -9,9 +9,3 @@ def index(request):
     links = Link.objects.all()
     
     return render(request, 'links/index.html', locals())
-
-
-def show(request, id):
-    link = get_object_or_404(Link, id=id)
-    
-    return render(request, 'links/show.html', locals())

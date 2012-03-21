@@ -28,10 +28,9 @@ urlpatterns = patterns('',
                        
                        url(r'^contact/$', 'pythontr_org.extra.views.contact', name = 'contact'),
                        
-                       url(r'^py/', include('pythontr_org.posts.urls', namespace = 'posts')),
-    
-                       url(r'^polls/', include('pythontr_org.polls.urls', namespace = 'polls')),
-                       
+                       url(r'^links/', include('pythontr_org.links.urls', namespace = 'links')),                                              
+                       url(r'^py/', include('pythontr_org.posts.urls', namespace = 'posts')),    
+                       url(r'^polls/', include('pythontr_org.polls.urls', namespace = 'polls')),                       
                        url(r'^admin/', include(admin.site.urls)),   
                        url(r'^accounts/', include('pythontr_org.users.urls', namespace = 'users')),                    
 )
