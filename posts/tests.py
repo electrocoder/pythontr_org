@@ -23,10 +23,16 @@ class PostFunctionals(TestCase):
     def setUp(self):        
         self.client.login(username='yigit', password='1234')
         
-        self.post_information = {
+        self.post_informations = {
                                  'title': 'Lorem',
                                  'category': '1',
                                  'content': u'laba laba löp löp',
+        }
+        
+        self.new_informations = {
+                                 'title': 'Lorem ipsum',
+                                 'category': '1',
+                                 'content': u'İlginç bir deneyim'
         }
         
     
@@ -132,13 +138,13 @@ class PostFunctionals(TestCase):
         count = len(Post.objects.all())
         latest_post = Post.objects.latest()
         
-        response = self.client.post(reverse('posts:new'), self.post_information)
+        response = self.client.post(reverse('posts:new'), self.post_informations)
         
         
         latest_post_now = Post.objects.latest()
         
         self.assertRedirects(response, reverse('posts:my_posts'))
-        self.assertEqual(latest_post_now.title, self.post_information['title'])        
+        self.assertEqual(latest_post_now.title, self.post_informations['title'])        
         
         self.assertNotEqual(count, len(Post.objects.all()))
         self.assertNotEqual(latest_post.title, latest_post_now.title)
@@ -170,7 +176,33 @@ class PostFunctionals(TestCase):
         """
         
         post = Post.objects.latest()
-
+                
+        response = self.client.post(reverse('posts:edit', args=[post.id]), self.new_informations)
+        
+        self.assertRedirects(response, reverse('posts:my_posts'))
+        self.assertNotEqual(post.title, self.new_informations['title'])
+        
+        self.assertEqual(Post.objects.latest().title, self.new_informations['title'])
+        
+        
+        
+    def test_delete_post(self):
+        """
+            
+            Gönderiyi silme testi.
+            
+        """
+        
+        post = Post.objects.latest()
+        count = len(Post.objects.all())
+        
+        response = self.client.get(reverse('posts:delete', args=[post.id]))
+        
+        
+        self.assertRedirects(response, reverse('posts:my_posts'))
+        self.assertNotEqual(count, len(Post.objects.all()))
+        
+        
 
         
 class CategoryFunctionals(TestCase):
