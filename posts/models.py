@@ -2,11 +2,37 @@
 
 from django.db import models
 from django.contrib.auth.models import User, Group
-from django.contrib.sitemaps import ping_google
 
+from django.contrib.sitemaps import ping_google
 from django.core.exceptions import ValidationError
 
 from pythontr_org.slughifi import slugify_unicode
+
+
+
+
+class Category(models.Model):
+    """
+        Kategorileri depolamak için kullanılan model.
+        'name' alanını içerir.
+    """
+    
+    name = models.CharField("Adı", unique=True, max_length=50)
+    slug = models.SlugField('Slug', max_length = 255, blank = True, null = True)
+    
+    image = models.ImageField(upload_to='category_images', blank = True, null = True)
+    
+    def __unicode__(self):
+        return self.name
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('posts:show_category', [self.slug]) 
+
+    class Meta:
+        verbose_name = "Kategori"
+        verbose_name_plural = "Kategoriler"
+
 
 def validate_user_is_in_authors_group(value):
     """
@@ -21,27 +47,6 @@ def validate_user_is_in_authors_group(value):
     if not user in group.user_set.all():
         raise ValidationError(u'%s adlı kullanıcı bir yazar değil.' % user.username)
         
-
-
-class Category(models.Model):
-    """
-        Kategorileri depolamak için kullanılan model.
-        'name' alanını içerir.
-    """
-    
-    name = models.CharField("Adı", unique=True, max_length=50)
-    slug = models.SlugField('Slug', max_length = 255, blank = True, null = True)
-    
-    def __unicode__(self):
-        return self.name
-    
-    @models.permalink
-    def get_absolute_url(self):
-        return ('posts:show_category', [self.slug]) 
-
-    class Meta:
-        verbose_name = "Kategori"
-        verbose_name_plural = "Kategoriler"
 
 class Post(models.Model):
     """
