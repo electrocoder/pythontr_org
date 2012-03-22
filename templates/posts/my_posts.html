@@ -8,16 +8,16 @@
 		<h1>Gönderilerim</h1>
 	</div>
 	
-	{% if messages %}
-		{% for message in messages %}
-			<div class="alert alert-success">
-				<a class="close" data-dismiss="alert">×</a>
-				{{ message }}
-			</div>
-		{% endfor %}	
-	{% endif %}	
-	
 	<div class="span8">
+		
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert alert-success">
+					<a class="close" data-dismiss="alert">×</a>
+					{{ message }}
+				</div>
+			{% endfor %}	
+		{% endif %}
 		
 		{% if posts %}
 			<table class="table table-bordered">

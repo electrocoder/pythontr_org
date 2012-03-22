@@ -1,6 +1,6 @@
 <form class="form-horizontal" method="POST">{% csrf_token %}
 	<fieldset>
-		
+		{{ form.media }}
 		{% for field in form %}
 			<div class="control-group{% if field.errors %} error {% endif %}">
 				<label class="control-label" for="id_{{ field.html_name }}">{{ field.label }}</label>

@@ -32,7 +32,8 @@ urlpatterns = patterns('',
                        url(r'^py/', include('pythontr_org.posts.urls', namespace = 'posts')),    
                        url(r'^polls/', include('pythontr_org.polls.urls', namespace = 'polls')),                       
                        url(r'^admin/', include(admin.site.urls)),   
-                       url(r'^accounts/', include('pythontr_org.users.urls', namespace = 'users')),                    
+                       url(r'^accounts/', include('pythontr_org.users.urls', namespace = 'users')),
+                       url(r'^tinymce/', include('tinymce.urls')),               
 )
 
 urlpatterns += SITEMAPS_URLS 
