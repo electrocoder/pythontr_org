@@ -9,6 +9,13 @@
 	</div>
 	
 	<div class="span8">
+		
+		<ul class="thumbnails">
+			<li class="span4">
+				<img src="{{ category.image.url }}" />
+			</li>
+		</ul>
+		
 		<b>{{ category.name }}</b> ile ilişkili gönderiler;
 		{% if posts %}
 			<ul>
