@@ -3,6 +3,9 @@
 from pythontr_org.posts.models import Post, Category
 from django.contrib import admin
 
+from tinymce.widgets import TinyMCE
+
+
 class CategoryAdmin(admin.ModelAdmin):
     
     
@@ -31,11 +34,20 @@ class PostAdmin(admin.ModelAdmin):
         self.message_user(request, "%s gönderi başarı ile yayınlandı!" % rows_updated)
     publish.short_description = u'Seçili gönderileri yayınla'
     
+    
     def unpublish(self, request, queryset):
         rows_updated = queryset.update(published = False)
         
         self.message_user(request, "%s gönderi başarı ile yayından kaldırıldı!" % rows_updated)
     unpublish.short_description = u'Seçili gönderileri yayından kaldır'
+    
+    
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if db_field.name == 'content':
+            return db_field.formfield(widget=TinyMCE(
+                attrs={'cols': 80, 'rows': 30},
+            ))
+        return super(PostAdmin, self).formfield_for_dbfield(db_field, **kwargs)
     
 
 
