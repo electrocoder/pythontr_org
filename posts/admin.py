@@ -45,7 +45,7 @@ class PostAdmin(admin.ModelAdmin):
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'content':
             return db_field.formfield(widget=TinyMCE(
-                attrs={'cols': 80, 'rows': 30},
+                attrs={'cols': 100, 'rows': 30},
             ))
         return super(PostAdmin, self).formfield_for_dbfield(db_field, **kwargs)
     
