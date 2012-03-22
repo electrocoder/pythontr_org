@@ -115,6 +115,10 @@ FIXTURE_DIRS = (
 DISQUS_API_KEY = 'rr3r45gg7hoAnpar32erwr32432rerSLlxoos2JpnY' 
 DISQUS_WEBSITE_SHORTNAME = 'pythonprogramcilari'
 
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': "advanced",
+}
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
