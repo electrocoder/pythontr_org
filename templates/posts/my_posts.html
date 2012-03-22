@@ -25,6 +25,7 @@
 					<tr>
 						<th>Gönderi başlığı</th>
 						<th>Kategorisi</th>
+						<th>Yayınlandı mı?</th>
 						<th>Okunma sayısı</th>
 						<th>Eklenme tarihi</th>
 						<th>Değiştirilme tarihi</th>
@@ -41,6 +42,9 @@
 							{{ post.category }}
 						</td>
 						<td>
+							<img width="16" height="16" src="/static/img/{{ post.published }}.png" alt="{{ post.published }}" />
+						</td>
+						<td>
 							{{ post.read_count }}
 						</td>
 						<td>
@@ -48,8 +52,7 @@
 						</td>
 						<td>
 							{{ post.updated_at }}
-						</td>
-						
+						</td>						
 						<td>
 							<a href="{% url posts:edit post.id %}" class="btn">Düzenle</a>
 						</td>
