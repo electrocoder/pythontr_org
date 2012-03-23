@@ -9,37 +9,7 @@
 	</div>
 
 	<div class="span8">
-		
-		<form class="form-horizontal" method="POST"> {% csrf_token %}
-			<fieldset>
-				<legend>İletişim formu</legend>
-				
-				{% for field in form %}
-					<div class="control-group{% if field.errors %} error {% endif %}">
-						<label class="control-label" for="id_{{ field.html_name }}">{{ field.label }}</label>
-						<div class="controls">
-							{{ field }}
-							
-							{% if field.errors %}
-								<p class="help-block">{{ field.errors }}</p>
-							{% endif %}
-							
-							{% if field.help_text %}
-								<p class="help-block">{{ field.help_text }}</p>
-							{% endif %}
-						</div>
-					</div>
-				{% endfor %}
-				
-				<div class="form-actions">
-					<input type="hidden" name="next" value="{{ next }}" />
-					<button class="btn btn-primary" type="submit">Gönder</button>
-					<a href="{% url posts:index %}" class="btn">Geri</a>
-				</div>
-
-			</fieldset>
-		</form>
-		
+		{% include '_form.html' %}	
 	</div>
 
 {% endblock %}
