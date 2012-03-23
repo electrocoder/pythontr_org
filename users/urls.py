@@ -39,7 +39,7 @@ urlpatterns = patterns('pythontr_org.users.views',
 
 PASSWORD_RESET_DICT = {
                        'post_reset_redirect': '/accounts/password_reset/done/',
-                       'email_template_name': 'mails/password_reset.html',
+                       'email_template_name': 'emails/password_reset.html',
                        'template_name': 'users/password_reset.html'
 }
 

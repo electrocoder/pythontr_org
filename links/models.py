@@ -31,6 +31,9 @@ class Link(models.Model):
     def anchor_tag(self):
         return mark_safe("<a href='%s' target='_blank'>%s</a>" % (self.href, self.title))
     
+    def get_absolute_url(self):
+        return self.href
+    
     class Meta:
         verbose_name = 'Bağlantı'
         verbose_name_plural = 'Bağlantılar'

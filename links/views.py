@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from pythontr_org.links.models import Link
 from pythontr_org.links.forms import LinkForm
+from pythontr_org.links.mails import LinkAddedMail
 
 
 def index(request):
@@ -29,10 +30,11 @@ def new(request):
     form = LinkForm(request.POST or None, instance = Link(confirmed = False))
     
     if form.is_valid():
-        form.save()
+        link = form.save()
         
-        messages.success(request, u'Teşekkürler. Bağlantı başarı ile eklendi. Yöneticiler onayladığında listede yerini alacaktır.')
+        LinkAddedMail(link).send()
         
+        messages.success(request, u'Teşekkürler. Bağlantı başarı ile eklendi. Yöneticiler onayladığında listede yerini alacaktır.')        
         return redirect('users:settings')
     
     return render(request, 'links/new.html', locals())

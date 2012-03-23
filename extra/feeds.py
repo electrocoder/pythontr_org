@@ -5,6 +5,8 @@ from django.conf.urls.defaults import patterns
 
 from django.shortcuts import get_object_or_404
 from pythontr_org.posts.models import Post, Category
+from pythontr_org.links.models import Link
+
 
 class LatestCommunityPosts(Feed):
     """
@@ -50,10 +52,33 @@ class LatestPosts(Feed):
         return item.created_at
 
 
+class LatestLinks(Feed):
+    """
+        Bağlantı RSS beslemesi
+    """
+    
+    title = 'Son gönderilen bağlantılar'
+    link = '/'
+    description = 'Python programcıları derneği son gönderilen 5 bağlantı'
+    
+    def items(self):
+        return Link.objects.filter(confirmed = True)[:5]
+    
+    def item_title(self, item):
+        return item.title
+    
+    def item_description(self, item):
+        return item.description or item.title
+    
+    def item_pubdate(self, item):
+        return item.created_at
+
+
 # urls
 
 RSS_URLS = patterns('',
                     (r'^rss/$', LatestPosts()),
                     (r'^rss/community/$', LatestCommunityPosts()),
                     (r'^rss/posts/$', LatestPosts()),
+                    (r'^rss/links/$', LatestLinks())
 )

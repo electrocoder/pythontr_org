@@ -22,6 +22,10 @@
 
 	<tr>
 		<th>İçerik</th>
-		<td><p>{{ form.content }}</p></td>
+		<td>
+			{% autoescape off %}
+				{{ form.content }}
+			{% endautoescape %}
+		</td>
 	</tr>			
 </table>
