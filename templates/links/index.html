@@ -9,6 +9,9 @@
 	</div>
 	
 	<div class="span8">
+		{% if user.is_authenticated %}
+			<a href="{% url links:new %}">Yeni bağlantı ekle</a>
+		{% endif %}
 		
 		<ul>
 			{% for link in links %}

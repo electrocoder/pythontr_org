@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+
+{% block title %} Yeni bağlantı {% endblock %}
+
+
+{% block content %}
+	
+	<div class="page-header">
+		<h1>
+			Yeni bağlantı
+		</h1>
+	</div>
+	
+	<div class="span8">
+		<form class="form-horizontal" method="post">{% csrf_token %}
+			<fieldset>
+				{% for field in form %}
+					<div class="control-group{% if field.errors %} error {% endif %}">
+						<label class="control-label" for="id_{{ field.html_name }}">{{ field.label }}</label>
+						<div class="controls">
+							{{ field }}
+							
+							{% if field.errors %}
+								<p class="help-block">{{ field.errors }}</p>
+							{% endif %}
+							
+							{% if field.help_text %}
+								<p class="help-block">{{ field.help_text }}</p>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+				
+				<div class="form-actions">
+					<input type="hidden" name="next" value="{{ next }}" />
+					<button class="btn btn-primary" type="submit">Kaydet</button>
+					<a href="{% url links:index %}" class="btn">Geri</a>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	
+{% endblock %}

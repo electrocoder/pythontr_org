@@ -19,8 +19,11 @@ class Link(models.Model):
     href = models.URLField('Adres', max_length = 255)
     description = models.TextField('Kısa açıklama', max_length = 570, blank = True, null = True)
     
+    confirmed = models.BooleanField('Onaylandı mı?', default = True)
+    
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    
     
     def __unicode__(self):
         return self.title

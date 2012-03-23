@@ -16,7 +16,7 @@ urlpatterns = patterns('pythontr_org.users.views',
                        
                        # Giriş ve çıkış
                        url(r'^login/$', login, {'template_name': 'users/login.html'}, name = 'login'),
-                       url(r'^logout/$', logout, { 'next_page': '/posts/' }, name = 'logout'),
+                       url(r'^logout/$', logout, { 'next_page': '/py/' }, name = 'logout'),
                        
                        # kayıt olma ve şifre değiştirme
                        url(r'^signup/$', 'signup', name = 'signup'),
