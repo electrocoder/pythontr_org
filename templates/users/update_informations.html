@@ -3,42 +3,13 @@
 {% block title %} Bilgilerini güncelle {% endblock %}
 
 {% block content %}
+	
 	<div class="page-header">
 		<h1>Kişisel bilgilerin</h1>
 	</div>
 	
-	<form class="form-horizontal" method="post" action="{% url users:update_informations %}">{% csrf_token %}
-	<fieldset>
-		<legend>Bilgi güncelleme formu</legend>
-		
-		<div class="control-group">
-
-			<label for="id_email" class="control-label">{{ form.email.label }}</label>
-			<div class="controls">
-				{{ form.email }}
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label for="id_first_name" class="control-label">{{ form.first_name.label }}</label>
-			<div class="controls">
-				{{ form.first_name }}
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label for="id_last_name" class="control-label">{{ form.last_name.label }}</label>
-			<div class="controls">
-				{{ form.last_name }}
-			</div>
-		</div>								
-		
-		<div class="form-actions">
-			<input type="hidden" name="next" value="{{ next }}" />
-			<button class="btn btn-primary" type="submit">Değişiklikleri kaydet</button>
-			<a href="{% url users:settings %}" class="btn">Geri</a>
-		</div>
-		
-	</fieldset>
-</form>
+	<div class="span8">
+		{% include '_form.html' %}
+	</div>
+	
 {% endblock %}
