@@ -22,7 +22,14 @@ def detail(request, poll_id):
         Anket detaylarını göstermek için kullanılır.
     """
     
-    poll = get_object_or_404(Poll, pk=poll_id)    
+    poll = get_object_or_404(Poll, pk=poll_id)
+    
+    try:
+        vote = Vote.objects.get(user=request.user, poll=poll)
+    except:
+        pass
+
+    
     return render(request, 'polls/detail.html', locals())
 
 

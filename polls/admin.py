@@ -3,6 +3,7 @@
 from pythontr_org.polls.models import Poll, Choice, Vote
 from django.contrib import admin
 
+
 class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 1
@@ -13,8 +14,11 @@ class PollAdmin(admin.ModelAdmin):
     ]
     inlines = [ChoiceInline]
 
+
 class VoteAdmin(admin.ModelAdmin):
-    pass
+    
+    list_display = ('user', 'poll', 'choice', 'created_at')
+
 
 admin.site.register(Poll, PollAdmin)
 admin.site.register(Vote, VoteAdmin)

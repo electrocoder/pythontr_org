@@ -7,17 +7,16 @@
 		<h1>{{ poll.question }} için sonuçlar</h1>
 	</div>
 	
-	<div class="span8">
-		
-		<a href="{% url polls:index %}">Anketler</a>
-		<a href="{% url polls:detail poll.id %}">Geri</a>
-		
-		<br />
-		
+	<div class="span8">		
 		<ul>
 			{% for choice in poll.choice_set.all %}
 			    <li>{{ choice.choice }} - {{ choice.votes }} oy</li>
 			{% endfor %}
 		</ul>
+		
+		<div class="btn-group">
+			<a class="btn" href="{% url polls:detail poll.id %}">Geri</a>
+			<a class="btn" href="{% url polls:index %}">Anketler</a>
+	    </div>
 	</div>
 {% endblock %}
