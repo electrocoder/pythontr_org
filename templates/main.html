@@ -79,7 +79,7 @@
             </ul>
             
 			<form class="navbar-search pull-left" method="get" action="{% url 'posts:search' %}">
-        		<input type="text" value="{{ q }}" name="q" class="search-query" placeholder="Gönderi ara...">
+        		<input type="text" value="{{ q }}" name="q" class="search-query" placeholder="Ara...">
         	</form>
             
             {% if user.is_authenticated %}

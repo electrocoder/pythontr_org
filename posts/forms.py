@@ -16,6 +16,7 @@ class PostForm(ModelForm):
             self.fields[myField].widget.attrs['class'] = 'input-xlarge'
                     
         self.fields['content'].widget.attrs['rows'] = 27
+        self.fields['content'].widget.attrs['id'] = 'editor'
        
         
     class Meta:
