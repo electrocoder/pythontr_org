@@ -9,8 +9,6 @@ from django.core.exceptions import ValidationError
 from pythontr_org.slughifi import slugify_unicode
 
 
-
-
 class Category(models.Model):
     """
         Kategorileri depolamak için kullanılan model.

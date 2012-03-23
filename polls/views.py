@@ -53,6 +53,7 @@ def vote(request, poll_id):
         error_message = u'Bir seçeneği seçmediniz.'
         
         return render(request, 'polls/detail.html', locals())
+    
     except ValidationError:
         error_message = u'Bu ankete zaten oy kullanmışsınız.'
         
