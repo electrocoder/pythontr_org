@@ -15,7 +15,7 @@ class PostForm(ModelForm):
         for myField in self.fields:
             self.fields[myField].widget.attrs['class'] = 'input-xlarge'
                     
-        #self.fields['content'].widget = TinyMCE(attrs={'rows': 27, 'cols': 50})
+        self.fields['content'].widget.attrs['rows'] = 27
        
         
     class Meta:
