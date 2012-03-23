@@ -11,8 +11,8 @@
 	<div class="span8">
 		
 		{% if user.is_authenticated %}
-			<a class="btn" href="{% url links:new %}">Yeni bağlantı ekle</a>
-			<br />
+			<a href="{% url links:new %}">Yeni bağlantı ekle</a>
+			<br /><br />
 		{% endif %}
 		
 		<ul>
