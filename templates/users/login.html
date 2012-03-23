@@ -9,35 +9,15 @@
 	</div>
 	
 	<div class="div8">
-		<form class="form-horizontal" method="POST" action="{% url users:login %}">{% csrf_token %}
-			<fieldset>
-				{% if form.errors %}
-				    <div class="alert alert-error">
- 						<a class="close" data-dismiss="alert">&times;</a>
-				    	Kullanıcı adı ve parola uyuşmuyor.
-					</div>
-				{% endif %}
-				
-				<div class="control-group">
-					<label class="control-label" for="{{ form.username.html_name }}">{{ form.username.label }}</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" name="{{ form.username.html_name }}" id="{{ form.username.html_name }}" />
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label class="control-label" for="{{ form.password.html_name }}">{{ form.password.label }}</label>
-					<div class="controls">
-						<input type="password" class="input-xlarge" name="{{ form.password.html_name }}" id="{{ form.password.html_name }}" />
-					</div>
-				</div>
-				
-				<div class="form-actions">
-					<input type="hidden" name="next" value="{{ next }}" />
-					<button class="btn btn-primary" type="submit">Giriş</button>
-					<a href="{% url posts:index %}" class="btn">Geri</a>
-				</div>
-			</fieldset>
-		</form>
+		
+		{% if form.errors %}
+		    <div class="alert alert-error">
+				<a class="close" data-dismiss="alert">&times;</a>
+		    	Kullanıcı adı ve parola uyuşmuyor.
+			</div>
+		{% endif %}
+		
+		{% include '_form.html' %}
+		
 	</div>
 {% endblock %}
