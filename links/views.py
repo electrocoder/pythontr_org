@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from pythontr_org.links.models import Link
 from pythontr_org.links.forms import LinkForm
 
+
 def index(request):
     """
         Bağlantıları listeler.
@@ -25,7 +26,7 @@ def new(request):
         Bağlantı kaydedilir, yöneticilere mail gönderilir.
     """
     
-    form = LinkForm(request.POST or None)
+    form = LinkForm(request.POST or None, instance = Link(confirmed = False))
     
     if form.is_valid():
         form.save()
