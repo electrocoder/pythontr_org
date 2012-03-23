@@ -1,7 +1,9 @@
 # -*- coding: utf-8-*-
 
 from django.db import models
+from django.contrib.auth.models import User
 
+from django.core.exceptions import ValidationError
 
 class Poll(models.Model):
 	question = models.CharField(max_length=200, verbose_name = "Sorusu")
@@ -31,3 +33,28 @@ class Choice(models.Model):
 	class Meta:
 		verbose_name = 'Seçenek'
 		verbose_name_plural = 'Seçenekler'
+		
+		
+class Vote(models.Model):
+	user = models.ForeignKey(User, verbose_name = 'Kullanıcı')
+	poll = models.ForeignKey(Poll, verbose_name = 'Anket')
+	choice = models.ForeignKey(Choice, verbose_name = 'Seçenek')
+	
+	created_at = models.DateTimeField(auto_now_add = True)
+	updated_at = models.DateTimeField(auto_now = True)
+	
+	def __unicode__(self):
+		return self.poll.question
+	
+	def save(self, force_insert=False, force_update=False):
+		
+		if Vote.objects.filter(user=self.user, poll=self.poll):
+			raise ValidationError(u'Bu ankete oy kullanmışsınız.')
+	
+		super(Vote, self).save(force_insert, force_update)
+
+	class Meta:
+		ordering = ['-created_at']
+		
+		verbose_name = 'Oy'
+		verbose_name_plural = 'Oylar'

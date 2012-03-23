@@ -1,6 +1,6 @@
 # -*- coding: utf-8-*-
 
-from pythontr_org.polls.models import Poll, Choice
+from pythontr_org.polls.models import Poll, Choice, Vote
 from django.contrib import admin
 
 class ChoiceInline(admin.TabularInline):
@@ -13,4 +13,8 @@ class PollAdmin(admin.ModelAdmin):
     ]
     inlines = [ChoiceInline]
 
+class VoteAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(Poll, PollAdmin)
+admin.site.register(Vote, VoteAdmin)
