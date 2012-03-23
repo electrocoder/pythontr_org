@@ -8,16 +8,6 @@ from django.contrib import messages
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.posts.forms import PostForm
 
-# Gönderiler için
-
-# def index(request):
-#    """
-#        Gönderileri listeler.
-#    """    
-#    
-#    posts = Post.objects.filter(published = True)
-#    
-#    return render(request, 'posts/index.html', locals())
 
 def show(request, category_slug, slug):
     """
@@ -29,6 +19,7 @@ def show(request, category_slug, slug):
     post.increase_read_count()
     
     return render(request, 'posts/show.html', locals())
+
 
 def search(request):
     """
