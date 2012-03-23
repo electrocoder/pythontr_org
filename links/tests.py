@@ -75,7 +75,7 @@ class LinksFunctionals(TestCase):
         self.client.logout()
         response = self.client.get(reverse('links:new'))
         
-        self.assertRedirects(response, reverse('users:login'))
+        self.assertRedirects(response, '%s?next=%s' % (reverse('users:login'), reverse('links:new')))
         
 
 class LinkUnits(TestCase):
@@ -102,6 +102,15 @@ class LinkUnits(TestCase):
         
         self.assertTrue(link)
         
+    def test_anchor_tag(self):
+        """
+            'anchor_tag' fonksiyonunu test eder.
+        """
         
-    
+        link = Link.objects.get(pk=2)
+        
+        str = "<a href='%s' target='_blank'>%s</a>" % ('https://www.djangoproject.com/', 'Django Project')
+        
+        self.assertEqual(link.anchor_tag(), str)
+        
         
