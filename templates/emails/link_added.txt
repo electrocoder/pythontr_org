@@ -1,0 +1,14 @@
+Merhaba uygulamanızdan haberler var!
+
+Uygulamanıza yeni bir bağlantı eklendi.
+Bağlantıyı onaylamak için veya silmek için aşağıdaki bağlantıyı takip edin.
+
+{{ site_name }}/admin/links/link/{{ link.id }}
+
+Bilgiler
+--------
+
+	Başlık: {{ link.title }}
+	Adres: {{ link.href }}
+	Kısa açıklama: 
+		{{ link.description }}

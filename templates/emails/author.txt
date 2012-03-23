@@ -1,0 +1,10 @@
+Uygulamanızdan haberler var.
+
+Aşağıdaki kullanıcı yazar olmak istiyor.
+Kullanıcı 'Yazar olmak isteyenler' adlı gruba taşındı.
+
+Kullanıcı adı: {{ user }}
+
+Kullanıcıyı yazar yapmak için aşağıdaki bağlantıyı takip edininiz
+
+{{ site.name }}/admin/auth/user/{{ user.id }}/

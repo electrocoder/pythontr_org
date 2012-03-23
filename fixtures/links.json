@@ -7,7 +7,8 @@
             "created_at": "2012-03-21 19:20:06", 
             "href": "http://2012.djangocon.eu/", 
             "description": "", 
-            "title": "Djangocon EU"
+            "title": "Djangocon EU",
+            "confirmed": true
         }
     }, 
     {
@@ -18,7 +19,8 @@
             "created_at": "2012-03-21 19:19:40", 
             "href": "http://www.python.org/", 
             "description": "", 
-            "title": "Python"
+            "title": "Python",
+            "confirmed": true
         }
     }, 
     {
@@ -29,7 +31,8 @@
             "created_at": "2012-03-21 19:19:26", 
             "href": "https://www.djangoproject.com/", 
             "description": "", 
-            "title": "Django Project"
+            "title": "Django Project",
+            "confirmed": true
         }
     }, 
     {
@@ -40,7 +43,8 @@
             "created_at": "2012-03-21 19:13:31", 
             "href": "http://djangosnippets.org/", 
             "description": "", 
-            "title": "Django snippets"
+            "title": "Django snippets",
+			"confirmed": true
         }
     }
 ]
