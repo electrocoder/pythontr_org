@@ -39,5 +39,5 @@ Kullanmak için:
 	* Profiller uygulamasına şu anda kullandığınız üyenin profilini oluşturun.
 		
 	* Düzsayfalar (Flatpages) uygulamasına girip adresi '/about/' olan bir düzsayfa oluşturun.
-		
-6) Eğlenin :)
+6) 'settings.py' adlı dosyadaki email ayarlarını yapın. 
+7) Eğlenin :)

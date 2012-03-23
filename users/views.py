@@ -131,5 +131,3 @@ def authors(request):
     users = group.user_set.all()
     
     return render(request, 'users/authors.html', locals())
-    
-    
