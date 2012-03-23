@@ -65,7 +65,18 @@ class LinksFunctionals(TestCase):
         
         self.assertFalse(Link.objects.latest().confirmed)
         
-
+        
+    def test_should_redirect_to_login_page(self):
+        """
+            Giriş yapmadan bağlantı ekleme sayfasına erişmeyi
+            test et.
+        """
+        
+        self.client.logout()
+        response = self.client.get(reverse('links:new'))
+        
+        self.assertRedirects(response, reverse('users:login'))
+        
 
 class LinkUnits(TestCase):
     """
