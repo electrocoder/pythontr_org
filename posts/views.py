@@ -8,6 +8,21 @@ from django.contrib import messages
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.posts.forms import PostForm
 
+from django.views.generic.list_detail import object_list
+
+
+def index(request):
+    """
+        Gönderileri listelemek için kullanılır.
+    """    
+    return object_list(
+                       request,
+                       queryset=Post.objects.filter(published = True),
+                       paginate_by=20,
+                       template_name='posts/index.html',
+                       template_object_name='posts'
+                       )
+
 
 def show(request, category_slug, slug):
     """
@@ -26,11 +41,15 @@ def search(request):
         Gönderileri aramak için kullanılır.
         Aranan yapı Post modelinin 'content' alında bulunuyorsa seçer.
     """
+    
     q = request.GET.get('q', '')
-    
-    posts = Post.objects.filter(content__icontains = q)
-    
-    return render(request, 'posts/search.html', locals())    
+    return object_list(request,
+                       queryset=Post.objects.filter(content__icontains = q), 
+                       paginate_by=20,
+                       template_name='posts/search.html',
+                       extra_context=locals(),
+                       template_object_name='posts'
+                       )
 
 # Kategoriler ile ilgili.
 

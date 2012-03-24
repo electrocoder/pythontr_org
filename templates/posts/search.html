@@ -13,9 +13,9 @@
 	</div>
 	
 	<div class="span8">
-		{% if posts %}
+		{% if posts_list %}
 			<ul>
-				{% for post in posts %}
+				{% for post in posts_list %}
 					<li>
 						<a href="{{ post.get_absolute_url }}">
 							{{ post.short_title }}
@@ -23,6 +23,8 @@
 					</li>
 				{% endfor %}
 			</ul>
+			
+			{% include 'posts/_pagination.html' %}
 		{% else %}
 			<h3>Sonuç bulunamadı.</h3>
 		{% endif %}		

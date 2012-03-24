@@ -4,7 +4,7 @@
 		<ul>
 			<li>
 				{% if page_obj.has_previous %}
-					<a href="?page={{ page_obj.previous_page_number }}"> Geri </a>
+					<a href="?q={{ q }}&page={{ page_obj.previous_page_number }}"> Geri </a>
 				{% else %}
 					<a href="#">Geri </a>
 				{% endif %}
@@ -16,13 +16,13 @@
 					</li>
 				{% else %}
 					<li>
-						<a href="?page={{ page }}">{{ page }}</a>
+						<a href="?q={{ q }}&page={{ page }}">{{ page }}</a>
 					</li>
 				{% endif %}
 			{% endfor %}
 			<li>
 			{% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">İleri</a>
+                <a href="?q={{ q }}&page={{ page_obj.next_page_number }}">İleri</a>
             {% else %}
             	<a href="#">İleri</a>
             {% endif %}
