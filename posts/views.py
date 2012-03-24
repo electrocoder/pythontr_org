@@ -42,7 +42,7 @@ def search(request):
     
     q = request.GET.get('q', '')
     return post_list(request,
-                       queryset=Post.objects.filter(content__icontains = q), 
+                       queryset=Post.objects.filter(published = True, content__icontains = q), 
                        template_name='search.html',
                        extra_context=locals(),
                        )

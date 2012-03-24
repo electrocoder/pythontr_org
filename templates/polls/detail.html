@@ -34,14 +34,14 @@
 					</label>
 				{% endfor %}
 				
-				<button type="submit" class="btn btn-primary">Gönder</button>
+				<button type="submit" class="btn btn-primary">Tamam</button>
 			</form>
 			
 		{% endif %}
 		
 		<div class="btn-group">
 			<a class="btn" href="{% url polls:index %}">Anketler</a>
-			<a class="btn" href="{% url polls:results poll.id %}">Anket sonuçlarını gör</a>
+			<a class="btn" href="{% url polls:results poll.slug %}">Anket sonuçlarını gör</a>
 		</div>
 	</div>
 {% endblock %}

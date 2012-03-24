@@ -56,7 +56,7 @@
 		</ul>
 		
 		<div class="btn-group">
-			<a class="btn" href="{% url polls:detail poll.id %}">Geri</a>
+			<a class="btn" href="{{ poll.get_absolute_url }}">Geri</a>
 			<a class="btn" href="{% url polls:index %}">Anketler</a>
 	    </div>
 	</div>

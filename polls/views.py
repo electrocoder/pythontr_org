@@ -6,23 +6,28 @@ from django.contrib.auth.decorators import login_required
 from pythontr_org.polls.models import Choice, Poll, Vote
 
 from django.core.exceptions import ValidationError
+from django.views.generic.list_detail import object_list
 
 
 def index(request):
     """
         Son 5 anketi listelemek için kullanılır.
     """
-    
-    latest_poll_list = Poll.objects.all()[:5]
-    return render(request, 'polls/index.html', locals())
+    return object_list(
+                       request,
+                       queryset=Poll.objects.all(),
+                       paginate_by=15,
+                       template_name='polls/index.html',
+                       template_object_name='poll'
+                       )
 
 
-def detail(request, poll_id):
+def detail(request, slug):
     """
         Anket detaylarını göstermek için kullanılır.
     """
     
-    poll = get_object_or_404(Poll, pk=poll_id)
+    poll = get_object_or_404(Poll, slug=slug)
     
     try:
         vote = Vote.objects.get(user=request.user, poll=poll)
@@ -33,13 +38,14 @@ def detail(request, poll_id):
     return render(request, 'polls/detail.html', locals())
 
 
-def results(request, poll_id):
+def results(request, slug):
     """
         Anket sonuçlarını göstermek için kullanılır.
     """
     
-    poll = get_object_or_404(Poll, pk=poll_id)    
+    poll = get_object_or_404(Poll, slug=slug)    
     return render(request, 'polls/results.html', locals())
+
 
 @login_required
 def vote(request, poll_id):
@@ -73,4 +79,4 @@ def vote(request, poll_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         
-        return redirect('polls:results', poll_id)
+        return redirect('polls:results', poll.slug)

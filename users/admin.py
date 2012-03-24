@@ -5,10 +5,7 @@ from pythontr_org.users.models import Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    
-    
-    search_fields = ['web_site', 'about', 'city']
-    
+    search_fields = ['web_site', 'about', 'city']    
     list_display = ('user', 'web_site', 'city')
 
 

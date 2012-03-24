@@ -9,19 +9,14 @@
 	</div>
 	
 	<div class="span8">
-		{% if latest_poll_list %}
+		{% if poll_list %}
 		    <ul>
-		    {% for poll in latest_poll_list %}
+		    {% for poll in poll_list %}
 		        <li>
-		        	<a href="{% url polls:detail poll.id %}">{{ poll.question }}</a>
-			        <ul>
-				        {% for choice in poll.choice_set.all %}
-				        	<li>
-					          	{{ choice.choice }}:
-					        	{{ choice.votes }} oy
-				        	</li>
-						{% endfor %}
-					</ul>
+		        	<a href="{{ poll.get_absolute_url }}">{{ poll.question }}</a>
+			        [
+			        	<a href="{% url polls:results  poll.slug %}">Sonuçları gör</a>
+			        ]
 		        </li>
 		    {% endfor %}
 		    </ul>

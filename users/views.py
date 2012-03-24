@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
 from django.contrib.auth import authenticate, login
+from django.views.generic.list_detail import object_list
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -13,7 +14,6 @@ from django.contrib.auth import logout
 
 from pythontr_org.users.forms import UserSettings, ProfileForm
 from pythontr_org.users.models import Profile
-from pythontr_org.utils import user_post_list
 
 
 def signup(request):
@@ -115,10 +115,13 @@ def profile(request, username):
     is_me = tuser.username == request.user.username
     group = Group.objects.get(name = 'Yazarlar')    
     
-    return user_post_list(
+    return object_list(
                             request,
-                            tuser.post_set.filter(published = True) if group.user_set.filter(username = tuser) else None,
-                            extra_context = locals()
+                            queryset=tuser.post_set.filter(published = True) if group.user_set.filter(username = tuser) else None,
+                            extra_context=locals(),
+                            template_name='users/profile.html',
+                            template_object_name='post',
+                            paginate_by=10
                           )
 
 

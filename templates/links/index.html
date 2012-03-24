@@ -8,12 +8,9 @@
 		<h1>Bağlantılar</h1>
 	</div>
 	
-	<div class="span8">
-		
-		{% if user.is_authenticated %}
-			<a href="{% url links:new %}">Yeni bağlantı ekle</a>
-			<br /><br />
-		{% endif %}
+	<div class="span8">		
+		<a href="{% url links:new %}">Yeni bağlantı ekle</a>
+		<br /><br />
 		
 		<ul>
 			{% for link in link_list %}
