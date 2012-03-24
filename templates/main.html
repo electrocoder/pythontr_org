@@ -1,0 +1,219 @@
+{% load url from future %}
+{% load post_tags %}
+
+{% load markup %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% block head %}{% endblock %}
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>
+    	{% block title %}
+    		Python Programcıları
+    	{% endblock %}
+    </title>
+    <link rel="Shortcut Icon" href="{{ STATIC_URL }}img/favicon.ico"></link>
+    
+	<meta name="keywords" content="türkiye, python türkiye, Python, piton, akademi, PythonTR, python tr, phyton e-kitap, piython e-book, Python ders, python dersleri,
+python türkçe, python 3.1, python-tr, python_tr, py5hon, piton, python nedir,
+kitap, Django, Spyder, Django nedir, tkinter, py, *.py, pyton, {{ post.tags }}" />
+    
+    <meta name="robots" content="index, follow" />
+	<meta name="Revisit-after" content="1 days" />
+	<meta name="DISTRIBUTION" content="GLOBAL" />
+	<meta name="expires" content="never" />
+	<meta name="rating" content="general" />
+    
+    <meta name="author" content="pythontr" />
+	<meta name="description" content="Python Programlama Dili" />
+	<meta name="google-site-verification" content="euJj8OwKcNB1hAMqaI1EZXDkEjbN9aYaKXLroa9hBDE" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}prettify.css" rel="stylesheet">
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/examples/images/favicon.ico">
+    <link rel="apple-touch-icon" href="http://twitter.github.com/bootstrap/examples/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://twitter.github.com/bootstrap/examples/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://twitter.github.com/bootstrap/examples/images/apple-touch-icon-114x114.png">
+	
+
+	<!-- TinyMCE -->
+	<script type="text/javascript" src="{{ STATIC_URL }}tiny_mce/tiny_mce_dev.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/tinymce_options.js"></script>
+	<!-- /TinyMCE -->
+	
+  </head>
+
+  <body onLoad="prettyPrint()">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="{% url 'posts:index' %}">Python Programcıları</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li><a href="{% url 'posts:index' %}">Anasayfa</a></li>
+              <li>
+              	<a href="/polls/">Anketler</a>
+              </li>
+              <li>
+              	<a href="{% url 'links:index' %}">Bağlantılar</a>
+              </li>
+              <li>
+              	<a href="{% url 'users:authors' %}">Yazarlar</a>
+              </li>
+              <li><a href="/about/">Hakkımızda</a></li>
+              <li><a href="{% url 'contact' %}">İletişim</a></li>
+            </ul>
+            
+			<form class="navbar-search pull-left" method="get" action="{% url 'posts:search' %}">
+        		<input type="text" value="{{ q }}" name="q" class="search-query" placeholder="Ara...">
+        	</form>
+            
+            {% if user.is_authenticated %}
+				<div class="btn-group pull-right">
+					<a class="btn btn-success" href="{% url 'users:show_profile' user.username %}">{{ user.username }}</a>
+					<a class="btn btn-success dropdown-toggle" href="#" data-toggle="dropdown">
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{% url 'users:show_profile' user.username %}">
+								<i class="icon-user"></i> Profilim
+							</a>
+						</li>
+						<li>
+							<a href="{% url 'users:settings' %}">
+								<i class="icon-cog"></i> Ayarlar
+							</a>
+						</li>
+												
+						<li class="divider"></li>
+						<li>
+							<a href="{% url 'users:logout' %}">
+								<i class="icon-off"></i> Çıkış
+							</a>
+						</li>
+					</ul>
+        		</div>
+            {% else %}
+				<div class="btn-group pull-right">
+					<a class="btn btn-danger" href="#">Ziyaretçi</a>
+					<a class="btn btn-danger dropdown-toggle" href="#" data-toggle="dropdown">
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{% url 'users:login' %}">
+								<i class="icon-ok"></i> Giriş
+							</a>
+						</li>
+						<li>
+							<a href="{% url 'users:signup' %}">
+								<i class="icon-user"></i> Kayıt ol
+							</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="/accounts/password_reset/">
+								<i class="icon-lock"></i> Parolamı unuttum
+							</a>
+						</li>
+					</ul>
+        		</div>
+            {% endif %}
+
+
+
+
+
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+            	{% if perms.posts.add_post %}
+            		<li class="nav-header">Gönderi yönetimi</li>
+            		{% include 'posts/_administration.html' %}
+            	{% endif %}
+            
+              <li class="nav-header">Kategoriler</li>
+              	{% get_categories %}
+              <li class="nav-header">Son gönderilenler</li>
+              	{% get_five_latest_posts %}
+              <li class="nav-header">En çok okunanlar</li>
+              	{% get_five_most_reads %}
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          {% block content %}
+          {% endblock %}
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+      	<center>
+        	<p>
+        		<a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django." /></a>
+        		<br />
+        		Bazı hakları saklıdır. &copy; Python programcıları
+        	</p>
+       </center>
+      </footer>
+
+    </div><!--/.fluid-container-->
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-transition.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-modal.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-scrollspy.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-tab.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-popover.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-button.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
+    <script src="{{ STATIC_URL }}js/simple-confirm.js"></script>
+    <script src="{{ STATIC_URL }}prettify.js"></script>    
+    <!-- Thanks http://blog.cloudme.org/2010/10/simple-confirm-dialog-with-jquery/ -->
+</body></html>

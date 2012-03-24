@@ -1,13 +1,15 @@
-{% extends "base.html" %}
-<meta charset='utf-8'>
-{% load i18n %}
+{% extends 'main.html' %}
 
-{% block breadcrumbs %}<div class="breadcrumbs"><a href="/">{% trans "Home" %}</a> &rsaquo; {% trans "Server error" %}</div>{% endblock %}
-
-{% block title %}{% trans 'Server error (500)' %}{% endblock %}
+{% block title %} 500: Sunucu hatası {% endblock %}
 
 {% block content %}
-<h1>{% trans 'Server Error <em>(500)</em>' %}</h1>
-<p>{% trans "There's been an error. It's been reported to the site administrators via e-mail and should be fixed shortly. Thanks for your patience." %}</p>
-
+	
+	<div class="hero-unit">
+		<h1>500</h1>
+		<p>
+			Sunucuda bir hata ile karşılaşıldı.<br />
+			Yöneticilerimiz bu hatayı en kısa zamanda çözecektir.
+		</p>
+	</div>
+	
 {% endblock %}

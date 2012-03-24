@@ -1,0 +1,8 @@
+{% for p in p_list %}
+	<li>
+		<a href="{{ p.get_absolute_url }}">
+			{{ p.short_title }}
+			({{ p.read_count }})
+		</a>
+	</li>
+{% endfor %}

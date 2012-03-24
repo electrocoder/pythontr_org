@@ -1,34 +1,80 @@
+# -*- coding: utf-8 -*-
+
 # Django settings for pythontr project.
 
-import os
+import os.path
 
-DIRNAME = os.path.dirname(__file__)
-
-EMAIL_HOST = 'xxx.xxx.com'
-EMAIL_PORT = xxx
- 
-EMAIL_HOST_USER = 'xxxxxx@xxxx.com'
-EMAIL_HOST_PASSWORD = 'xxxxxxxx'
- 
-EMAIL_USE_TLS = True
-
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+PATH = os.path.dirname(__file__)
+
+if DEBUG:
+    MEDIA_ROOT = PATH + '/media/'
+
+    MEDIA_URL = '/media/' 
+        
+    STATIC_ROOT = PATH + 'static/'
+    
+    STATIC_URL = '/static/'
+    
+    ADMIN_MEDIA_PREFIX = '/static/admin/'
+    
+    STATICFILES_DIRS = (
+        PATH + '/static',
+    )
+else:
+    MEDIA_ROOT = PATH + '/media/'
+
+    MEDIA_URL = '/media/' 
+    
+    
+    STATIC_ROOT = PATH + 'static/'
+    
+    STATIC_URL = '/static/'
+    
+    ADMIN_MEDIA_PREFIX = 'http://pythontr.org/media/admin/'
+    
+    STATICFILES_DIRS = (
+        PATH + '/static',
+    )
+
+
+
+# Email ayarları;
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'yigitsadic@gmail.com'
+EMAIL_HOST_PASSWORD = '' # şşt uzaklaş bakalım ;-)
+EMAIL_PORT = 587
+
+
 ADMINS = (
-    ('xxx', 'xxx@xxxx.xxx'),
+    (u'Şahin Mersin', 'electrocoder@gmail.com'), 
+    (u'Yiğit Sadıç', 'yigitsadic@gmail.com'),     
 )
+
+
+# Üye işlemleri ile ilgili ayarlar;
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/accounts/login/'
+
+LOGOUT_URL = '/accounts/logout/'
+AUTH_PROFILE_MODULE = 'users.Profile'
+
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': DIRNAME + '/xxxxxxx.xxxx',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'database',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -42,22 +88,6 @@ USE_I18N = True
 
 USE_L10N = True
 
-MEDIA_ROOT = os.path.abspath(os.path.dirname(__file__)) + '/static_media/'
-
-
-MEDIA_URL = '/media/'
-
-
-STATIC_ROOT = DIRNAME + '/static/'
-
-STATIC_URL = 'http://pythontr.org/static/'
-
-ADMIN_MEDIA_PREFIX = 'http://pythontr.org/media/admin/'
-
-STATICFILES_DIRS = (
-    DIRNAME + '/static/',
-)
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -70,14 +100,6 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.core.context_processors.auth",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.media",
-    "django.core.context_processors.request",
-)
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -87,14 +109,27 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
-ROOT_URLCONF = 'myproject.urls'
+ROOT_URLCONF = 'pythontr_org.urls'
 
-TEMPLATE_DIRS = ("/home/electrocoder/webapps/pythontr_org/myproject/templates")
+TEMPLATE_DIRS = (
+                 PATH + '/templates',
+)
 
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+# fixtures
+
+FIXTURE_DIRS = (
+                PATH + '/fixtures',
+)
 
 DISQUS_API_KEY = 'rr3r45gg7hoAnpar32erwr32432rerSLlxoos2JpnY' 
 DISQUS_WEBSITE_SHORTNAME = 'pythonprogramcilari'
+
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': "advanced",
+    'relative_urls': False
+}
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -103,14 +138,22 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'disqus',
-    'django.contrib.admin',
     'django.contrib.flatpages',
-    'myproject.polls',
     'django.contrib.sitemaps',
-    'myproject.python',
-    'myproject.pythoncoders',
-    'myproject.pythonauthors',
+    'django.contrib.admin',
+    'django.contrib.localflavor',
+    'django.contrib.markup',
+    
+    'pythontr_org.polls',
+    
+    'pythontr_org.posts',
+    'pythontr_org.links',
+    'pythontr_org.users',
+    'pythontr_org.extra',    
+    
+    'disqus',
+    'south',
+    'tinymce',
 )
 
 LOGGING = {

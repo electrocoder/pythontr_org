@@ -1,0 +1,8 @@
+İletişim formu gönderildi.
+----
+İçerik;
+
+	Başlık: {{ form.title }}
+	Email: {{ form.email }}
+	Website: {{ form.web_site }}
+	Mesaj içerik: {{ form.content }}

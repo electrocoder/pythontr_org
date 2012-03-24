@@ -1,0 +1,12 @@
+[
+    {
+        "pk": 1, 
+        "model": "users.profile", 
+        "fields": {
+            "web_site": "", 
+            "city": null, 
+            "about": "", 
+            "user": 1
+        }
+    }
+]

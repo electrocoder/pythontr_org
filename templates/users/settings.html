@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block title %} Ayarlar {% endblock %}
+
+{% block content %}
+	<div class="page-header">
+		<h1>Ayarlar</h1>
+	</div>
+	
+	<div class="span8">
+		<h2>Merhaba, {{ user.username }}.</h2> <br />
+		
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert alert-success">
+					<a class="close" data-dismiss="alert">×</a>
+					{{ message }}
+				</div>
+			{% endfor %}	
+		{% endif %}
+		
+		{% include 'users/_controls.html' %}
+		
+		{% if not perms.posts.add_post %}
+			<a href="{% url became_an_author %}" class="btn btn-primary btn-large">Yazar olmak istiyorum!</a>
+		{% endif %}
+	</div>
+{% endblock %}

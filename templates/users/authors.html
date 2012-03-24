@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block title %} Yazarlar {% endblock %}
+
+{% block content %}
+	<div class="page-header">
+		<h1>Yazarlar</h1>
+	</div>
+	
+	<div class="span8">
+		<ul>
+			{% for author in users %}
+				<li>
+					<a href="{% url users:show_profile author.username %}">
+						{{ author.username }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

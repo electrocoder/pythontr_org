@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block title %} '{{ q }}' için arama sonuçları {% endblock %}
+
+{% block content %}
+	<div class="page-header">
+		<h1>
+			Arama sonuçları
+			<strong>
+				<i>{{ q }}</i> için arama sonuçları;
+			</strong>
+		</h1>
+	</div>
+	
+	<div class="span8">
+		{% if post_list %}
+			<ul>
+				{% for post in post_list %}
+					<li>
+						<a href="{{ post.get_absolute_url }}">
+							{{ post.short_title }}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+			
+			{% include '_pagination.html' %}
+		{% else %}
+			<h3>Sonuç bulunamadı.</h3>
+		{% endif %}		
+	</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% for c in c_list %}
+	<li>
+		<a href="{{ c.get_absolute_url }}">
+			{{ c.name }}
+		</a>
+	</li>
+{% endfor %}

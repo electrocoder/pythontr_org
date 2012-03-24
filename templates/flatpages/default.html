@@ -1,24 +1,14 @@
-<meta charset='utf-8'>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html>
-<head>
-<title>{{ flatpage.title }}</title>
-</head>
-<body>
-{{ flatpage.content }}
+{% extends 'main.html' %}
+{% load markup %}
 
+{% block title %} {{ flatpage.title }} {% endblock %}
 
-
-{% load flatpages %}
-{% get_flatpages as flatpages %}
-<ul>
-    {% for page in flatpages %}
-        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-    {% endfor %}
-</ul>
-
-
-{% get_flatpages '/about/' as about_pages %}
-
-</body>
-</html>
+{% block content %}
+	<div class="page-header">
+		<h1>{{ flatpage.title }}</h1>
+	</div>
+	
+	<div class="span8">
+		{{ flatpage.content|textile }}
+	</div>
+{% endblock %}
