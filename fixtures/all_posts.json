@@ -3,84 +3,84 @@
         "pk": 1, 
         "model": "posts.category", 
         "fields": {
-            "name": "blog"
+            "name": "Blog"
         }
     }, 
     {
         "pk": 2, 
         "model": "posts.category", 
         "fields": {
-            "name": "python"
+            "name": "Python"
         }
     }, 
     {
         "pk": 3, 
         "model": "posts.category", 
         "fields": {
-            "name": "tkinter"
+            "name": "Tkinter"
         }
     }, 
     {
         "pk": 4, 
         "model": "posts.category", 
         "fields": {
-            "name": "kitap"
+            "name": "Kitap"
         }
     }, 
     {
         "pk": 5, 
         "model": "posts.category", 
         "fields": {
-            "name": "yazilimmuhendisligi"
+            "name": "Yazılım mühendisliği"
         }
     }, 
     {
         "pk": 6, 
         "model": "posts.category", 
         "fields": {
-            "name": "kodbankasi"
+            "name": "Kod Bankası"
         }
     }, 
     {
         "pk": 7, 
         "model": "posts.category", 
         "fields": {
-            "name": "django"
+            "name": "Django"
         }
     }, 
     {
         "pk": 8, 
         "model": "posts.category", 
         "fields": {
-            "name": "pygtk"
+            "name": "PyGTK"
         }
     }, 
     {
         "pk": 9, 
         "model": "posts.category", 
         "fields": {
-            "name": "mobil"
+            "name": "Mobil"
         }
     }, 
     {
         "pk": 10, 
         "model": "posts.category", 
         "fields": {
-            "name": "pymatlab"
+            "name": "PyMatlab"
         }
     }, 
     {
         "pk": 11, 
         "model": "posts.category", 
         "fields": {
-            "name": "download"
+            "name": "Download"
         }
     }, 
     {
         "pk": 12, 
         "model": "posts.category", 
         "fields": {
-            "name": "pythontv"
+            "name": "Python TV"
         }
     }, 
     {
@@ -171,7 +171,7 @@
         "pk": 25, 
         "model": "posts.category", 
         "fields": {
-            "name": "android"
+            "name": "Android"
         }
     },
     {
