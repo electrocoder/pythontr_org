@@ -15,7 +15,11 @@ from pythontr_org.extra.feeds import RSS_URLS
 from pythontr_org.extra.sitemaps import SITEMAPS_URLS
 
 
-urlpatterns = patterns('',                       
+urlpatterns = SITEMAPS_URLS 
+urlpatterns += RSS_URLS
+
+
+urlpatterns += patterns('',                       
                        url(r'^errors/access_denied/$', 'pythontr_org.extra.views.access_denied', name = 'access_denied'),
                        url(r'^accounts/became_an_author/$', 'pythontr_org.extra.views.became_an_author', name = 'became_an_author'),
                        url(r'^contact/$', 'pythontr_org.extra.views.contact', name = 'contact'),
@@ -31,9 +35,6 @@ urlpatterns = patterns('',
                           
                        url(r'^', include('pythontr_org.posts.urls', namespace = 'posts')),            
 )
-
-urlpatterns += SITEMAPS_URLS 
-urlpatterns += RSS_URLS
 
 # static ve media klasörlerini sun.
 
