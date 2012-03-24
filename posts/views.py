@@ -8,19 +8,17 @@ from django.contrib import messages
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.posts.forms import PostForm
 
-from django.views.generic.list_detail import object_list
+from pythontr_org.posts.utils import posts_object_list
 
 
 def index(request):
     """
         Gönderileri listelemek için kullanılır.
     """    
-    return object_list(
+    return posts_object_list(
                        request,
                        queryset=Post.objects.filter(published = True),
-                       paginate_by=20,
-                       template_name='posts/index.html',
-                       template_object_name='posts'
+                       template_name='index.html',
                        )
 
 
@@ -43,12 +41,10 @@ def search(request):
     """
     
     q = request.GET.get('q', '')
-    return object_list(request,
+    return posts_object_list(request,
                        queryset=Post.objects.filter(content__icontains = q), 
-                       paginate_by=20,
-                       template_name='posts/search.html',
+                       template_name='search.html',
                        extra_context=locals(),
-                       template_object_name='posts'
                        )
 
 # Kategoriler ile ilgili.
@@ -60,12 +56,10 @@ def category_show(request, slug):
     """
     
     category = get_object_or_404(Category, slug = slug)    
-    return object_list(request,
+    return posts_object_list(request,
                        queryset=category.post_set.all(),
-                       paginate_by=15,
-                       template_name='posts/category_show.html',
+                       template_name='category_show.html',
                        extra_context=locals(),
-                       template_object_name='posts'
                        )
 
 
