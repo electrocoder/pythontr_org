@@ -17,9 +17,9 @@
 		</ul>
 		
 		<b>{{ category.name }}</b> ile ilişkili gönderiler;
-		{% if posts %}
+		{% if posts_list %}
 			<ul>
-				{% for post in posts %}
+				{% for post in posts_list %}
 					<li>
 						<a href="{{ post.get_absolute_url }}">
 							{{ post.title }}
@@ -27,8 +27,11 @@
 					</li>
 				{% endfor %}
 			</ul>
+			
+		{% include 'posts/_pagination.html' %}
+		
 		{% else %}
-			Maalesef hiç kayıt bulunamadı :(
+			Maalesef bu kategoriye ait hiç kayıt bulunamadı.
 		{% endif %}
 	</div>
 	

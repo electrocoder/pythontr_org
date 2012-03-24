@@ -59,10 +59,14 @@ def category_show(request, slug):
         Eğer kategori bulunmazsa 404 döndürür.
     """
     
-    category = get_object_or_404(Category, slug = slug)
-    posts = category.post_set.all()
-    
-    return render(request, 'posts/category_show.html', locals())
+    category = get_object_or_404(Category, slug = slug)    
+    return object_list(request,
+                       queryset=category.post_set.all(),
+                       paginate_by=15,
+                       template_name='posts/category_show.html',
+                       extra_context=locals(),
+                       template_object_name='posts'
+                       )
 
 
 # yeni gönderi ekleme, düzenleme ve silme
