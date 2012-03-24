@@ -18,32 +18,30 @@
 		{% endif %}
 		
 		{% if vote %}
+		
 			Bu ankete oy kullanmışsınız. <i>{{ vote.created_at|timesince }} önce.</i>
 			<br />
 			Oyunuz <b>{{ vote.choice.choice }}</b>
-			
-			<br /><br />
-			
-			<div class="btn-group">
-				<a class="btn" href="{% url polls:index %}">Anketler</a>
-				<a class="btn" href="{% url polls:results poll.id %}">Anket sonuçlarını gör</a>
-		    </div>
-			
+						
 		{% else %}
-		<form action="{% url polls:vote poll.id %}" method="post">{% csrf_token %}
-			
-			<div class="controls">
+				
+			<form class="form-inline" action="{% url polls:vote poll.id %}" method="post">{% csrf_token %}
+		
 				{% for choice in poll.choice_set.all %}
 					<label class="radio inline">
 						<input name="choice" id="inlineRadio{{ forloop.counter }}" type="radio" value="{{ choice.id }}" />
 						{{ choice.choice }}
 					</label>
 				{% endfor %}
-			</div>
+				
+				<button type="submit" class="btn btn-primary">Gönder</button>
+			</form>
 			
-			<button type="submit" class="btn btn-primary">Gönder</button>
-		</form>
 		{% endif %}
 		
+		<div class="btn-group">
+			<a class="btn" href="{% url polls:index %}">Anketler</a>
+			<a class="btn" href="{% url polls:results poll.id %}">Anket sonuçlarını gör</a>
+		</div>
 	</div>
 {% endblock %}
