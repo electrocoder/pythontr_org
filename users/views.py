@@ -13,6 +13,7 @@ from django.contrib.auth import logout
 
 from pythontr_org.users.forms import UserSettings, ProfileForm
 from pythontr_org.users.models import Profile
+from pythontr_org.utils import user_post_list
 
 
 def signup(request):
@@ -107,16 +108,18 @@ def profile(request, username):
         Üyenin herkes tarafından görülebilen profili.
         Temel bilgileri ve eğer yazarsa yazar bilgileri gösterilir.
     """
-    
+        
     tuser = get_object_or_404(User, username = username)
     profile = tuser.get_profile()
     
     is_me = tuser.username == request.user.username
-
     group = Group.objects.get(name = 'Yazarlar')    
-    posts = tuser.post_set.filter(published = True) if group.user_set.filter(username = tuser) else None
     
-    return render(request, 'users/profile.html', locals())
+    return user_post_list(
+                            request,
+                            tuser.post_set.filter(published = True) if group.user_set.filter(username = tuser) else None,
+                            extra_context = locals()
+                          )
 
 
 def authors(request):

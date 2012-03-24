@@ -67,12 +67,12 @@
 					{{ profile.get_city_display }}
 				</td>
 			</tr>
-			{% if posts %}
+			{% if post_list %}
 				<tr>
-					<th>Yazıları</th>
+					<th>Gönderilerim</th>
 					<td>
 						<ul>
-							{% for post in posts %}
+							{% for post in post_list %}
 								<li>
 									<a href="{{ post.get_absolute_url }}">{{ post }}</a>
 									/
@@ -80,6 +80,7 @@
 								</li>
 							{% endfor %}
 						</ul>
+						{% include '_pagination.html' %}
 					</td>
 				</tr>
 			{% endif %}

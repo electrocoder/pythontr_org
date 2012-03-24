@@ -25,3 +25,15 @@ def link_list(request, queryset, template_name, *args, **kwargs):
                             *args,
                             **kwargs
                        )
+
+
+def user_post_list(request, queryset, *args, **kwargs):
+    return object_list(
+                       request,
+                       queryset,
+                       paginate_by=10,
+                       template_name='users/profile.html',
+                       template_object_name='post',
+                       *args,
+                       **kwargs
+                       )
