@@ -7,15 +7,11 @@ from tinymce.widgets import TinyMCE
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    
-    
     search_fields = ['name']
     prepopulated_fields = {'slug': ('name', )}
 
 
 class PostAdmin(admin.ModelAdmin):
-    
-    
     prepopulated_fields = {'slug': ('title', )}
     
     list_display = ('title', 'category', 'author', 'published', 'read_count', 'created_at')    

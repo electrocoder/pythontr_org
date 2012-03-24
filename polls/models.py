@@ -5,15 +5,26 @@ from django.contrib.auth.models import User
 
 from django.core.exceptions import ValidationError
 
+
 class Poll(models.Model):
-	question = models.CharField(max_length=200, verbose_name = "Sorusu")
+	question = models.CharField(max_length=200, verbose_name = "Sorusu")	
+	slug = models.SlugField(verbose_name = 'Link', max_length=200)
+	
 	pub_date = models.DateTimeField("Yayınlanma tarihi", auto_now_add = True)
+	
 	
 	def __unicode__(self):
 		return self.question
 	
+	
 	def was_published_today(self):
 		return self.pub_date.date() == datetime.date.today()
+	
+	
+	@models.permalink
+	def get_absolute_url(self):
+		return ('polls:detail', [self.slug])
+	
 	
 	class Meta:
 		verbose_name_plural = "Anketler"
@@ -25,10 +36,12 @@ class Poll(models.Model):
 class Choice(models.Model):
 	poll = models.ForeignKey(Poll, verbose_name = "Anket")
 	choice = models.CharField(max_length=200, verbose_name = "Seçenek")
-	votes = models.IntegerField(verbose_name = "Oylar", blank = True, null = True)
+	votes = models.IntegerField(verbose_name = "Oylar", default=0)
+	
 	
 	def __unicode__(self):
 		return self.choice
+	
 	
 	class Meta:
 		verbose_name = 'Seçenek'
@@ -46,13 +59,22 @@ class Vote(models.Model):
 	def __unicode__(self):
 		return self.poll.question
 	
+	
 	def save(self, force_insert=False, force_update=False):
 		
 		if Vote.objects.filter(user=self.user, poll=self.poll):
 			raise ValidationError(u'Bu ankete oy kullanmışsınız.')
 	
 		super(Vote, self).save(force_insert, force_update)
-
+		
+		
+	def delete(self):
+		self.choice.votes -= 1
+		self.choice.save()
+		
+		super(Vote, self).delete()
+	
+	
 	class Meta:
 		ordering = ['-created_at']
 		
