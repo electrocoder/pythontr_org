@@ -47,6 +47,7 @@ def search(request):
                        extra_context=locals(),
                        )
 
+
 # Kategoriler ile ilgili.
 
 def category_show(request, slug):
