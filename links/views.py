@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
 from pythontr_org.links.models import Link
 from pythontr_org.links.forms import LinkForm
+
 from pythontr_org.links.mails import LinkAddedMail
+from pythontr_org.utils import links_object_list
 
 
 def index(request):
     """
         Bağlantıları listeler.
-    """
-    
-    links = Link.objects.all()
-    
-    return render(request, 'links/index.html', locals())
+    """    
+    return links_object_list(
+                             request,
+                             Link.objects.filter(confirmed=True),
+                             template_name='index.html'
+                             )
 
 
 @login_required

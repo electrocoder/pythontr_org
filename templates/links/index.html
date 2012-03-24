@@ -16,13 +16,14 @@
 		{% endif %}
 		
 		<ul>
-			{% for link in links %}
+			{% for link in links_list %}
 				<li>
 					{{ link.anchor_tag }}
 				</li>
 			{% endfor %}
 		</ul>
 		
+		{% include '_pagination.html' %}
 	</div>
 	
 {% endblock %}

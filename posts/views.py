@@ -8,7 +8,7 @@ from django.contrib import messages
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.posts.forms import PostForm
 
-from pythontr_org.posts.utils import posts_object_list
+from pythontr_org.utils import posts_object_list
 
 
 def index(request):
