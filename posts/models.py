@@ -18,14 +18,16 @@ class Category(models.Model):
     name = models.CharField("Adı", unique=True, max_length=50)
     slug = models.SlugField('Slug', max_length = 255, blank = True, null = True)
     
-    image = models.ImageField(upload_to='category_images', blank = True, null = True)
+    image = models.ImageField(upload_to='category_images')
     
     def __unicode__(self):
         return self.name
     
+    
     @models.permalink
     def get_absolute_url(self):
         return ('posts:show_category', [self.slug]) 
+
 
     class Meta:
         verbose_name = "Kategori"
