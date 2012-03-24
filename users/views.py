@@ -102,7 +102,7 @@ def disable(request):
     return redirect('posts:index')
 
 
-def show(request, username):
+def profile(request, username):
     """
         Üyenin herkes tarafından görülebilen profili.
         Temel bilgileri ve eğer yazarsa yazar bilgileri gösterilir.
@@ -116,7 +116,7 @@ def show(request, username):
     group = Group.objects.get(name = 'Yazarlar')    
     posts = tuser.post_set.filter(published = True) if group.user_set.filter(username = tuser) else None
     
-    return render(request, 'users/show.html', locals())
+    return render(request, 'users/profile.html', locals())
 
 
 def authors(request):

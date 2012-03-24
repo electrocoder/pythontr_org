@@ -27,7 +27,7 @@ urlpatterns = patterns('pythontr_org.users.views',
                        url(r'^disable/$', 'disable', name = 'disable_account'),
                        
                        # profil gösterme
-                       url(r'^profile/(?P<username>[^/]*)/', 'show', name = 'show_profile'),
+                       url(r'^profile/(?P<username>[^/]*)/', 'profile', name = 'show_profile'),
                        
                        # profil ve hesap ayarları
                        url(r'^settings/$', 'settings', name = 'settings'),                       
