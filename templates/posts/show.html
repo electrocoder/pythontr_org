@@ -1,12 +1,15 @@
 {% extends 'main.html' %}
+
 {% load markup %}
 {% load disqus_tags %} <!-- Çalışmıyor -->
 
-{% block pretty %}  onload="prettyPrint()" {% endblock %}
 
 {% block content %}
 	<div class="page-header">
 		<h1>
+			<a href="{{ post.category.get_absolute_url }}">
+				<img src="{{ post.category.image.url }}" width="30" height="30" />
+			</a>
 			{{ post.title }}
 			<small>
 				{{ post.author }} - {{ post.created_at.date }}
@@ -26,68 +29,59 @@
 		
 		{% disqus_show_comments %} <!-- Çalışmıyor -->
 		
-		<div class="well">
-			<table class="table">
-				<tr>
-					<th>
-						Yazar:
-					</th>
-					<td>
-						<a href="{% url users:show_profile post.author.username %}">
-							{{ post.author }}
-						</a>
-					</td>
-				</tr>
-				
-				<tr>
-					<th>
-						Kategori
-					</th>
-					<td>
-						<a href="{{ post.category.get_absolute_url }}">
-							{{ post.category }}
-						</a>
-					</td>
-				</tr>				
-				
-				<tr>
-					<th>
-						Okunma sayısı
-					</th>
-					<td>
-						{{ post.read_count }}
-					</td>
-				</tr>
-				
-				<tr>
-					<th>
-						Eklenme tarihi:
-					</th>
-					<td>
-						{{ post.created_at }}
-					</td>
-				</tr>
-				
-				<tr>
-					<th>
-						Güncellenme tarihi:
-					</th>
-					<td>
-						{{ post.updated_at }}
-					</td>
-				</tr>
-								
-				<tr>
-					<th>
-						Etiketler
-					</th>
-					<td>
-						<ul>
-																			
-						</ul>
-					</td>
-				</tr>
-			</table>
-		</div>
+		<hr />
+		
+		<table class="table table-bordered">
+			<tr>
+				<th>
+					Yazar:
+				</th>
+				<td>
+					<a href="{% url users:show_profile post.author.username %}">
+						{{ post.author }}
+					</a>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					Kategori
+				</th>
+				<td>
+					<a href="{{ post.category.get_absolute_url }}">
+						{{ post.category }}
+					</a>
+				</td>
+			</tr>				
+			
+			<tr>
+				<th>
+					Okunma sayısı
+				</th>
+				<td>
+					{{ post.read_count }}
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					Eklenme tarihi:
+				</th>
+				<td>
+					{{ post.created_at }}
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					Güncellenme tarihi:
+				</th>
+				<td>
+					{{ post.updated_at }}
+				</td>
+			</tr>
+			
+		</table>
+		
 	</div>
 {% endblock %}

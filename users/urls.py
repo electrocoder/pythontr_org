@@ -2,7 +2,6 @@
 
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib.auth.views import login, logout, password_change
-from django.contrib.auth.views import password_reset, password_reset_complete, password_reset_confirm, password_reset_done
 
 
 PASSWORD_CHANGE_DICT = {
@@ -17,7 +16,7 @@ urlpatterns = patterns('pythontr_org.users.views',
                        
                        # Giriş ve çıkış
                        url(r'^login/$', login, {'template_name': 'users/login.html'}, name = 'login'),
-                       url(r'^logout/$', logout, { 'next_page': '/py/' }, name = 'logout'),
+                       url(r'^logout/$', logout, { 'next_page': '/' }, name = 'logout'),
                        
                        # kayıt olma ve şifre değiştirme
                        url(r'^signup/$', 'signup', name = 'signup'),
