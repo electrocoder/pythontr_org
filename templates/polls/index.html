@@ -1,26 +1,32 @@
-<meta charset='utf-8'>
-{% extends "base-polls.html" %}
-{% block main %}
-<a href="/polls"><center><<< ANKETLER >>></center></a>
-<a href="/python/blog"><center><<< ANA SAYFA >>></center></a>
-<br>
+{% extends 'main.html' %}
 
-{% if latest_poll_list %}
-    <ul>
-    {% for poll in latest_poll_list %}
-    <h3>--------------------------------------------------------------------------------------------------------------------</h3>
-        {{poll.id}} nolu anket uygulaması bulundu.
-        <li><a href="/polls/{{ poll.id }}/">{{ poll.question }}</a></li>
-        {% for choice in poll.choice_set.all %}
-          {{ choice.choice }} 
-        <div class="meter-value" style="background-color: #3774A8; width: {{ choice.votes }}px;">
-        <div class="meter-text">{{ choice.votes }} oy</div>
-    	</div>
-{% endfor %}
-        <br>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Hazır anket yok.</p>
-{% endif %}
+{% block title %} Anketler {% endblock %}
+
+{% block content %}
+
+	<div class="page-header">
+		<h1>Anketler</h1>
+	</div>
+	
+	<div class="span8">
+		{% if latest_poll_list %}
+		    <ul>
+		    {% for poll in latest_poll_list %}
+		        <li>
+		        	<a href="{% url polls:detail poll.id %}">{{ poll.question }}</a>
+			        <ul>
+				        {% for choice in poll.choice_set.all %}
+				        	<li>
+					          	{{ choice.choice }}:
+					        	{{ choice.votes }} oy
+				        	</li>
+						{% endfor %}
+					</ul>
+		        </li>
+		    {% endfor %}
+		    </ul>
+		{% else %}
+		    <p> Henüz sistemde anket bulunmamaktadır. </p>
+		{% endif %}
+	</div>
 {% endblock %}

@@ -1,17 +1,47 @@
-<meta charset='utf-8'>
-{% block main %}
-<a href="/python/blog"><center><<< ANA SAYFA >>></center></a>
-<br>
-<h1>{{ poll.question }}</h1>
+{% extends 'main.html' %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block title %} {{ poll.question }} {% endblock %}
 
-<form action="/polls/{{ poll.id }}/vote/" method="post">
-{% csrf_token %}
-{% for choice in poll.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice }}</label><br />
-{% endfor %}
-<input type="submit" value="Tamam" />
-</form>
+{% block content %}
+
+	<div class="page-header">
+		<h1>{{ poll.question }}</h1>
+	</div>
+	
+	<div class="span8">
+		
+		{% if error_message %}
+			<div class="alert alert-error">
+				<a class="close" data-dismiss="alert">&times;</a>
+				{{ error_message }}
+    		</div>
+		{% endif %}
+		
+		{% if vote %}
+		
+			Bu ankete oy kullanmışsınız. <i>{{ vote.created_at|timesince }} önce.</i>
+			<br />
+			Oyunuz <b>{{ vote.choice.choice }}</b>
+						
+		{% else %}
+				
+			<form class="form-inline" action="{% url polls:vote poll.id %}" method="post">{% csrf_token %}
+		
+				{% for choice in poll.choice_set.all %}
+					<label class="radio inline">
+						<input name="choice" id="inlineRadio{{ forloop.counter }}" type="radio" value="{{ choice.id }}" />
+						{{ choice.choice }}
+					</label>
+				{% endfor %}
+				
+				<button type="submit" class="btn btn-primary">Gönder</button>
+			</form>
+			
+		{% endif %}
+		
+		<div class="btn-group">
+			<a class="btn" href="{% url polls:index %}">Anketler</a>
+			<a class="btn" href="{% url polls:results poll.id %}">Anket sonuçlarını gör</a>
+		</div>
+	</div>
 {% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+
+{% block title %} Gönderilerim {% endblock %}
+
+{% block content %}
+	
+	<div class="page-header">
+		<h1>Gönderilerim</h1>
+	</div>
+	
+	<div class="span8">
+		
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert alert-success">
+					<a class="close" data-dismiss="alert">×</a>
+					{{ message }}
+				</div>
+			{% endfor %}	
+		{% endif %}
+		
+		{% if post_list %}
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Gönderi başlığı</th>
+						<th>Kategorisi</th>
+						<th>Yayınlandı mı?</th>
+						<th>Okunma sayısı</th>
+						<th>Eklenme tarihi</th>
+						<th>Değiştirilme tarihi</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				{% for post in post_list %}
+					<tr>
+						<td>
+							<a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+						</td>
+						<td>
+							{{ post.category }}
+						</td>
+						<td>
+							<img width="16" height="16" src="{{ STATIC_URL }}img/{{ post.published }}.png" />
+						</td>
+						<td>
+							{{ post.read_count }}
+						</td>
+						<td>
+							{{ post.created_at }}
+						</td>
+						<td>
+							{{ post.updated_at }}
+						</td>
+						
+						<td>
+							<a href="{% url posts:edit post.id %}" class="btn">Düzenle</a>
+						</td>
+						<td>
+							<a href="{% url posts:delete post.id %}" id="confirm" title="Bu işlem geri alınamaz. Devam etmek istediğinize emin misiniz?" class="btn btn-danger">
+								Sil
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+			
+			{% include '_pagination.html' %}
+			
+		{% else %}
+			Görünüşe göre hiç gönderiniz bulunmuyor.<br />
+			Yeni gönderi eklemek için <a href="{% url posts:new %}">tıklayınız.</a> 
+		{% endif %}
+		
+	</div>
+	
+{% endblock %}

@@ -1,0 +1,25 @@
+<h2>Uygulamanızdan haberler var.</h2>
+
+<p>
+	Aşağıdaki kullanıcı yazar olmak istiyor.<br />
+	Kullanıcı 'Yazar olmak isteyenler' adlı gruba taşındı.
+</p>
+
+<table>
+	<tr>
+		<th>
+			Kullanıcı adı:
+		</th>
+		<td>
+			 {{ user }}
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Yönetici sayfası bağlantısı
+		</th>
+		<td>
+			{{ site.name }}/admin/auth/user/{{ user.id }}/
+		</td>
+	</tr>
+</table>

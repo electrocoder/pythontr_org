@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block title %} {{ category.name }} {% endblock %}
+
+{% block content %}
+	
+	<div class="page-header">
+		<h1>{{ category.name }}</h1>
+	</div>
+	
+	<div class="span8">
+		
+		<ul class="thumbnails">
+			<li class="span4">
+				<img src="{{ category.image.url }}" />
+			</li>
+		</ul>
+		
+		<b>{{ category.name }}</b> ile ilişkili gönderiler;
+		{% if post_list %}
+			<ul>
+				{% for post in post_list %}
+					<li>
+						<a href="{{ post.get_absolute_url }}">
+							{{ post.title }}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+			
+		{% include '_pagination.html' %}
+		
+		{% else %}
+			Maalesef bu kategoriye ait hiç kayıt bulunamadı.
+		{% endif %}
+	</div>
+	
+{% endblock %}

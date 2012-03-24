@@ -1,0 +1,29 @@
+<h2>Uygulamanızdan haberler var!</h2>
+
+<h3>İletişim formu gönderildi.</h3>
+
+<table>
+	<tr>
+		<th>Başlık</th>
+		<td>{{ form.title }}</td>
+	</tr>
+
+	<tr>
+		<th>Email</th>
+		<td>
+			<a href="mailto: {{ form.email }}">{{ form.email }}</a>
+		</td>
+	</tr>
+
+	<tr>
+		<th>Website</th>
+		<td>{{ form.web_site }}</td>
+	</tr>
+
+	<tr>
+		<th>İçerik</th>
+		<td>
+			{{ form.content }}
+		</td>
+	</tr>			
+</table>

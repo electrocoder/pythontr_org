@@ -1,0 +1,50 @@
+[
+    {
+        "pk": 4, 
+        "model": "links.link", 
+        "fields": {
+            "updated_at": "2012-03-21 19:20:06", 
+            "created_at": "2012-03-21 19:20:06", 
+            "href": "http://2012.djangocon.eu/", 
+            "description": "", 
+            "title": "Djangocon EU",
+            "confirmed": true
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "links.link", 
+        "fields": {
+            "updated_at": "2012-03-21 19:19:40", 
+            "created_at": "2012-03-21 19:19:40", 
+            "href": "http://www.python.org/", 
+            "description": "", 
+            "title": "Python",
+            "confirmed": true
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "links.link", 
+        "fields": {
+            "updated_at": "2012-03-21 19:19:26", 
+            "created_at": "2012-03-21 19:19:26", 
+            "href": "https://www.djangoproject.com/", 
+            "description": "", 
+            "title": "Django Project",
+            "confirmed": true
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "links.link", 
+        "fields": {
+            "updated_at": "2012-03-21 19:13:31", 
+            "created_at": "2012-03-21 19:13:31", 
+            "href": "http://djangosnippets.org/", 
+            "description": "", 
+            "title": "Django snippets",
+			"confirmed": true
+        }
+    }
+]

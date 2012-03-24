@@ -1,22 +1,13 @@
 # -*- coding: utf-8-*-
-# Projenin Adi : PythonTR-Türk Python' cular...
-# Tarih : 2008-2011
-# Yazar : pythontr.org ekibi
-# Kontak : admin@pythontr.org
-# Web : http://pythontr.org
-# Python Versiyonu : 2.6-2.7
-# Django Versiyonu : 1.2.5
-# Amaci : www.pythontr.org sitesinin Django framework ile acik kaynakli kodlanmasi...
-#         Eklemek isteginiz kodlar icin irtibat kurunuz...
-#
-#         http://pythontr.org
-#
+
 from django.db import models
-import datetime
+from django.contrib.auth.models import User
+
+from django.core.exceptions import ValidationError
 
 class Poll(models.Model):
-	question = models.CharField(max_length=200)
-	pub_date = models.DateTimeField('date published')
+	question = models.CharField(max_length=200, verbose_name = "Sorusu")
+	pub_date = models.DateTimeField("Yayınlanma tarihi", auto_now_add = True)
 	
 	def __unicode__(self):
 		return self.question
@@ -25,14 +16,45 @@ class Poll(models.Model):
 		return self.pub_date.date() == datetime.date.today()
 	
 	class Meta:
-		verbose_name_plural = "Anketler"    #admin sayfamizda hangi isimle gorunsun
+		verbose_name_plural = "Anketler"
 		verbose_name = "Anket"
 		
+		ordering = ['-pub_date']
+
+
 class Choice(models.Model):
-	poll = models.ForeignKey(Poll)
-	choice = models.CharField(max_length=200)
-	votes = models.IntegerField()
+	poll = models.ForeignKey(Poll, verbose_name = "Anket")
+	choice = models.CharField(max_length=200, verbose_name = "Seçenek")
+	votes = models.IntegerField(verbose_name = "Oylar", blank = True, null = True)
 	
 	def __unicode__(self):
 		return self.choice
 	
+	class Meta:
+		verbose_name = 'Seçenek'
+		verbose_name_plural = 'Seçenekler'
+		
+		
+class Vote(models.Model):
+	user = models.ForeignKey(User, verbose_name = 'Kullanıcı')
+	poll = models.ForeignKey(Poll, verbose_name = 'Anket')
+	choice = models.ForeignKey(Choice, verbose_name = 'Seçenek')
+	
+	created_at = models.DateTimeField(auto_now_add = True)
+	updated_at = models.DateTimeField(auto_now = True)
+	
+	def __unicode__(self):
+		return self.poll.question
+	
+	def save(self, force_insert=False, force_update=False):
+		
+		if Vote.objects.filter(user=self.user, poll=self.poll):
+			raise ValidationError(u'Bu ankete oy kullanmışsınız.')
+	
+		super(Vote, self).save(force_insert, force_update)
+
+	class Meta:
+		ordering = ['-created_at']
+		
+		verbose_name = 'Oy'
+		verbose_name_plural = 'Oylar'

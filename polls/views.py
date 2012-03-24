@@ -1,49 +1,76 @@
-# -*- coding: utf-8-*-
-# Projenin Adi : PythonTR-Türk Python' cular...
-# Tarih : 2008-2011
-# Yazar : pythontr.org ekibi
-# Kontak : admin@pythontr.org
-# Web : http://pythontr.org
-# Python Versiyonu : 2.6-2.7
-# Django Versiyonu : 1.2.5
-# Amaci : www.pythontr.org sitesinin Django framework ile acik kaynakli kodlanmasi...
-#         Eklemek isteginiz kodlar icin irtibat kurunuz...
-#
-#         http://pythontr.org
-#
-from django.shortcuts import get_object_or_404, render_to_response
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
-from django.template import RequestContext
-from myproject.polls.models import Choice, Poll
+# -*- coding: utf-8 -*-
+
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth.decorators import login_required
+
+from pythontr_org.polls.models import Choice, Poll, Vote
+
+from django.core.exceptions import ValidationError
+
 
 def index(request):
-    latest_poll_list = Poll.objects.all().order_by('pub_date')[:5]
-    return render_to_response('polls/index.html', {'latest_poll_list': latest_poll_list})
+    """
+        Son 5 anketi listelemek için kullanılır.
+    """
+    
+    latest_poll_list = Poll.objects.all()[:5]
+    return render(request, 'polls/index.html', locals())
+
 
 def detail(request, poll_id):
-    p = get_object_or_404(Poll, pk=poll_id)
-    return render_to_response('polls/detail.html', {'poll': p},
-                               context_instance=RequestContext(request))
+    """
+        Anket detaylarını göstermek için kullanılır.
+    """
+    
+    poll = get_object_or_404(Poll, pk=poll_id)
+    
+    try:
+        vote = Vote.objects.get(user=request.user, poll=poll)
+    except:
+        pass
+
+    
+    return render(request, 'polls/detail.html', locals())
+
 
 def results(request, poll_id):
-    p = get_object_or_404(Poll, pk=poll_id)
-    return render_to_response('polls/results.html', {'poll': p})
+    """
+        Anket sonuçlarını göstermek için kullanılır.
+    """
+    
+    poll = get_object_or_404(Poll, pk=poll_id)    
+    return render(request, 'polls/results.html', locals())
 
+@login_required
 def vote(request, poll_id):
-    p = get_object_or_404(Poll, pk=poll_id)
+    """
+        Ankete oy vermek için kullanılır.
+    """
+    
+    poll = get_object_or_404(Poll, pk=poll_id)
+    
     try:
-        selected_choice = p.choice_set.get(pk=request.POST['choice'])
+        selected_choice = poll.choice_set.get(pk=request.POST['choice'])
+        vote = Vote(user=request.user, poll=poll, choice=Choice.objects.get(pk=request.POST['choice']))
+        vote.save()
+        
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the poll voting form.
-        return render_to_response('polls/detail.html', {
-            'poll': p,
-            'error_message': "You didn't select a choice.",
-        }, context_instance=RequestContext(request))
+        
+        error_message = u'Bir seçeneği seçmediniz.'
+        
+        return render(request, 'polls/detail.html', locals())
+    
+    except ValidationError:
+        error_message = u'Bu ankete zaten oy kullanmışsınız.'
+        
+        return render(request, 'polls/detail.html', locals())
+    
     else:
         selected_choice.votes += 1
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('myproject.polls.views.results', args=(p.id,)))
+        
+        return redirect('polls:results', poll_id)

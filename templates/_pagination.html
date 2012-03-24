@@ -1,0 +1,34 @@
+
+{% if is_paginated %}
+	<div class="pagination">
+		<ul>
+			<li>
+				{% if page_obj.has_previous %}
+					<a href="?q={{ q }}&page={{ page_obj.previous_page_number }}"> Geri </a>
+				{% else %}
+					<a href="#">Geri </a>
+				{% endif %}
+			</li>
+			
+			{% for page in paginator.page_range %}
+				{% if page_obj.number == page %}
+					<li class="active">
+						<a href="">{{ page }}</a>
+					</li>
+				{% else %}
+					<li>
+						<a href="?q={{ q }}&page={{ page }}">{{ page }}</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+			
+			<li>
+			{% if page_obj.has_next %}
+                <a href="?q={{ q }}&page={{ page_obj.next_page_number }}">İleri</a>
+            {% else %}
+            	<a href="#">İleri</a>
+            {% endif %}
+			</li>
+		</ul>
+	</div>
+{% endif %}

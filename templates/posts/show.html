@@ -1,0 +1,94 @@
+{% extends 'main.html' %}
+
+{% load markup %}
+{% load disqus_tags %} <!-- Çalışmıyor -->
+
+
+{% block title %} {{ post }} {% endblock %}
+
+
+{% block content %}
+	{% include 'posts/_share.html' %} <!-- like, tweet, +1 javascript -->
+	
+	<div class="page-header">
+		<h1>
+			<a href="{{ post.category.get_absolute_url }}">
+				<img src="{{ post.category.image.url }}" width="30" height="30" />
+			</a>
+			{{ post.title }}
+			<small>
+				{{ post.author }} - {{ post.created_at.date }}
+			</small>
+		</h1>
+	</div>
+	
+	<div class="span8">
+		{% autoescape off %}
+			{{ post.content }}
+		{% endautoescape %}
+		
+		<br />
+		<br />
+		<div class="g-plusone" data-size="small" data-annotation="inline" data-href=""></div>
+		<div class="fb-like" data-send="false" data-width="450" data-show-faces="false"></div>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-lang="tr">Tweetle</a>
+		<center>~</center>
+		
+		{% disqus_show_comments %} <!-- Çalışmıyor -->
+		
+		<hr />
+		
+		<table class="table table-bordered">
+			<tr>
+				<th>
+					Yazar:
+				</th>
+				<td>
+					<a href="{% url users:show_profile post.author.username %}">
+						{{ post.author }}
+					</a>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					Kategori
+				</th>
+				<td>
+					<a href="{{ post.category.get_absolute_url }}">
+						{{ post.category }}
+					</a>
+				</td>
+			</tr>				
+			
+			<tr>
+				<th>
+					Okunma sayısı
+				</th>
+				<td>
+					{{ post.read_count }}
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					Eklenme tarihi:
+				</th>
+				<td>
+					{{ post.created_at }}
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					Güncellenme tarihi:
+				</th>
+				<td>
+					{{ post.updated_at }}
+				</td>
+			</tr>
+			
+		</table>
+		
+	</div>
+{% endblock %}

@@ -1,13 +1,43 @@
+Test uygulaması = http://vivid-sword-9218.herokuapp.com - Epey eski
 
-pythonTr sitesinin kaynak kodlaridir...
-=======
-pythonTr sitesinin kaynak kodlaridir.
+PythonTr sitesinin kaynak kodlarıdır.
+Twitter-Bootstrap kullanılarak tekrar üretilmiştir.
+
+www.pythontr.org
+
+İlgilenenler için iletişim adresleri:
+
+	Şahin MERSIN: electrocoder@gmail.com
+	Yiğit SADIÇ: yigitsadic@gmail.com
+
+Gerekli modüller:
+
+	South - http://south.aeracode.org/
+	disqus - https://github.com/arthurk/django-disqus
+	textile - https://github.com/jsamsa/python-textile
+	TinyMCE - https://github.com/aljosa/django-tinymce
 
 
-ilgilenenler icin iletisim adresim : electrocoder@gmail.com
-
--------------------------------------------------------------
-forklayın ve istediginiz gibi kullanın :d
-
->>> www.pythontr.org
->>> python programcıları...
+Eksikler:
+	
+	Daha iyi bir gönderi listeleme, gösterme
+	Disquss
+	Daha iyi bir kullanıcı deneyimi
+	Anketlere bir çekidüzen verme
+	
+	
+Kullanmak için:
+	
+1) Gerekli modüllerin kurulu olduğundan emin olun.
+2) 'python maange.py syncdb' komutunu verin.
+3) 'bash migrate_all.sh' komutu yada 'python migrate <uygulama_adi>' komutu ile teker teker migrate edin.
+4) 'python manage.py runserver' komutu ile uygulamayı yerel olarak başlatın.
+5) Düzgün şekilde çalışması için:
+	'/admin/' sayfasına girip sırasıyla;
+	* 'Yazarlar', 'Yazar olmak isteyenler', 'Sıradan üyeler' adlarında gruplar oluşturun.
+	* Şu anda kullandığınız üyeyi 'Yazarlar' grubuna ekleyin.
+	* Profiller uygulamasına şu anda kullandığınız üyenin profilini oluşturun.
+		
+	* Düzsayfalar (Flatpages) uygulamasına girip adresi '/about/' olan bir düzsayfa oluşturun.
+6) 'settings.py' adlı dosyadaki email ayarlarını yapın. 
+7) Eğlenin :)

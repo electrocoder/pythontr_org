@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block title %} Bağlantılar {% endblock %}
+
+{% block content %}
+	
+	<div class="page-header">
+		<h1>Bağlantılar</h1>
+	</div>
+	
+	<div class="span8">
+		
+		{% if user.is_authenticated %}
+			<a href="{% url links:new %}">Yeni bağlantı ekle</a>
+			<br /><br />
+		{% endif %}
+		
+		<ul>
+			{% for link in link_list %}
+				<li>
+					{{ link.anchor_tag }}
+				</li>
+			{% endfor %}
+		</ul>
+		
+		{% include '_pagination.html' %}
+	</div>
+	
+{% endblock %}
