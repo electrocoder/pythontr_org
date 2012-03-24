@@ -24,4 +24,4 @@ def link_list(request, queryset, template_name, *args, **kwargs):
                             template_object_name='link',
                             *args,
                             **kwargs
-                       )    
+                       )

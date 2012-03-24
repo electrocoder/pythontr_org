@@ -6,7 +6,7 @@ from pythontr_org.posts.models import Post, Category
 
 register = template.Library()
 
-@register.inclusion_tag('posts/_posts.html')
+@register.inclusion_tag('posts/templatetags/_posts.html')
 def get_five_latest_posts():
     """
         Son beş gönderiyi listeler.
@@ -16,7 +16,8 @@ def get_five_latest_posts():
     
     return {'posts_list': posts}
 
-@register.inclusion_tag('posts/_posts.html')
+
+@register.inclusion_tag('posts/templatetags/_posts.html')
 def get_most_reads():
     """
         En çok okunan 5 gönderiyi listeler.
@@ -26,7 +27,8 @@ def get_most_reads():
     
     return {'posts_list': posts}
 
-@register.inclusion_tag('posts/_categories.html')
+
+@register.inclusion_tag('posts/templatetags/_categories.html')
 def get_categories():
     """
         Kategorileri listeler.
