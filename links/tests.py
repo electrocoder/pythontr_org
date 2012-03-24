@@ -3,13 +3,13 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
-
+from django.core import mail
 from pythontr_org.links.models import Link
 
+from pythontr_org.settings import ADMINS
 
 
-class LinksFunctionals(TestCase):
-    
+class LinksFunctionals(TestCase):    
     fixtures = ['links.json', 'auth.json']
     
     
@@ -64,6 +64,10 @@ class LinksFunctionals(TestCase):
         self.assertEqual(Link.objects.latest().title, self.link_informations['title'])
         
         self.assertFalse(Link.objects.latest().confirmed)
+        self.assertEqual(len(mail.outbox), 1)
+        
+        self.assertEqual([email for admin, email in ADMINS], mail.outbox[0].to)
+        self.assertEqual(u'Yeni bağlantı eklendi.', mail.outbox[0].subject)
         
         
     def test_should_redirect_to_login_page(self):
