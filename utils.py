@@ -3,25 +3,25 @@
 from django.views.generic.list_detail import object_list
 
 
-def posts_object_list(request, queryset, template_name, *args, **kwargs):    
+def post_list(request, queryset, template_name, *args, **kwargs):    
     return object_list(
                            request,
                            queryset,
                            paginate_by=15,
                            template_name='posts/%s' % template_name,
-                           template_object_name='posts',
+                           template_object_name='post',
                            *args,
                            **kwargs
                        )
     
     
-def links_object_list(request, queryset, template_name, *args, **kwargs):
+def link_list(request, queryset, template_name, *args, **kwargs):
     return object_list(
                             request,
                             queryset,
                             paginate_by=15,
                             template_name='links/%s' % template_name,
-                            template_object_name='links',
+                            template_object_name='link',
                             *args,
                             **kwargs
                        )    

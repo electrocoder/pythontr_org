@@ -17,9 +17,9 @@
 		</ul>
 		
 		<b>{{ category.name }}</b> ile ilişkili gönderiler;
-		{% if posts_list %}
+		{% if post_list %}
 			<ul>
-				{% for post in posts_list %}
+				{% for post in post_list %}
 					<li>
 						<a href="{{ post.get_absolute_url }}">
 							{{ post.title }}

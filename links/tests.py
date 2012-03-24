@@ -32,9 +32,9 @@ class LinksFunctionals(TestCase):
         response = self.client.get(reverse('links:index'))
         
         self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(response.context['links'])
+        self.assertIsNotNone(response.context['link_list'])
         
-        self.assertEqual(len(Link.objects.all()), len(response.context['links']))
+        self.assertEqual(Link.objects.count(), len(response.context['link_list']))
     
     
     def test_get_new_link_page(self):

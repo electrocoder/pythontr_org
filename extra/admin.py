@@ -6,6 +6,7 @@ from django.contrib import admin
 
 from tinymce.widgets import TinyMCE
 
+
 class TinyMCEFlatPageAdmin(FlatPageAdmin):
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'content':

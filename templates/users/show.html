@@ -14,15 +14,17 @@
 			{% include 'users/_controls.html' %}
 		{% endif %}
 
-	    <ul class="thumbnails">
-		    <li class="span3">
-			    <a href="{{ tuser.get_profile.get_image }}" class="thumbnail">
-			    	<img src="{{ tuser.get_profile.get_image }}" alt="">
-			    </a>
-		    </li>
-	    </ul>
+	    <!--<ul class="thumbnails">
+		    <li class="span3">-->
+		    	<center>
+				    <a href="{{ tuser.get_profile.get_image }}">
+				    	<img src="{{ tuser.get_profile.get_image }}" alt="">
+				    </a>
+			    </center>
+		    <!--</li>
+	    </ul>-->
 		
-		<table class="table">
+		<table class="table table-bordered">
 			<tr>
 				<th>Kullanıcı adım</th>
 				<td>{{ tuser.username }}</td>

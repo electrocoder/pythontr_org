@@ -47,7 +47,7 @@ class PostFunctionals(TestCase):
         response = self.client.get(reverse('posts:index'))
         
         self.assertEqual(response.status_code, 200)        
-        self.assertIsNotNone(response.context['object_list']) # generic view
+        self.assertIsNotNone(response.context['post_list']) # generic view
         
         
     def test_get_show(self):
@@ -99,7 +99,7 @@ class PostFunctionals(TestCase):
         for q in SEARCH_LIST:
             response = self.client.get(reverse('posts:search'), {'q': q})
             
-            self.assertIsNotNone(response.context['posts'])
+            self.assertIsNotNone(response.context['post_list'])
     
     
     def test_get_my_posts(self):
@@ -112,7 +112,7 @@ class PostFunctionals(TestCase):
         response = self.client.get(reverse('posts:my_posts'))        
         
         self.assertEqual(response.status_code, 200)        
-        self.assertIsNotNone(response.context['posts'])
+        self.assertIsNotNone(response.context['post_list'])
 
         
     def test_get_new_post(self):
@@ -229,9 +229,9 @@ class CategoryFunctionals(TestCase):
             response = self.client.get(cat.get_absolute_url())
             
             self.assertEqual(response.status_code, 200)
-            self.assertIsNotNone(response.context['posts'])
+            self.assertIsNotNone(response.context['post_list'])
         
-            self.assertEqual(len(cat.post_set.all()), len(response.context['posts']))
+            self.assertEqual(cat.post_set.count(), len(response.context['post_list']))
             
             
     def test_should_raise_404_with_bad_id(self):

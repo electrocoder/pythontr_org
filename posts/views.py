@@ -8,14 +8,14 @@ from django.contrib import messages
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.posts.forms import PostForm
 
-from pythontr_org.utils import posts_object_list
+from pythontr_org.utils import post_list
 
 
 def index(request):
     """
         Gönderileri listelemek için kullanılır.
     """    
-    return posts_object_list(
+    return post_list(
                        request,
                        queryset=Post.objects.filter(published = True),
                        template_name='index.html',
@@ -41,7 +41,7 @@ def search(request):
     """
     
     q = request.GET.get('q', '')
-    return posts_object_list(request,
+    return post_list(request,
                        queryset=Post.objects.filter(content__icontains = q), 
                        template_name='search.html',
                        extra_context=locals(),
@@ -56,7 +56,7 @@ def category_show(request, slug):
     """
     
     category = get_object_or_404(Category, slug = slug)    
-    return posts_object_list(request,
+    return post_list(request,
                        queryset=category.post_set.all(),
                        template_name='category_show.html',
                        extra_context=locals(),
@@ -119,10 +119,7 @@ def my_posts(request):
         Yazarın kendi gönderdiği gönderilerin listelendiği
         düzenle ve sil bağlantılarının yer aldığı sayfa.
     """
-    
-    posts = request.user.post_set.all()
-    
-    return render(request, 'posts/my_posts.html', locals())
+    return post_list(request, request.user.post_set.all(),'my_posts.html')
     
     
 @permission_required('posts.delete_post')
