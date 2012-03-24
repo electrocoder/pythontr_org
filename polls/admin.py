@@ -15,7 +15,10 @@ class PollAdmin(admin.ModelAdmin):
     ]
     inlines = [ChoiceInline]
     
-    prepopulated_fields = {'slug': ('question', )}
+    prepopulated_fields = {'slug': ('question', )}    
+    list_display = ('question', 'created_at')
+    
+    search_fields = ['question']
 
 
 class VoteAdmin(admin.ModelAdmin):

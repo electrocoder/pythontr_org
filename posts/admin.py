@@ -27,14 +27,14 @@ class PostAdmin(admin.ModelAdmin):
     def publish(self, request, queryset):
         rows_updated = queryset.update(published = True)
         
-        self.message_user(request, "%s gönderi başarı ile yayınlandı!" % rows_updated)
+        self.message_user(request, u"%s gönderi başarı ile yayınlandı!" % rows_updated)
     publish.short_description = u'Seçili gönderileri yayınla'
     
     
     def unpublish(self, request, queryset):
         rows_updated = queryset.update(published = False)
         
-        self.message_user(request, "%s gönderi başarı ile yayından kaldırıldı!" % rows_updated)
+        self.message_user(request, u"%s gönderi başarı ile yayından kaldırıldı!" % rows_updated)
     unpublish.short_description = u'Seçili gönderileri yayından kaldır'
     
     

@@ -10,7 +10,8 @@ class Poll(models.Model):
 	question = models.CharField(max_length=200, verbose_name = "Sorusu")	
 	slug = models.SlugField(verbose_name = 'Link', max_length=200)
 	
-	pub_date = models.DateTimeField("Yayınlanma tarihi", auto_now_add = True)
+	created_at = models.DateTimeField("Yayınlanma tarihi", auto_now_add = True)
+	updated_at = models.DateTimeField('Güncellenme tarihi', auto_now = True)
 	
 	
 	def __unicode__(self):
@@ -18,7 +19,7 @@ class Poll(models.Model):
 	
 	
 	def was_published_today(self):
-		return self.pub_date.date() == datetime.date.today()
+		return self.created_at.date() == datetime.date.today()
 	
 	
 	@models.permalink
@@ -30,7 +31,7 @@ class Poll(models.Model):
 		verbose_name_plural = "Anketler"
 		verbose_name = "Anket"
 		
-		ordering = ['-pub_date']
+		ordering = ['-created_at']
 
 
 class Choice(models.Model):
