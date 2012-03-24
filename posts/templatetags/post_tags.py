@@ -6,26 +6,29 @@ from pythontr_org.posts.models import Post, Category
 
 register = template.Library()
 
+
+# Sol menüde yer alan;
+#    Kategoriler
+#    Son gönderilenler
+#    En çok okunanlar
+#
+# için template tagları
+
+
 @register.inclusion_tag('posts/templatetags/_posts.html')
 def get_five_latest_posts():
     """
         Son beş gönderiyi listeler.
-    """
-    
-    posts = Post.objects.filter(published = True)[:5]
-    
-    return {'posts_list': posts}
+    """    
+    return {'p_list': Post.objects.filter(published = True)[:5]}
 
 
 @register.inclusion_tag('posts/templatetags/_posts.html')
-def get_most_reads():
+def get_five_most_reads():
     """
-        En çok okunan 5 gönderiyi listeler.
+        En çok okunan beş gönderiyi listeler.
     """
-    
-    posts = Post.objects.filter(published = True).order_by('-read_count')[:5]
-    
-    return {'posts_list': posts}
+    return {'p_list': Post.objects.filter(published = True).order_by('-read_count')[:5]}
 
 
 @register.inclusion_tag('posts/templatetags/_categories.html')
@@ -33,7 +36,4 @@ def get_categories():
     """
         Kategorileri listeler.
     """
-    
-    categories = Category.objects.all()
-    
-    return {'categories_list': categories}
+    return {'c_list': Category.objects.all()}
