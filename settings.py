@@ -9,6 +9,38 @@ TEMPLATE_DEBUG = DEBUG
 
 PATH = os.path.dirname(__file__)
 
+if DEBUG:
+    MEDIA_ROOT = PATH + '/media/'
+
+    MEDIA_URL = '/media/' 
+        
+    STATIC_ROOT = PATH + 'static/'
+    
+    STATIC_URL = '/static/'
+    
+    ADMIN_MEDIA_PREFIX = '/static/admin/'
+    
+    STATICFILES_DIRS = (
+        PATH + '/static',
+    )
+else:
+    MEDIA_ROOT = PATH + '/media/'
+
+    MEDIA_URL = '/media/' 
+    
+    
+    STATIC_ROOT = PATH + 'static/'
+    
+    STATIC_URL = '/static/'
+    
+    ADMIN_MEDIA_PREFIX = 'http://pythontr.org/media/admin/'
+    
+    STATICFILES_DIRS = (
+        PATH + '/static',
+    )
+
+
+
 # Email ayarları;
 
 EMAIL_USE_TLS = True
@@ -55,21 +87,6 @@ SITE_ID = 1
 USE_I18N = True
 
 USE_L10N = True
-
-MEDIA_ROOT = PATH + '/media/'
-
-MEDIA_URL = '/media/' 
-
-
-STATIC_ROOT = PATH + 'static/'
-
-STATIC_URL = '/static/'
-
-ADMIN_MEDIA_PREFIX = '/static/admin/' #'http://pythontr.org/media/admin/'
-
-STATICFILES_DIRS = (
-    PATH + '/static',
-)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',

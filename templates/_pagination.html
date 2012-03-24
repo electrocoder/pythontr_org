@@ -9,6 +9,7 @@
 					<a href="#">Geri </a>
 				{% endif %}
 			</li>
+			
 			{% for page in page_range %}
 				{% if page_obj.number == page %}
 					<li class="active">
@@ -20,6 +21,7 @@
 					</li>
 				{% endif %}
 			{% endfor %}
+			
 			<li>
 			{% if page_obj.has_next %}
                 <a href="?q={{ q }}&page={{ page_obj.next_page_number }}">İleri</a>
