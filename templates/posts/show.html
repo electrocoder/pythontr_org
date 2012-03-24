@@ -4,7 +4,11 @@
 {% load disqus_tags %} <!-- Çalışmıyor -->
 
 
+{% block title %} {{ post }} {% endblock %}
+
+
 {% block content %}
+
 	<div class="page-header">
 		<h1>
 			<a href="{{ post.category.get_absolute_url }}">
@@ -18,13 +22,16 @@
 	</div>
 	
 	<div class="span8">
+		
 		{% autoescape off %}
 			{{ post.content }}
 		{% endautoescape %}
 		
 		<br />
 		<br />
-				
+		
+		{% include 'posts/_share.html' %}
+		
 		<center>~</center>
 		
 		{% disqus_show_comments %} <!-- Çalışmıyor -->
