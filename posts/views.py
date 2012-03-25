@@ -8,19 +8,12 @@ from django.contrib import messages
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.posts.forms import PostForm
 
-from pythontr_org.utils import post_list
+from pythontr_org.utils import post_list, PostListView, PostSearchListView, CategoryPostListView
 
 
-def index(request):
-    """
-        Gönderileri listelemek için kullanılır.
-    """    
-    return post_list(
-                       request,
-                       queryset=Post.objects.filter(published = True),
-                       template_name='index.html',
-                       )
-
+index = PostListView.as_view()
+search = PostSearchListView.as_view()
+category_show = CategoryPostListView.as_view()
 
 def show(request, category_slug, slug):
     """
@@ -28,40 +21,40 @@ def show(request, category_slug, slug):
         Eğer gönderi bulunamazsa 404 döndürür.
     """
     
-    post = get_object_or_404(Post, slug = slug, published = True)
+    post = get_object_or_404(Post, slug = slug, published = True, category__slug = category_slug)
     post.increase_read_count()
     
     return render(request, 'posts/show.html', locals())
 
 
-def search(request):
-    """
-        Gönderileri aramak için kullanılır.
-        Aranan yapı Post modelinin 'content' alında bulunuyorsa seçer.
-    """
-    
-    q = request.GET.get('q', '')
-    return post_list(request,
-                       queryset=Post.objects.filter(published = True, content__icontains = q), 
-                       template_name='search.html',
-                       extra_context=locals(),
-                       )
+#def search(request):
+#    """
+#        Gönderileri aramak için kullanılır.
+#        Aranan yapı Post modelinin 'content' alında bulunuyorsa seçer.
+#    """
+#    
+#    q = request.GET.get('q', '')
+#    return post_list(request,
+#                       queryset=Post.objects.published().filter(content__icontains = q), 
+#                       template_name='search.html',
+#                       extra_context=locals(),
+#                       )
 
 
 # Kategoriler ile ilgili.
 
-def category_show(request, slug):
-    """
-        Bu kategoriye bağlı gönderileri bulmak için kullanılır.
-        Eğer kategori bulunmazsa 404 döndürür.
-    """
-    
-    category = get_object_or_404(Category, slug = slug)    
-    return post_list(request,
-                       queryset=category.post_set.all(),
-                       template_name='category_show.html',
-                       extra_context=locals(),
-                       )
+#def category_show(request, slug):
+#    """
+#        Bu kategoriye bağlı gönderileri bulmak için kullanılır.
+#        Eğer kategori bulunmazsa 404 döndürür.
+#    """
+#    
+#    category = get_object_or_404(Category, slug = slug)    
+#    return post_list(request,
+#                       queryset=category.post_set.published(),
+#                       template_name='category_show.html',
+#                       extra_context=locals(),
+#                       )
 
 
 # yeni gönderi ekleme, düzenleme ve silme

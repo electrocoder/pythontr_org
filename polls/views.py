@@ -8,52 +8,21 @@ from pythontr_org.polls.models import Choice, Poll, Vote
 from django.core.exceptions import ValidationError
 from django.views.generic.list_detail import object_list
 
-
-def index(request):
-    """
-        Son 5 anketi listelemek için kullanılır.
-    """
-    return object_list(
-                       request,
-                       queryset=Poll.objects.all(),
-                       paginate_by=15,
-                       template_name='polls/index.html',
-                       template_object_name='poll'
-                       )
+from pythontr_org.utils import PollListView, PollDetailView
 
 
-def detail(request, slug):
-    """
-        Anket detaylarını göstermek için kullanılır.
-    """
-    
-    poll = get_object_or_404(Poll, slug=slug)
-    
-    try:
-        vote = Vote.objects.get(user=request.user, poll=poll)
-    except:
-        pass
-
-    
-    return render(request, 'polls/detail.html', locals())
-
-
-def results(request, slug):
-    """
-        Anket sonuçlarını göstermek için kullanılır.
-    """
-    
-    poll = get_object_or_404(Poll, slug=slug)    
-    return render(request, 'polls/results.html', locals())
+index = PollListView.as_view()
+detail = PollDetailView.as_view()
+results = PollDetailView.as_view(template_name='polls/results.html')
 
 
 @login_required
-def vote(request, poll_id):
+def vote(request, slug):
     """
         Ankete oy vermek için kullanılır.
     """
     
-    poll = get_object_or_404(Poll, pk=poll_id)
+    poll = get_object_or_404(Poll, slug=slug)
     
     try:
         selected_choice = poll.choice_set.get(pk=request.POST['choice'])

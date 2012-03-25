@@ -25,7 +25,7 @@
 						
 		{% else %}
 				
-			<form class="form-inline" action="{% url polls:vote poll.id %}" method="post">{% csrf_token %}
+			<form class="form-inline" action="{% url polls:vote poll.slug %}" method="post">{% csrf_token %}
 		
 				{% for choice in poll.choice_set.all %}
 					<label class="radio inline">

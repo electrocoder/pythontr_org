@@ -168,12 +168,13 @@ kitap, Django, Spyder, Django nedir, tkinter, py, *.py, pyton, {{ post.tags }}" 
             		{% include 'posts/_administration.html' %}
             	{% endif %}
             
-              <li class="nav-header">Kategoriler</li>
-              	{% get_categories %}
               <li class="nav-header">Son gönderilenler</li>
               	{% get_five_latest_posts %}
               <li class="nav-header">En çok okunanlar</li>
               	{% get_five_most_reads %}
+			  <li class="nav-header">Kategoriler</li>
+              	{% get_categories %}
+              	
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
