@@ -107,3 +107,33 @@ class MyPostListView(PostListView, ProtectedView):
     
     def get_queryset(self):
         return self.request.user.post_set.all()
+    
+    
+class UserPostListView(PostListView):
+    paginate_by=6
+    template_name='users/profile.html'
+    
+    def get_queryset(self):
+        self.tuser = get_object_or_404(User, username=self.kwargs['username'])
+        self.profile = self.tuser.get_profile()
+        
+        self.is_me = self.tuser.username == self.request.user
+        self.group = Group.objects.get(name='Yazarlar')
+        
+        if self.group.user_set.filter(username = self.tuser):
+            return self.tuser.post_set.filter(published=True)
+        else:
+            return []
+        
+    
+    def get_context_data(self, **kwargs):
+        context = super(UserPostListView, self).get_context_data(**kwargs)
+        
+        context.update({
+                            'is_me': self.is_me,
+                            'group': self.group,
+                            'profile': self.profile,
+                            'tuser': self.tuser,
+                        }) 
+        
+        return context
