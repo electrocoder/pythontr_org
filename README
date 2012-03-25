@@ -1,9 +1,7 @@
-Test uygulaması = Yayında değil
+Site yayında! www.pythontr.org
 
 PythonTr sitesinin kaynak kodlarıdır.
 Twitter-Bootstrap kullanılarak tekrar üretilmiştir.
-
-www.pythontr.org
 
 İlgilenenler için iletişim adresleri:
 
@@ -16,14 +14,6 @@ Gerekli modüller:
 	disqus - https://github.com/arthurk/django-disqus
 	textile - https://github.com/jsamsa/python-textile
 	TinyMCE - https://github.com/aljosa/django-tinymce
-
-
-Eksikler:
-	
-	Daha iyi bir gönderi listeleme, gösterme
-	Disquss
-	Daha iyi bir kullanıcı deneyimi
-	Anketlere bir çekidüzen verme
 	
 	
 Kullanmak için:
