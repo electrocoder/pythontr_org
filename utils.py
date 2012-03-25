@@ -15,7 +15,7 @@ from pythontr_org.polls.models import Poll, Vote, Choice
 
 
 class MainListView(ListView):
-    paginate_by = 15
+    paginate_by = 20
 
 
 
@@ -78,12 +78,13 @@ class PostSearchListView(PostListView):
         return context
 
     
-class CategoryPostListView(MainListView):
+class CategoryPostListView(PostListView):
     template_name='posts/category_show.html'
     
     def get_queryset(self):
         self.category=get_object_or_404(Category, slug=self.kwargs['slug'])
-        return self.category.post_set.published()
+        
+        return self.category.post_set.filter(published=True)
     
     
     def get_context_data(self, **kwargs):
@@ -93,7 +94,7 @@ class CategoryPostListView(MainListView):
         return context
 
 
-class ProtectedView(TemplateView):
+class ProtectedView(object):
     @method_decorator(permission_required('posts.add_post'))
     def dispatch(self, *args, **kwargs):
         return super(ProtectedView, self).dispatch(*args, **kwargs)
@@ -101,7 +102,7 @@ class ProtectedView(TemplateView):
 
 class MyPostListView(PostListView, ProtectedView):
     template_name='posts/my_posts.html'
-    paginate_by=5
+    paginate_by=6
     
     
     def get_queryset(self):
