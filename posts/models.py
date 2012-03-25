@@ -53,6 +53,10 @@ def validate_user_is_in_authors_group(value):
 class PostManager(models.Manager):
     def published(self):
         return Post.objects.filter(published=True)
+    
+    
+    def search(self, q):
+        return Post.objects.published().filter(content__icontains=q)
 
 
 class Post(models.Model):

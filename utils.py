@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic.list_detail import object_list
 from django.shortcuts import get_object_or_404
 
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.decorators import permission_required
+from django.utils.decorators import method_decorator
+
+from django.views.generic import ListView, DetailView, TemplateView
 
 from django.contrib.auth.models import Group, User
 
@@ -42,7 +44,8 @@ class PollListView(MainListView):
 class PollDetailView(DetailView):
     template_name = 'polls/detail.html'
     model = Poll
-        
+
+
     def get_context_data(self, **kwargs):
        context = super(PollDetailView, self).get_context_data(**kwargs)
        
@@ -65,7 +68,8 @@ class PostSearchListView(PostListView):
     template_name='posts/search.html'
     
     def get_queryset(self):
-        return Post.objects.published().filter(content__icontains=self.request.GET.get('q', ''))
+        return Post.objects.search(self.request.GET.get('q', ''))
+    
     
     def get_context_data(self, **kwargs):
         context = super(PostSearchListView, self).get_context_data(**kwargs)
@@ -81,6 +85,7 @@ class CategoryPostListView(MainListView):
         self.category=get_object_or_404(Category, slug=self.kwargs['slug'])
         return self.category.post_set.published()
     
+    
     def get_context_data(self, **kwargs):
         context = super(CategoryPostListView, self).get_context_data(**kwargs)
         context['category'] = self.category
@@ -88,13 +93,16 @@ class CategoryPostListView(MainListView):
         return context
 
 
-def post_list(request, queryset, template_name, *args, **kwargs):    
-    return object_list(
-                           request,
-                           queryset,
-                           paginate_by=15,
-                           template_name='posts/%s' % template_name,
-                           template_object_name='post',
-                           *args,
-                           **kwargs
-                       )
+class ProtectedView(TemplateView):
+    @method_decorator(permission_required('posts.add_post'))
+    def dispatch(self, *args, **kwargs):
+        return super(ProtectedView, self).dispatch(*args, **kwargs)
+
+
+class MyPostListView(PostListView, ProtectedView):
+    template_name='posts/my_posts.html'
+    paginate_by=5
+    
+    
+    def get_queryset(self):
+        return self.request.user.post_set.all()
