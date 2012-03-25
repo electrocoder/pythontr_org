@@ -12,13 +12,20 @@
 		<a href="{% url links:new %}">Yeni bağlantı ekle</a>
 		<br /><br />
 		
-		<ul>
+		
 			{% for link in link_list %}
-				<li>
+				<p>
 					{{ link.anchor_tag }}
-				</li>
+					{% if link.description %}
+						<blockquote>
+							{% autoescape off %}
+								{{ link.description }}
+							{% endautoescape %}
+						</blockquote>
+					{% endif %}
+				</p>
 			{% endfor %}
-		</ul>
+		
 		
 		{% include '_pagination.html' %}
 	</div>

@@ -9,7 +9,7 @@ from django.conf.urls.defaults import patterns
 
 
 post_dict = {
-    'queryset': Post.objects.filter(published = True),
+    'queryset': Post.objects.published(),
     'date_field': 'created_at',
 }
 
@@ -20,7 +20,7 @@ category_dict = {
 
 
 links_dict = {
-              'queryset': Link.objects.filter(confirmed = True),
+              'queryset': Link.objects.confirmed(),
               'date_field': 'created_at',
 }
 

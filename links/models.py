@@ -4,6 +4,11 @@ from django.db import models
 from django.utils.safestring import mark_safe
 
 
+class LinkManager(models.Manager):
+    def confirmed(self):
+        return Link.objects.filter(confirmed=True)
+    
+
 class Link(models.Model):
     """
     
@@ -25,14 +30,20 @@ class Link(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
     
     
+    objects = LinkManager()
+    
+    
     def __unicode__(self):
         return self.title
+    
     
     def anchor_tag(self):
         return mark_safe("<a href='%s' target='_blank'>%s</a>" % (self.href, self.title))
     
+    
     def get_absolute_url(self):
         return self.href
+    
     
     class Meta:
         verbose_name = 'Bağlantı'

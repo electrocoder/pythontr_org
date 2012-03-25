@@ -9,37 +9,20 @@ TEMPLATE_DEBUG = DEBUG
 
 PATH = os.path.dirname(__file__)
 
-if DEBUG:
-    MEDIA_ROOT = PATH + '/media/'
 
-    MEDIA_URL = '/media/' 
-        
-    STATIC_ROOT = PATH + 'static/'
-    
-    STATIC_URL = '/static/'
-    
-    ADMIN_MEDIA_PREFIX = '/static/admin/'
-    
-    STATICFILES_DIRS = (
-        PATH + '/static',
-    )
-else:
-    MEDIA_ROOT = PATH + '/media/'
+MEDIA_ROOT = PATH + '/media/'
 
-    MEDIA_URL = '/media/' 
+MEDIA_URL = '/media/' 
     
-    
-    STATIC_ROOT = PATH + 'static/'
-    
-    STATIC_URL = '/static/'
-    
-    ADMIN_MEDIA_PREFIX = 'http://pythontr.org/media/admin/'
-    
-    STATICFILES_DIRS = (
-        PATH + '/static',
-    )
+STATIC_ROOT = PATH + 'static/'
 
+STATIC_URL = '/static/'
 
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+STATICFILES_DIRS = (
+    PATH + '/static',
+)
 
 # Email ayarları;
 

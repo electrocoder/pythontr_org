@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
-{% load markup %}
-{% load disqus_tags %} <!-- Çalışmıyor -->
+
+{% load disqus_tags %} <!-- Yerel sunucuda çalışmıyor -->
 
 
 {% block title %} {{ post }} {% endblock %}
@@ -34,7 +34,7 @@
 		<a href="https://twitter.com/share" class="twitter-share-button" data-lang="tr">Tweetle</a>
 		<center>~</center>
 		
-		{% disqus_show_comments %} <!-- Çalışmıyor -->
+		{% disqus_show_comments %} <!-- Yerel sunucuda çalışmıyor -->
 		
 		<hr />
 		
