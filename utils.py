@@ -2,7 +2,7 @@
 
 from django.shortcuts import get_object_or_404
 
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 from django.utils.decorators import method_decorator
 
 from django.views.generic import ListView, DetailView, TemplateView
@@ -13,6 +13,22 @@ from pythontr_org.links.models import Link
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.polls.models import Poll, Vote, Choice
 
+
+class PermissionProtectedView(object):
+    @method_decorator(permission_required('posts.add_post'))
+    def dispatch(self, *args, **kwargs):
+        return super(PermissionProtectedView, self).dispatch(*args, **kwargs)
+
+
+class ProtectedView(object):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ProtectedView, self).dispatch(*args, **kwargs)
+
+
+class SettingsView(ProtectedView, TemplateView):
+    template_name='users/settings.html'
+    
 
 class MainListView(ListView):
     paginate_by = 20
@@ -94,16 +110,40 @@ class CategoryPostListView(PostListView):
         return context
 
 
-class ProtectedView(object):
-    @method_decorator(permission_required('posts.add_post'))
-    def dispatch(self, *args, **kwargs):
-        return super(ProtectedView, self).dispatch(*args, **kwargs)
-
-
-class MyPostListView(PostListView, ProtectedView):
+class MyPostListView(PermissionProtectedView, PostListView):
     template_name='posts/my_posts.html'
     paginate_by=6
     
     
     def get_queryset(self):
         return self.request.user.post_set.all()
+    
+    
+class UserPostListView(PostListView):
+    paginate_by=6
+    template_name='users/profile.html'
+    
+    def get_queryset(self):
+        self.tuser = get_object_or_404(User, username=self.kwargs['username'])
+        self.profile = self.tuser.get_profile()
+        
+        self.is_me = self.tuser.username == self.request.user
+        self.group = Group.objects.get(name='Yazarlar')
+        
+        if self.group.user_set.filter(username = self.tuser):
+            return self.tuser.post_set.filter(published=True)
+        else:
+            return []
+        
+    
+    def get_context_data(self, **kwargs):
+        context = super(UserPostListView, self).get_context_data(**kwargs)
+        
+        context.update({
+                            'is_me': self.is_me,
+                            'group': self.group,
+                            'profile': self.profile,
+                            'tuser': self.tuser,
+                        }) 
+        
+        return context
