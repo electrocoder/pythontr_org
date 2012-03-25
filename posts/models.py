@@ -32,6 +32,8 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Kategori"
         verbose_name_plural = "Kategoriler"
+        
+        ordering = ['name']
 
 
 def validate_user_is_in_authors_group(value):
@@ -47,6 +49,15 @@ def validate_user_is_in_authors_group(value):
     if not user in group.user_set.all():
         raise ValidationError(u'%s adlı kullanıcı bir yazar değil.' % user.username)
         
+
+class PostManager(models.Manager):
+    def published(self):
+        return Post.objects.filter(published=True)
+    
+    
+    def search(self, q):
+        return Post.objects.published().filter(content__icontains=q)
+
 
 class Post(models.Model):
     """
@@ -95,6 +106,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
+    
+    objects= PostManager()
+    
     
     def __unicode__(self):
         return self.title

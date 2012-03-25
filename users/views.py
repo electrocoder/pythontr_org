@@ -15,6 +15,8 @@ from django.contrib.auth import logout
 from pythontr_org.users.forms import UserSettings, ProfileForm
 from pythontr_org.users.models import Profile
 
+from pythontr_org.utils import AuthorListView
+
 
 def signup(request):
     """
@@ -117,23 +119,12 @@ def profile(request, username):
     
     return object_list(
                             request,
-                            queryset=tuser.post_set.filter(published = True) if group.user_set.filter(username = tuser) else None,
+                            queryset=tuser.post_set.published() if group.user_set.filter(username = tuser) else [],
                             extra_context=locals(),
                             template_name='users/profile.html',
                             template_object_name='post',
                             paginate_by=10
                           )
 
-
-def authors(request):
-    """
-        django.contrib.auth.models.Group adlı modelde 'Yazarlar'
-        olarak kayıtlı üyeleri listele.
-        
-        Bu kişiler yeni gönderi ekleme yetkisine sahip.
-    """
     
-    group = get_object_or_404(Group, name = 'Yazarlar')
-    users = group.user_set.all()
-    
-    return render(request, 'users/authors.html', locals())
+authors = AuthorListView.as_view()

@@ -34,7 +34,7 @@ class LinksFunctionals(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(response.context['link_list'])
         
-        self.assertEqual(Link.objects.count(), len(response.context['link_list']))
+        self.assertEqual(Link.objects.confirmed().count(), len(response.context['link_list']))
     
     
     def test_get_new_link_page(self):

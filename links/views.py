@@ -2,27 +2,15 @@
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
-
 from django.contrib.auth.decorators import login_required
-from django.views.generic.list_detail import object_list
 
 from pythontr_org.links.models import Link
 from pythontr_org.links.forms import LinkForm
-
 from pythontr_org.links.mails import LinkAddedMail
+from pythontr_org.utils import LinkListView
 
-
-def index(request):
-    """
-        Bağlantıları listeler.
-    """    
-    return object_list(
-                         request,
-                         queryset=Link.objects.filter(confirmed=True),
-                         template_name='links/index.html',
-                         paginate_by=15,
-                         template_object_name='link',
-                    )
+    
+index = LinkListView.as_view()
 
 
 @login_required

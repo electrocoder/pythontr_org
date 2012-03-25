@@ -21,7 +21,7 @@ class LatestCommunityPosts(Feed):
 
 
     def items(self):
-        return Post.objects.filter(published = True, tags__icontains = 'topluluk')[:5]
+        return Post.objects.published().filter(tags__icontains = 'topluluk')[:5]
 
 
     def item_title(self, item):
@@ -45,8 +45,9 @@ class LatestPosts(Feed):
     link = "/"
     description = ">>> Son 5 makale..."
 
+
     def items(self):
-        return Post.objects.filter(published=True)[:5]
+        return Post.objects.published()[:5]
 
 
     def item_title(self, item):
@@ -72,7 +73,7 @@ class LatestLinks(Feed):
     
     
     def items(self):
-        return Link.objects.filter(confirmed = True)[:5]
+        return Link.objects.confirmed()[:5]
     
     
     def item_title(self, item):
