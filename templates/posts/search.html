@@ -5,9 +5,8 @@
 {% block content %}
 	<div class="page-header">
 		<h1>
-			Arama sonuçları
 			<strong>
-				<i>{{ q }}</i> için arama sonuçları;
+				<i>{{ q }}</i> için arama sonuçları
 			</strong>
 		</h1>
 	</div>
@@ -18,8 +17,17 @@
 				{% for post in post_list %}
 					<li>
 						<a href="{{ post.get_absolute_url }}">
-							{{ post.short_title }}
+							{{ post }}
 						</a>
+						/
+						<a href="{{ post.category.get_absolute_url }}">
+							{{ post.category }}
+						</a>
+						~
+						Okunma sayısı
+						<span class="badge">({{ post.read_count }})</span>,
+						<i>{{ post.created_at }}</i>
+						
 					</li>
 				{% endfor %}
 			</ul>

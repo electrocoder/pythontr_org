@@ -14,7 +14,13 @@ from django.contrib.auth import logout
 from pythontr_org.users.forms import UserSettings, ProfileForm
 from pythontr_org.users.models import Profile
 
-from pythontr_org.utils import AuthorListView, UserPostListView
+from pythontr_org.utils import AuthorListView, UserPostListView, SettingsView
+
+# class-based generic views
+
+profile = UserPostListView.as_view()
+authors = AuthorListView.as_view()
+settings = SettingsView.as_view()
 
 
 def signup(request):
@@ -37,17 +43,6 @@ def signup(request):
         return redirect('users:settings')
         
     return render(request, 'users/signup.html', locals())
-
-
-@login_required
-def settings(request):
-    """
-        Kullanıcı ayarlarına ulaşmak için bir panel.
-        Şifre değiştirme, hesabı silme, profili düzenleme,
-        kişisel bilgileri düzenleme formlarına ulaşılır.
-    """
-        
-    return render(request, 'users/settings.html')
 
 
 @login_required
@@ -102,7 +97,3 @@ def disable(request):
     logout(request)
     
     return redirect('posts:index')
-
-
-profile = UserPostListView.as_view()
-authors = AuthorListView.as_view()

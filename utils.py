@@ -2,7 +2,7 @@
 
 from django.shortcuts import get_object_or_404
 
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 from django.utils.decorators import method_decorator
 
 from django.views.generic import ListView, DetailView, TemplateView
@@ -13,6 +13,22 @@ from pythontr_org.links.models import Link
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.polls.models import Poll, Vote, Choice
 
+
+class PermissionProtectedView(object):
+    @method_decorator(permission_required('posts.add_post'))
+    def dispatch(self, *args, **kwargs):
+        return super(PermissionProtectedView, self).dispatch(*args, **kwargs)
+
+
+class ProtectedView(object):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ProtectedView, self).dispatch(*args, **kwargs)
+
+
+class SettingsView(ProtectedView, TemplateView):
+    template_name='users/settings.html'
+    
 
 class MainListView(ListView):
     paginate_by = 20
@@ -94,13 +110,7 @@ class CategoryPostListView(PostListView):
         return context
 
 
-class ProtectedView(object):
-    @method_decorator(permission_required('posts.add_post'))
-    def dispatch(self, *args, **kwargs):
-        return super(ProtectedView, self).dispatch(*args, **kwargs)
-
-
-class MyPostListView(PostListView, ProtectedView):
+class MyPostListView(PermissionProtectedView, PostListView):
     template_name='posts/my_posts.html'
     paginate_by=6
     
