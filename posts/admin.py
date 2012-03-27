@@ -7,16 +7,16 @@ from tinymce.widgets import TinyMCE
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    search_fields = ['name']
+    search_fields       = ['name']
     prepopulated_fields = {'slug': ('name', )}
 
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
     
-    list_display = ('title', 'category', 'author', 'published', 'read_count', 'created_at')    
+    list_display  = ('title', 'category', 'author', 'published', 'read_count', 'created_at')    
     search_fields = ['title', 'content', 'tags']    
-    list_filter = ('published', )
+    list_filter   = ('published', )
     
     date_hierarchy = 'created_at'
     
@@ -45,7 +45,6 @@ class PostAdmin(admin.ModelAdmin):
             ))
         return super(PostAdmin, self).formfield_for_dbfield(db_field, **kwargs)
     
-
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)

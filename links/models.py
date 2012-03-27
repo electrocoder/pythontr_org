@@ -39,6 +39,7 @@ class Link(models.Model):
     
     def anchor_tag(self):
         return mark_safe("<a href='%s' target='_blank'>%s</a>" % (self.href, self.title))
+    anchor_tag.allow_tags = True
     
     
     def get_absolute_url(self):

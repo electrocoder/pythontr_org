@@ -5,12 +5,12 @@ from django.contrib import admin
 from pythontr_org.links.models import Link
 
 class LinkAdmin(admin.ModelAdmin):
-    list_display = ('title', 'href', 'confirmed')
+    list_display = ('title', 'anchor_tag', 'confirmed')
     search_fields = ['title', 'description']    
     date_hierarchy = 'created_at'
     
     list_filter = ('confirmed',)
-    
+
     actions = ['confirm', 'unconfirm']
     
     
