@@ -17,6 +17,7 @@ from django.contrib.auth import logout
 
 from pythontr_org.users.forms import UserSettings, ProfileForm, InviteFriendForm
 from pythontr_org.users.models import Profile
+from pythontr_org.users.mails import invite_friend_mail
 
 
 class SettingsView(TemplateView):
@@ -103,14 +104,16 @@ def invite_friends(request):
     """
         Üyelerin arkadaşlarını davet etmesini sağlayan fonksiyon.
     """
+    FriendsFormset = formset_factory(InviteFriendForm, extra=request.GET.get('extra', 3))
     
-    friends_formset = formset_factory(FriendForm, extra=3)
     
     if request.method == 'POST':
-        pass
-    else:
-        friend_forms = friends_formset()
+        friend_formset = FriendsFormset(request.POST, request.FILES)
         
+        if friend_formset.is_valid():
+            invite_friend_mail(request.user, friend_formset.cleaned_data)
+    else:
+        friend_formset = FriendsFormset()                
     
     return render(request, 'users/invite_friends.html', locals())
 

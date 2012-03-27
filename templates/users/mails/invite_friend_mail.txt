@@ -1,0 +1,14 @@
+{% load url from future %}
+
+Merhaba {{ form.name }}. Ben {{ user }}.
+
+Bu siteyi incelemeni öneririm. Bilginin paylaşıldığı bir yer.
+
+Python, Django, Tkinter ve daha nice konularda güzel yazılar
+var.
+
+Bu da benim kullanıcı profilim: {{ site }}{% url 'users:show_profile' user %}
+Buradan kayıt olabilirsin: {{ site }}{% url 'users:signup' %}
+
+
+{{ site_name }}

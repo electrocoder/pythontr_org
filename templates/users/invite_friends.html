@@ -8,9 +8,11 @@
 		<h1>Arkadaşlarını davet et</h1>
 	</div>
 		
-	<div class="span8">
+	<div class="span8">		
 		<form method="POST" class="form-horizontal">{% csrf_token %}
-			{% for form in friend_forms %}
+			{{ friend_formset.management_form }}
+			
+			{% for form in friend_formset.forms %}
 				<fieldset>
 					{% for field in form %}
 						<div class="control-group{% if field.errors %} error {% endif %}">
