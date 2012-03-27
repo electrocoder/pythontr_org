@@ -86,10 +86,10 @@ def signup(request):
     if form.is_valid():
         user = form.save()
         user.backend = 'django.contrib.auth.backends.ModelBackend'
+        user.groups.add(Group.objects.get('Sıradan üyeler'))
         
-        login(request, user)
-        
-        Profile.objects.create(user = user)
+        login(request, user)        
+        Profile.objects.create(user = user)        
         
         messages.success(request, u'Sisteme hoşgeldiniz. Sizi aramızda görmek bize büyük bir mutluluk verdi.')
         
