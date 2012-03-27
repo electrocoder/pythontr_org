@@ -1,0 +1,10 @@
+Uygulamanızdan haberler var!
+
+İletişim formu gönderildi.
+
+Başlık:	{{ form.title }}
+Email:	{{ form.email }}
+Website:	{{ form.web_site }}
+İçerik:
+	
+	{{ form.content }}

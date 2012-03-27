@@ -1,0 +1,5 @@
+Merhaba {{ user.username }}, yazar olma isteğin incelendi ve yazar olmak için
+gerekli nitelikleri, maalesef, taşımadığın sonucuna varıldı.
+
+
+PythonTR ekibi

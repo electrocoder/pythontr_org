@@ -1,0 +1,28 @@
+{% load url from future %}
+
+Merhaba {{ user.username }}, yazar olma isteğin incelendi ve yazar olmak için
+gerekli nitelikleri taşıdığın sonucuna varıldı.
+
+Artık gönderi gönderebilir, bilginin çoğalmasına fayda sağlayabilirsin.
+pythontr ekibi olarak seni tebrik ediyoruz.
+
+
+Peki nasıl gönderi ekleyebileceksin?
+
+Gönderi eklemek için giriş yaptıktan sonra, sol navigasyon barında
+'GONDERİ YONETIMI' başlığı altında bir iki bağlantı mevcut.
+
+'Yeni gönderi' bağlantısını takip edersen yeni gönderi ekleme
+sayfasına ulaşabilirsin.
+
+Bağlantı: {{ site.name }}{% url 'posts:new' %}
+
+
+Gönderi düzenlemek için yapman gereken, 'GONDERI YONETIMI' başlığı
+altında bulunan 'Gönderilerim' bağlantısını takip etmek.
+
+Bu bağlantı seni gönderilerinin bilgilerinin listelendiği bir sayfaya
+ulaştıracaktır. Bu sayfada gönderilerini silebilir, düzenleyebilirsin.
+	
+
+PythonTR ekibi
