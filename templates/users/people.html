@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block title %} Üyeler {% endblock %}
+
+{% block content %}
+
+	<div class="page-header">
+		<h1>Üyeler</h1>
+	</div>
+	
+	<div class="span8">
+		
+		{% include 'users/_list_users.html' %}
+		
+	</div>
+
+{% endblock %}

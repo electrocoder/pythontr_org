@@ -16,8 +16,15 @@ class ProfileAdmin(admin.ModelAdmin):
 
 class CoolUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
-    actions      = ['accept_author_requests', 'decline_author_requests']
-    authors_group = Group.objects.get(name='Yazarlar')
+    actions      = [
+                    'accept_author_requests',
+                    'decline_author_requests',
+                    'make_author',
+                    'make_standart_user'
+                    ]
+    
+    authors_group        = Group.objects.get(name='Yazarlar')
+    standart_users_group = Group.objects.get(name='Sıradan üyeler')
     
     
     def accept_author_requests(self, request, queryset):
@@ -41,7 +48,25 @@ class CoolUserAdmin(UserAdmin):
         self.message_user(request, u'Seçili kullanıcıların yazarlık başvuruları reddedildi.')
         
     decline_author_requests.short_description = u'Seçili kullanıcıların yazarlık başvurusunu reddet'
-
+    
+    
+    def make_author(self, request, queryset):
+        for user in queryset:
+            user.groups.clear()
+            user.groups.add(self.authors_group)
+            
+        self.message_user(request, u'Seçili kullanıcılar yazar yapıldı.')
+    make_author.short_description = u'Seçili kullanıcıları yazar yap (E-posta göndermez.)'
+    
+    
+    def make_standart_user(self, request, queryset):
+        for user in queryset:
+            user.groups.clear()
+            user.groups.add(self.standart_users_group)
+        
+        self.message_user(request, u'Seçili kullanıcılar sıradan üye yapıldı.')
+    make_standart_user.short_description = u'Seçili kullanıcıları standart üye yap (E-posta göndermez.)'
+    
 
 admin.site.register(Profile, ProfileAdmin)
 

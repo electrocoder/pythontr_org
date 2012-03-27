@@ -96,7 +96,42 @@ kitap, Django, Spyder, Django nedir, tkinter, py, *.py, pyton, {{ post.tags }}" 
           <a class="brand" href="{% url 'posts:index' %}">Python Programcıları</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li><a href="{% url 'posts:index' %}">Anasayfa</a></li>
+              <li class="dropdown">
+              	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              		Gönderiler
+              		<b class="caret"></b>
+              	</a>
+              	
+              	<ul class="dropdown-menu">
+              		<li>
+              			<a href="{% url 'posts:index' %}">
+              				<i class="icon-home"></i>
+              				Anasayfa
+              			</a>
+              		</li>
+              		<li>
+              			<a href="{% url 'posts:categories' %}">
+              				<i class="icon-th"></i>
+              				Kategoriler
+              			</a>
+              		</li>
+              		{% if perms.posts.add_post %}
+              			<li class="divider"></li>
+              			<li>
+              				<a href="{% url 'posts:new' %}">
+              					<i class="icon-plus"></i>
+              					Yeni
+              				</a>
+              			</li>
+              			<li>
+              				<a href="{% url 'posts:my_posts' %}">
+              					<i class="icon-list-alt"></i>
+              					Gönderilerim
+              				</a>
+              			</li>
+              		{% endif %}
+              	</ul>
+              </li>
               <li>
               	<a href="/polls/">Anketler</a>
               </li>
@@ -106,8 +141,23 @@ kitap, Django, Spyder, Django nedir, tkinter, py, *.py, pyton, {{ post.tags }}" 
               <li>
               	<a href="http://forum.pythontr.org">Soru/Cevap</a>
               </li>
-              <li>
-              	<a href="{% url 'users:authors' %}">Yazarlar</a>
+              <li class="dropdown">
+              	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              		Kişiler
+              		<b class="caret"></b>
+              	</a>
+              	<ul class="dropdown-menu">
+              		<li>
+              			<a href="{% url 'users:people' %}">
+              				<i class=" icon-user"></i> Üyeler
+              			</a>
+              		</li>
+              		<li>
+              			<a href="{% url 'users:authors' %}">
+              				<i class="icon-pencil"></i> Yazarlar
+              			</a>
+              		</li>
+              	</ul>
               </li>
               <li><a href="/about/">Hakkımızda</a></li>
               <li><a href="{% url 'contact' %}">İletişim</a></li>

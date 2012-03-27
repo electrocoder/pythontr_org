@@ -4,7 +4,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib.auth.views import login, logout, password_change
 
 from pythontr_org.users.views import SettingsView, AuthorListView,\
-UserPostListView
+UserPostListView, PeopleListView
 
 
 PASSWORD_CHANGE_DICT = {
@@ -16,6 +16,7 @@ PASSWORD_CHANGE_DICT = {
 urlpatterns = patterns('pythontr_org.users.views',
                        # yazarlar
                        url(r'^authors/$', AuthorListView.as_view(), name='authors'),
+                       url(r'^people/$', PeopleListView.as_view(), name='people'),
                        
                        # Giriş ve çıkış
                        url(r'^login/$', login, {'template_name': 'users/login.html'}, name='login'),

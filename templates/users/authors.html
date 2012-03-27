@@ -9,22 +9,7 @@
 	
 	<div class="span8">
 		
-		<ul class="thumbnails">
-			{% for author in user_list %}
-				  <li class="span2">
-				    <div class="thumbnail">
-				    	<a href="{% url users:show_profile author.username %}">
-				      		<img src="{{ author.get_profile.get_image }}" alt="">
-				      	</a>
-			      		<center>
-			      			<h5>{{ author }}</h5>
-			      		</center>
-				    </div>
-				  </li>
-			{% endfor %}
-		</ul>
-		
-		{% include '_pagination.html' %}
-		
+		{% include 'users/_list_users.html' %}
+				
 	</div>
 {% endblock %}

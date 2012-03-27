@@ -50,7 +50,15 @@ class CategoryPostListView(PostListView):
         
         return context
 
+
+class CategoryListView(ListView):
+    model      =  Category
+    paginate_by = 16
     
+    template_name        = 'posts/categories.html'
+    template_object_name = 'category_list'
+
+
 class MyPostListView(PostListView):
     template_name='posts/my_posts.html'
     paginate_by=6

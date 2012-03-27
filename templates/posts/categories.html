@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block title %} Kategoriler {% endblock %}
+
+{% block content %}
+
+	<div class="page-header">
+		<h1>Kategoriler</h1>
+	</div>
+	
+	<div class="span8">
+		
+		<ul class="thumbnails">
+			{% for category in category_list %}
+				<li class="span1">
+					<div class="thumbnail">
+						<a href="{{ category.get_absolute_url }}">
+							<img src="{{ category.image.url }}" alt="" />
+						</a>
+						<center>
+							<h5>{{ category }}</h5>
+						</center>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+		
+		{% include '_pagination.html' %}
+	</div>
+
+{% endblock %}

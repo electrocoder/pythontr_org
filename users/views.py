@@ -30,13 +30,18 @@ class SettingsView(TemplateView):
 
 class AuthorListView(ListView):
     template_name='users/authors.html'
-    paginate_by=4
+    paginate_by=8
     
     template_object_name='user'
     
-    group=get_object_or_404(Group, name='Yazarlar')
+    group=Group.objects.get(name='Yazarlar')
     queryset=group.user_set.filter(is_active=True)
 
+
+class PeopleListView(AuthorListView):
+    template_name='users/people.html'    
+    queryset=Group.objects.get(name='Sıradan üyeler').user_set.filter(is_active=True)
+    
 
 class UserPostListView(ListView):
     paginate_by=6

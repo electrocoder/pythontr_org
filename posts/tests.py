@@ -272,6 +272,13 @@ class PostAuthorFunctionalTests(TestCase):
 class CategoryAnonymousFunctionalTests(TestCase):
     fixtures = fixtures
     
+    def test_get_categories(self):
+        response = self.client.get(reverse('posts:categories'))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['category_list'])        
+        self.assertEqual(Category.objects.count(), len(response.context['category_list']))
+    
     
     def test_get_category_show(self):
         category   = Category.objects.get(pk=1)
