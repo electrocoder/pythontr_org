@@ -31,7 +31,7 @@ def new(request):
     if form.is_valid():
         link = form.save()
         
-        LinkAddedMail(link).send()
+        LinkAddedMail(link)
         
         messages.success(request, u'Teşekkürler. Bağlantı başarı ile eklendi. Yöneticiler onayladığında listede yerini alacaktır.')        
         return redirect('users:settings')

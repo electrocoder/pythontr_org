@@ -11,11 +11,9 @@ PATH = os.path.dirname(__file__)
 
 
 MEDIA_ROOT = PATH + '/media/'
-
 MEDIA_URL = '/media/' 
     
 STATIC_ROOT = PATH + 'static/'
-
 STATIC_URL = '/static/'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
@@ -28,9 +26,12 @@ STATICFILES_DIRS = (
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'yigitsadic@gmail.com'
+
+EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = '' # şşt uzaklaş bakalım ;-)
+
 EMAIL_PORT = 587
+FROM_EMAIL = EMAIL_HOST_USER
 
 
 ADMINS = (

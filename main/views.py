@@ -15,7 +15,7 @@ def contact(request):
     
     if form.is_valid():
         
-        ContactMail(form).send()
+        ContactMail(form)
         return redirect('posts:index')                    
     
     return render(request, 'main/contact.html', locals())
@@ -41,9 +41,9 @@ def became_an_author(request):
         # Üyeyi 'Yazar olmak isteyenler' adlı gruba ekle
         
         group.user_set.add(request.user)        
-        AuthorMail(request.user).send()
+        AuthorMail(request.user)
         
-        messages.success(request, u'İsteğiniz gönderilmiştir. Onaylandığında gönderi ekleyebileceksiniz.')        
+        messages.success(request, u'İsteğiniz gönderilmiştir. Onaylandığında gönderi ekleyebileceksiniz. Size e-posta yoluyla geri döneceğiz.')        
         return redirect('users:settings')
         
     return render(request, 'main/became_an_author.html', locals())

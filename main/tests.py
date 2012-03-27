@@ -92,7 +92,7 @@ class AuthorActionsForUser(TestCase):
         
         
         self.assertRedirects(response, reverse('users:settings'))
-        self.assertContains(response, u'İsteğiniz gönderilmiştir. Onaylandığında gönderi ekleyebileceksiniz.')
+        self.assertContains(response, u'İsteğiniz gönderilmiştir. Onaylandığında gönderi ekleyebileceksiniz. Size e-posta yoluyla geri döneceğiz.')
         
         self.assertTrue(self.user in group.user_set.all())
         self.assertEqual(len(mail.outbox), 1)

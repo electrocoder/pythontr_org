@@ -2,28 +2,21 @@
 
 from django.contrib.sites.models import Site
 
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
 from django.template import Context, loader
 
-from pythontr_org.settings import ADMINS
+from pythontr_org.settings import ADMINS, FROM_EMAIL
 
-
-FROM_EMAIL = 'yigitsadic@gmail.com'
 TO = [ email for name, email in ADMINS ]
 
 
 def ContactMail(form):
+    c = Context({'form': form.clean()})
     subject = u'İletişim formu gönderildi.'
     
-    c = Context({'form': form.clean()})
+    html_content = (loader.get_template('main/mails/contact.txt')).render(c)
     
-    html_content = (loader.get_template('emails/contact.html')).render(c)
-    text_content = (loader.get_template('emails/contact.txt')).render(c)
-    
-    message = EmailMultiAlternatives(subject, text_content, FROM_EMAIL, TO)
-    message.attach_alternative(html_content, 'text/html')
-    
-    return message
+    send_mail(subject, html_content, FROM_EMAIL, TO)
 
 
 def AuthorMail(user):
@@ -32,10 +25,6 @@ def AuthorMail(user):
 
     c = Context({'user': user, 'site': site})
     
-    html_content = (loader.get_template('emails/author.html')).render(c)
-    text_content = (loader.get_template('emails/author.txt')).render(c)
+    html_content = (loader.get_template('main/mails/author.txt')).render(c)
     
-    message = EmailMultiAlternatives(subject, text_content, FROM_EMAIL, TO)
-    message.attach_alternative(html_content, 'text/html')
-    
-    return message    
+    send_mail(subject, html_content, FROM_EMAIL, TO)

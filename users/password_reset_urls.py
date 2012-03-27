@@ -5,7 +5,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 PASSWORD_RESET_DICT = {
                        'post_reset_redirect': '/accounts/password_reset/done/',
-                       'email_template_name': 'emails/password_reset.html',
+                       'email_template_name': 'users/mails/password_reset.html',
                        'template_name': 'users/password_reset.html'
 }
 
