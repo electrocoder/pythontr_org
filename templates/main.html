@@ -268,6 +268,37 @@ kitap, Django, Spyder, Django nedir, tkinter, py, *.py, pyton, {{ post.tags }}" 
             		<li>
             			<a href="{% url 'links:new' %}">Yeni bağlantı ekle</a>
             		</li>
+            		<li class="nav-header">Kullanıcı işlemleri</li>
+            		<li>
+            			<a href="{% url 'users:password_change' %}">
+            				Parola değiştirme
+            			</a>
+            		</li>
+            		<li>
+            			<a href="{% url 'users:settings' %}">
+            				Hesabımı sil
+            			</a>
+            		</li>
+            		<li class="nav-header">Bilgiler</li>
+            		<li>
+            			<a href="{% url 'users:show_profile' user %}">Profilim</a>
+            		</li>
+            		<li>
+            			<a href="{% url 'users:update_informations' %}">
+            				Kişisel bilgilerimi düzenle
+            			</a>
+            		</li>
+            		<li>
+            			<a href="{% url 'users:update_profile' %}">
+            				Profilimi düzenle
+            			</a>
+            		</li>
+            		<li class="nav-header">Diğer</li>
+            		<li>
+            			<a href="{% url 'users:invite_friends' %}">
+            				Arkadaşlarımı davet et
+            			</a>
+            		</li>
             	{% endif %}
             
               <li class="nav-header">Son gönderilenler</li>
