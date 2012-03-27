@@ -1,7 +1,10 @@
 {% load url from future %}
-{% load post_tags %}
 
+{% load post_tags %}
+{% load flatpages %}
 {% load markup %}
+
+{% get_flatpages as flatpages %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -159,7 +162,22 @@ kitap, Django, Spyder, Django nedir, tkinter, py, *.py, pyton, {{ post.tags }}" 
               		</li>
               	</ul>
               </li>
-              <li><a href="/about/">Hakkımızda</a></li>
+              <li class="dropdown">
+              	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              		Sayfalar
+              		<b class="caret"></b>
+              	</a>
+              	
+              	<ul class="dropdown-menu">
+              		{% for flatpage in flatpages %}
+              			<li>
+              				<a href="{{ flatpage.url }}">
+              					<i class="icon-file"></i> {{ flatpage.title }}              					
+              				</a>
+              			</li>
+              		{% endfor %}
+              	</ul>
+              </li>
               <li><a href="{% url 'contact' %}">İletişim</a></li>
             </ul>
             

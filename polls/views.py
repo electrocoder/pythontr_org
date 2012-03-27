@@ -18,7 +18,7 @@ class PollListView(ListView):
 
 class PollDetailView(DetailView):
     template_name = 'polls/detail.html'
-    model = Poll
+    model         = Poll
 
 
     def get_context_data(self, **kwargs):
