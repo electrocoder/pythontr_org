@@ -7,16 +7,12 @@ from django.template import Context, loader
 
 from pythontr_org.settings import ADMINS
 
+
 FROM_EMAIL = 'yigitsadic@gmail.com'
 TO = [ email for name, email in ADMINS ]
 
 
 def ContactMail(form):
-    """
-        İletişim formu gönderildiğinde
-        yöneticilere email gönderir.
-    """
-    
     subject = u'İletişim formu gönderildi.'
     
     c = Context({'form': form.clean()})
@@ -31,12 +27,6 @@ def ContactMail(form):
 
 
 def AuthorMail(user):
-    """
-        Yazar olma isteği yapıldığında çalışır.
-        
-        Yöneticilere mail gönderir.
-    """
-    
     site = Site.objects.get_current()
     subject = u'Yazar olmak isteyen var!'
 

@@ -2,15 +2,21 @@
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
 
 from pythontr_org.links.models import Link
 from pythontr_org.links.forms import LinkForm
 from pythontr_org.links.mails import LinkAddedMail
-from pythontr_org.utils import LinkListView
 
+
+class LinkListView(ListView):
+    template_name='links/index.html'
+    template_object_name='link_list'
     
-index = LinkListView.as_view()
+    queryset=Link.objects.confirmed()
+    paginate_by=15    
 
 
 @login_required

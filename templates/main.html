@@ -183,14 +183,16 @@ kitap, Django, Spyder, Django nedir, tkinter, py, *.py, pyton, {{ post.tags }}" 
       <div class="row-fluid">
         <div class="span3">
           <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-            	<li class="nav-header">Gönderi yönetimi</li>
-            	{% if perms.posts.add_post %}            		
+            <ul class="nav nav-list">            	
+            	{% if perms.posts.add_post %}
+            		<li class="nav-header">Gönderi yönetimi</li>            		
             		{% include 'posts/_administration.html' %}
             	{% else %}
-            		<li>
-            			<a href="{% url 'became_an_author' %}">Yazar olmak için başvur</a>
-            		</li>
+            	    {% if user.is_authenticated %}
+	            		<li>
+	            			<a href="{% url 'became_an_author' %}">Yazar olmak için başvur</a>
+	            		</li>
+            		{% endif %}
             	{% endif %}
             	
             	{% if user.is_authenticated %}

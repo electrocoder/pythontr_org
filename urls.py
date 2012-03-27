@@ -11,8 +11,8 @@ admin.autodiscover()
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from pythontr_org.extra.feeds import RSS_URLS
-from pythontr_org.extra.sitemaps import SITEMAPS_URLS
+from pythontr_org.main.feeds import RSS_URLS
+from pythontr_org.main.sitemaps import SITEMAPS_URLS
 
 
 urlpatterns = SITEMAPS_URLS 
@@ -20,23 +20,19 @@ urlpatterns += RSS_URLS
 
 
 urlpatterns += patterns('',                       
-                       url(r'^errors/access_denied/$', 'pythontr_org.extra.views.access_denied', name = 'access_denied'),
-                       url(r'^accounts/became_an_author/$', 'pythontr_org.extra.views.became_an_author', name = 'became_an_author'),
-                       url(r'^contact/$', 'pythontr_org.extra.views.contact', name = 'contact'),
+                       url(r'^links/', include('pythontr_org.links.urls', namespace='links')),                                              
+                       url(r'^polls/', include('pythontr_org.polls.urls', namespace='polls')),
                        
-                       url(r'^links/', include('pythontr_org.links.urls', namespace = 'links')),                                              
-                       url(r'^polls/', include('pythontr_org.polls.urls', namespace = 'polls')),
-                       
-                       url(r'^accounts/', include('pythontr_org.users.urls', namespace = 'users')),
+                       url(r'^accounts/', include('pythontr_org.users.urls', namespace='users')),
                        
                        url(r'^tinymce/', include('tinymce.urls')),
                        
                        url(r'^admin/', include(admin.site.urls)),
-                          
-                       url(r'^', include('pythontr_org.posts.urls', namespace = 'posts')),            
+                       url(r'^', include('pythontr_org.main.urls')),                          
+                       url(r'^', include('pythontr_org.posts.urls', namespace='posts')),            
 )
 
 # static ve media klasörlerini sun.
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += staticfiles_urlpatterns()
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += staticfiles_urlpatterns()

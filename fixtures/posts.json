@@ -1,35 +1,81 @@
 [
     {
-        "pk": 1, 
-        "model": "posts.category", 
+        "pk": 6, 
+        "model": "posts.post", 
         "fields": {
-            "image": "category_images/django_square_logo.png", 
-            "name": "Django", 
-            "slug": "django"
+            "category": 1, 
+            "read_count": 0, 
+            "title": "Aliquam vehicula neque et tellus scelerisque luctus", 
+            "created_at": "2012-03-26T21:12:57.271", 
+            "author": 1, 
+            "updated_at": "2012-03-26T21:12:57.271", 
+            "content": "<p style=\"text-align: justify; font-size: 11px; line-height: 14px; margin-top: 0px; margin-right: 0px; margin-bottom: 14px; margin-left: 0px; font-family: Arial, Helvetica, sans; padding: 0px;\">Aliquam vehicula neque et tellus scelerisque luctus. Nullam nisl ante, fringilla at porttitor id, feugiat vel nisl. Ut vestibulum placerat elementum. Curabitur ac nulla sit amet orci fermentum aliquet. Vestibulum posuere turpis vel arcu porttitor gravida. Mauris vel massa leo. Nunc at urna eros. Nullam magna ligula, lobortis ac suscipit sit amet, bibendum at nunc. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>", 
+            "published": false, 
+            "slug": "aliquam-vehicula-neque-et-tellus-scelerisque-luctus", 
+            "tags": ""
         }
     }, 
     {
-        "pk": 2,
-        "model": "posts.category", 
+        "pk": 5, 
+        "model": "posts.post", 
         "fields": {
-            "image": "category_images/Tk.png", 
-            "name": "Tkinter", 
-            "slug": "tkinter"
+            "category": 2, 
+            "read_count": 0, 
+            "title": "Nullam placerat odio faucibus massa mollis volutpat", 
+            "created_at": "2012-03-26T21:12:35.479", 
+            "author": 1, 
+            "updated_at": "2012-03-26T21:12:35.479", 
+            "content": "<p style=\"text-align: justify; font-size: 11px; line-height: 14px; margin-top: 0px; margin-right: 0px; margin-bottom: 14px; margin-left: 0px; font-family: Arial, Helvetica, sans; padding: 0px;\">Nullam placerat odio faucibus massa mollis volutpat. Fusce risus tortor, condimentum et consequat nec, molestie aliquam lectus. Mauris risus est, pretium vitae dictum ac, vehicula eget orci. Aliquam vitae metus in leo ultricies imperdiet. Mauris quis libero ac nisi accumsan sagittis et nec lorem. Fusce sollicitudin ullamcorper nibh, et lacinia lorem tincidunt bibendum. Fusce ac augue dui, non viverra eros. Maecenas ligula odio, imperdiet quis posuere tristique, blandit et leo. Integer aliquet enim nec augue rutrum ultricies. Cras porta laoreet tortor sollicitudin interdum. Phasellus mi ligula, semper ac viverra at, elementum et leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>\r\n<div>&nbsp;</div>", 
+            "published": true, 
+            "slug": "nullam-placerat-odio-faucibus-massa-mollis-volutpat", 
+            "tags": ""
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "posts.post", 
+        "fields": {
+            "category": 2, 
+            "read_count": 0, 
+            "title": "Curabitur sapien massa, vehicula sed tempus eu, dignissim ut augue", 
+            "created_at": "2012-03-26T21:12:10.222", 
+            "author": 2, 
+            "updated_at": "2012-03-26T21:12:10.222", 
+            "content": "<p style=\"text-align: justify; font-size: 11px; line-height: 14px; margin-top: 0px; margin-right: 0px; margin-bottom: 14px; margin-left: 0px; font-family: Arial, Helvetica, sans; padding: 0px;\">Curabitur sapien massa, vehicula sed tempus eu, dignissim ut augue. Sed ut purus justo. Nulla non lacus nec lacus luctus sollicitudin vitae et erat. Vestibulum nisi ipsum, rhoncus at fringilla eget, facilisis sit amet nisl. Suspendisse ac elit enim. Quisque iaculis quam non nisl vulputate at ultrices dui sollicitudin. Ut sollicitudin ligula eget tortor vehicula commodo. Duis luctus hendrerit libero eget hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\r\n<div>&nbsp;</div>", 
+            "published": false, 
+            "slug": "curabitur-sapien-massa-vehicula-sed-tempus-eu-dignissim-ut-augue", 
+            "tags": ""
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "posts.post", 
+        "fields": {
+            "category": 2, 
+            "read_count": 0, 
+            "title": "Nam tempus tincidunt nisl, quis tempor dui commodo in", 
+            "created_at": "2012-03-26T21:11:48.865", 
+            "author": 2, 
+            "updated_at": "2012-03-26T21:11:48.865", 
+            "content": "<p style=\"text-align: justify; font-size: 11px; line-height: 14px; margin-top: 0px; margin-right: 0px; margin-bottom: 14px; margin-left: 0px; font-family: Arial, Helvetica, sans; padding: 0px;\">Nam tempus tincidunt nisl, quis tempor dui commodo in. Mauris facilisis consequat luctus. Maecenas cursus est sed arcu mollis vel rhoncus lorem lobortis. Sed eu erat eu dolor tincidunt suscipit. Nullam laoreet faucibus feugiat. Duis placerat tincidunt eros, sed mollis ligula bibendum id. Cras ut velit risus, eu vulputate nisi. Duis et faucibus magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris id diam sapien. Aenean dignissim feugiat euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>\r\n<div>&nbsp;</div>", 
+            "published": true, 
+            "slug": "nam-tempus-tincidunt-nisl-quis-tempor-dui-commodo-in", 
+            "tags": ""
         }
     }, 
     {
         "pk": 2, 
         "model": "posts.post", 
         "fields": {
-            "category": 2, 
+            "category": 1, 
             "read_count": 0, 
-            "title": "Vivamus ullamcorper felis semper ipsum condimentum convallis", 
-            "created_at": "2012-03-21 01:01:46", 
-            "author": 1, 
-            "updated_at": "2012-03-21 01:01:46", 
-            "content": "Vivamus ullamcorper felis semper ipsum condimentum convallis. Ut dui turpis, convallis non volutpat suscipit, adipiscing at libero. Donec at diam a nisl ornare egestas id sit amet libero. Integer vel convallis tellus. Pellentesque elementum sodales pellentesque. Maecenas tristique posuere commodo. Fusce faucibus sapien quis est lacinia gravida. Suspendisse enim eros, consequat ac lacinia in, mollis non libero. Fusce vitae orci ac enim venenatis tempor. Curabitur aliquet congue mauris a gravida. Nulla in tortor sed nisi placerat egestas et et mauris. Maecenas venenatis augue dapibus felis eleifend vel ullamcorper tellus tristique. Aliquam nec tortor dolor, sit amet molestie metus.\r\n\r\nSed dignissim, nisi at vestibulum dignissim, sem ligula sodales magna, tincidunt scelerisque ligula mi vitae metus. Pellentesque imperdiet feugiat sapien nec cursus. Fusce sed purus enim. In eu quam eget lorem tempor tincidunt eget ac nisl. Sed feugiat, nisi quis ultrices tincidunt, purus tellus dignissim risus, sit amet congue mauris nunc in dui. Fusce blandit ultrices est, et bibendum est rutrum id. Quisque ultricies feugiat ligula, vel mollis dui pretium ut. ", 
+            "title": "Nulla pellentesque rutrum sodales", 
+            "created_at": "2012-03-26T21:11:28.704", 
+            "author": 2, 
+            "updated_at": "2012-03-26T21:11:28.705", 
+            "content": "<p style=\"text-align: justify; font-size: 11px; line-height: 14px; margin-top: 0px; margin-right: 0px; margin-bottom: 14px; margin-left: 0px; font-family: Arial, Helvetica, sans; padding: 0px;\">Nulla pellentesque rutrum sodales. Phasellus lectus tellus, bibendum in consectetur at, interdum vel turpis. Fusce porta dignissim risus vitae venenatis. Suspendisse potenti. Proin sit amet lectus in nulla pharetra viverra. Sed adipiscing augue tincidunt ligula ultrices sollicitudin. Vestibulum adipiscing mi non magna vestibulum rutrum aliquet nisl sodales. Praesent ac erat sed arcu rhoncus auctor in non nisi. Cras porta vulputate sodales. Etiam vulputate velit nunc, nec euismod magna. Quisque eget volutpat lorem. Integer fermentum congue augue, sit amet vehicula metus iaculis eu.</p>", 
             "published": true, 
-            "slug": "vivamus-ullamcorper-felis-semper-ipsum-condimentum-convallis", 
+            "slug": "nulla-pellentesque-rutrum-sodales", 
             "tags": ""
         }
     }, 
@@ -39,13 +85,13 @@
         "fields": {
             "category": 1, 
             "read_count": 0, 
-            "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit", 
-            "created_at": "2012-03-21 01:01:17", 
+            "title": "Lorem ipsum dolor sit amet", 
+            "created_at": "2012-03-26T21:06:59.005", 
             "author": 1, 
-            "updated_at": "2012-03-21 01:01:17", 
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula dolor eu mauris porta ut molestie velit egestas. Quisque sit amet laoreet nibh. Phasellus vitae commodo velit. Nullam vestibulum velit vitae nibh pharetra rutrum. Sed sit amet sapien sem, interdum dictum neque. Vivamus interdum sollicitudin bibendum. Cras vestibulum est ac metus interdum vestibulum. Suspendisse potenti. Duis condimentum sem et leo euismod hendrerit.\r\n\r\nSed vestibulum ligula diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras quis lacus eu felis porta porta. Nullam posuere nisl vitae nulla sodales rhoncus vel non orci. Nulla facilisi. Sed sed metus libero, eget aliquet urna. Donec lorem leo, bibendum et vestibulum at, vehicula ac turpis. ", 
+            "updated_at": "2012-03-26T21:06:59.005", 
+            "content": "<p><span style=\"font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent orci magna, aliquam eget elementum in, ornare quis ante. Nam congue pulvinar diam ut luctus. Aenean dapibus sem ut urna mollis luctus. Nulla ornare molestie ipsum vitae cursus. Mauris pretium tortor id nulla blandit tincidunt. Phasellus sit amet velit vel velit accumsan tristique sed vitae eros. Nam egestas eros quis sapien tincidunt at mollis risus sodales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac nulla ut tortor dictum lobortis viverra ut lacus. Nullam elit risus, euismod blandit bibendum id, consequat vel felis. Suspendisse dapibus rutrum dolor, eget pellentesque dui commodo sit amet.</span></p>", 
             "published": true, 
-            "slug": "lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit", 
+            "slug": "lorem-ipsum-dolor-sit-amet", 
             "tags": ""
         }
     }

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.sitemaps import ping_google
 from django.core.exceptions import ValidationError
 
-from pythontr_org.slughifi import slugify_unicode
+from pythontr_org.utils import slugify_unicode
 
 
 class Category(models.Model):
@@ -27,8 +27,8 @@ class Category(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('posts:show_category', [self.slug]) 
-
-
+    
+    
     class Meta:
         verbose_name = "Kategori"
         verbose_name_plural = "Kategoriler"

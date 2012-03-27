@@ -5,7 +5,7 @@ from pythontr_org.links.models import Link
 from pythontr_org.polls.models import Poll
 
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
-from django.conf.urls.defaults import patterns
+from django.conf.urls.defaults import patterns, url
 
 
 post_dict = {
@@ -42,6 +42,6 @@ sitemaps = {
 
 
 SITEMAPS_URLS = patterns('django.contrib.sitemaps.views',
-    (r'^sitemap\.xml$', 'index', {'sitemaps': sitemaps}),
-    (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap', {'sitemaps': sitemaps}),
+    url(r'^sitemap\.xml$', 'index', {'sitemaps': sitemaps}),
+    url(r'^sitemap-(?P<section>.+)\.xml$', 'sitemap', {'sitemaps': sitemaps}),
 )

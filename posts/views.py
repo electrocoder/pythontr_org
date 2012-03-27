@@ -2,21 +2,69 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, permission_required
+from django.utils.decorators import method_decorator
 
 from django.contrib import messages
+from django.views.generic import ListView
 
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.posts.forms import PostForm
 
-from pythontr_org.utils import PostListView, PostSearchListView, CategoryPostListView,\
-                                MyPostListView
+
+class PostListView(ListView):
+    queryset=Post.objects.published()
+    paginate_by=20
+    
+    template_name='posts/index.html'
+    template_object_name='post'
 
 
-index = PostListView.as_view()
-search = PostSearchListView.as_view()
-category_show = CategoryPostListView.as_view()
-my_posts = MyPostListView.as_view()
+class PostSearchListView(PostListView):
+    template_name='posts/search.html'
+    
+    
+    def get_queryset(self):
+        return Post.objects.search(self.request.GET.get('q', ''))
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super(PostSearchListView, self).get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q', '')
+        
+        return context
 
+
+class CategoryPostListView(PostListView):
+    template_name='posts/category_show.html'
+    
+    
+    def get_queryset(self):
+        self.category=get_object_or_404(Category, slug=self.kwargs['slug'])
+        
+        return self.category.post_set.filter(published=True)
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super(CategoryPostListView, self).get_context_data(**kwargs)
+        context['category'] = self.category
+        
+        return context
+
+    
+class MyPostListView(PostListView):
+    template_name='posts/my_posts.html'
+    paginate_by=6
+    
+    
+    def get_queryset(self):
+        return self.request.user.post_set.all()
+    
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MyPostListView, self).dispatch(*args, **kwargs)
+
+    
 
 def show(request, category_slug, slug):
     """

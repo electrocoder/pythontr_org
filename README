@@ -15,19 +15,6 @@ Gerekli modüller:
 	textile - https://github.com/jsamsa/python-textile
 	TinyMCE - https://github.com/aljosa/django-tinymce
 	
-	
-Kullanmak için:
-	
-1) Gerekli modüllerin kurulu olduğundan emin olun.
-2) 'python maange.py syncdb' komutunu verin.
-3) 'bash migrate_all.sh' komutu yada 'python migrate <uygulama_adi>' komutu ile teker teker migrate edin.
-4) 'python manage.py runserver' komutu ile uygulamayı yerel olarak başlatın.
-5) Düzgün şekilde çalışması için:
-	'/admin/' sayfasına girip sırasıyla;
-	* 'Yazarlar', 'Yazar olmak isteyenler', 'Sıradan üyeler' adlarında gruplar oluşturun.
-	* Şu anda kullandığınız üyeyi 'Yazarlar' grubuna ekleyin.
-	* Profiller uygulamasına şu anda kullandığınız üyenin profilini oluşturun.
-		
-	* Düzsayfalar (Flatpages) uygulamasına girip adresi '/about/' olan bir düzsayfa oluşturun.
-6) 'settings.py' adlı dosyadaki email ayarlarını yapın. 
-7) Eğlenin :)
+
+Kullanım:
+	Yakında wiki sayfası yapılacaktır.

@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-    'posts' uygulaması için functional ve unit testleri
-"""
-
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
@@ -11,237 +7,292 @@ from pythontr_org.posts.models import Post, Category
 from django.contrib.auth.models import User
 
 
-class PostFunctionals(TestCase):
-    """
+NEW_DATA = {
+            'title': 'Lorem',
+            'category': 1,
+            'content': 'Text',
+            'published': True,
+}
+
+fixtures = ['categories.json', 'groups.json', 'users.json', 'posts.json', 'categories.json']
+
+
+class PostAnonymousFunctionalTests(TestCase):
+    fixtures = fixtures
     
-        'Post' modeli ile ilgili functional test.    
-        
-    """
+    def setUp(self):
+        self.post                = Post.objects.published()[0]
+                
+        self.new_redirect_url    = '%s?next=%s' % (reverse('users:login'), reverse('posts:new'))
+        self.edit_redirect_url   = '%s?next=%s' % (reverse('users:login'), reverse('posts:edit', args=[self.post.id]))
+        self.delete_redirect_url = '%s?next=%s' % (reverse('users:login'), reverse('posts:delete', args=[self.post.id]))
     
-    fixtures = ['auth.json', 'posts.json']
-    
-    def setUp(self):        
-        self.client.login(username='yigit', password='1234')
-        
-        self.post_informations = {
-                                 'title': 'Lorem',
-                                 'category': '1',
-                                 'content': u'laba laba löp löp',
-        }
-        
-        self.new_informations = {
-                                 'title': 'Lorem ipsum',
-                                 'category': '1',
-                                 'content': u'İlginç bir deneyim'
-        }
-        
     
     def test_get_index(self):
-        """
-        
-            Index sayfasına istek gönderir.
-            200 durum kodu döndürmelidir.
-            
-        """
-        
         response = self.client.get(reverse('posts:index'))
         
-        self.assertEqual(response.status_code, 200)        
-        self.assertIsNotNone(response.context['post_list']) # generic view
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['post_list'])        
+        self.assertEqual(Post.objects.published().count(), len(response.context['post_list']))
         
+        for post in response.context['post_list']:
+            self.assertTrue(post.published)
         
+    
     def test_get_show(self):
-        """
-        
-            Show sayfasına istek gönderir.
-            200 durum kodu döndürmelidir.
-            
-        """
-        
-        posts = Post.objects.filter(published = True)
+        posts = Post.objects.published()
         
         for post in posts:
-            response = self.client.get(post.get_absolute_url())
+            old_count = post.read_count
+            response  = self.client.get(reverse('posts:show', args=[post.category.slug, post.slug]))
             
             self.assertEqual(response.status_code, 200)
-            self.assertEqual(response.context['post'].title, post.title)
             
-            self.assertEqual(post.read_count + 1, response.context['post'].read_count)
+            # Her şey alan aynı mı test et.
             
+            self.assertEqual(post.title, response.context['post'].title)
+            self.assertEqual(post.slug, response.context['post'].slug)
+            self.assertEqual(post.content, response.context['post'].content)            
+            self.assertEqual(post.author, response.context['post'].author)
+            self.assertEqual(post.tags, response.context['post'].tags)
+                    
+            self.assertTrue(response.context['post'].published)
             
-    def test_get_show_should_return_404(self):
-        """
+            # Okunma sayısı artmış mı? - İki yoldan test et.
+            new_count = response.context['post'].read_count
+            
+            self.assertNotEqual(old_count, new_count)
+            self.assertEqual(old_count + 1, new_count)
+    
+    
+    def test_get_show_unpublished(self):
+        posts = Post.objects.filter(published=False)
         
-            Show sayfasına istek gönderir.
-            Yanlış bir id ile istek yapılır.
-            404 hata kodu döndürmelidir.
-            
-        """
-        
-        BAD_IDS = ['wrong-slug-one', 'wrong-and-bad-slug']
-        
-        for bad in BAD_IDS:
-            response = self.client.get(reverse('posts:show', args=['django', bad]))
+        for post in posts:
+            response = self.client.get(reverse('posts:show', args=[post.category.slug, post.slug]))
             
             self.assertEqual(response.status_code, 404)
+            self.assertFalse(post.published)
             
             
-    def test_should_search(self):
-        """
+    def test_get_search(self):
+        q        = 'Nullam'
+        response = self.client.get(reverse('posts:search'), {'q': q})
         
-            Search sayfasına istek gönderir.
-            django ve tkinter için arama yapar.
-            
-        """
-                
-        SEARCH_LIST = ('django', 'tkinter')
+        self.assertTrue(response.context['post_list'])
+        self.assertEqual(response.status_code, 200)
         
-        for q in SEARCH_LIST:
-            response = self.client.get(reverse('posts:search'), {'q': q})
+        for post in response.context['post_list']:
+            self.assertTrue(post.published)
+            self.assertTrue(q in post.content)
+        
             
-            self.assertIsNotNone(response.context['post_list'])
-    
-    
     def test_get_my_posts(self):
-        """
-            
-            Gönderilerim sayfasına erişmelidir.
-            
-        """
+        response = self.client.get(reverse('posts:my_posts'), follow=True)
         
-        response = self.client.get(reverse('posts:my_posts'))        
+        self.assertRedirects(response, '%s?next=%s' % (reverse('users:login'), reverse('posts:my_posts')))
         
-        self.assertEqual(response.status_code, 200)        
-        self.assertIsNotNone(response.context['post_list'])
+    
+    def test_get_new(self):
+        response = self.client.get(reverse('posts:new'), follow=True)
+        
+        self.assertRedirects(response, self.new_redirect_url)
+    
+    
+    def test_post_new(self):
+        response = self.client.post(reverse('posts:new'), NEW_DATA, follow=True)
+        
+        self.assertRedirects(response, self.new_redirect_url)
 
+
+    def test_get_edit(self):        
+        response = self.client.get(reverse('posts:edit', args=[self.post.id]))
         
-    def test_get_new_post(self):
-        """
+        self.assertRedirects(response, self.edit_redirect_url)
+        
+        
+    def test_post_edit(self):
+        response = self.client.post(reverse('posts:edit', args=[self.post.id]))
+        
+        self.assertRedirects(response, self.edit_redirect_url)
+        
+    
+    def test_get_delete(self):
+        response = self.client.get(reverse('posts:delete', args=[self.post.id]))
+        
+        self.assertRedirects(response, self.delete_redirect_url)
+        
+        
+# 'test_get_search' testlerine kadar olan testler aynı sonuca
+# ulaşacağından bu testleri tekrar etmek anlamsız.
+# O yüzden bu testler giriş yapmış kullanıcı için
+# atlanıcak.        
+
+class PostAuthorFunctionalTests(TestCase):
+    fixtures = fixtures
+    
+    
+    def setUp(self):
+        self.client.login(username='yigit', password='1234')
+        self.user = User.objects.get(username='yigit')
+        self.post = self.user.post_set.all()[0]
+        
+        
+        # Gönderi eklemek için ve düzenlemek için
+        # gerekli değerler.
+        
+        self.new_data = {
+                         'title': u'Selanik türküsü',
+                         'category': 1,
+                         'content': u'Mezarımı kazın bre dostlar',
+                         'published': True
+        }
+        
+        self.edit_data = {
+                          'title': u'Kızılcıklar oldu mu?',
+                          'category': 2,
+                          'content': u'Selelere doldu mu?',
+                          'published': True,
+        }
+        
+        
+    def test_get_my_posts(self):
+        posts_count = self.user.post_set.count()
+        response    = self.client.get(reverse('posts:my_posts'))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['post_list'])        
+        self.assertEqual(len(response.context['post_list']), posts_count)
+        
+        for post in response.context['post_list']:
+            self.assertTrue(post.author == self.user)
             
-            Yeni gönderi ekleme sayfasına girmeyi dener.
-        
-        """
-        
+
+    def test_get_new(self):
         response = self.client.get(reverse('posts:new'))
         
         self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(response.context['form'])
+        self.assertTrue(response.context['form'])
         
+    
+    def test_post_new(self):
+        old_post_count = self.user.post_set.count()
+        response       = self.client.post(reverse('posts:new'), self.new_data, follow=True)
+        post           = self.user.post_set.latest()
+        new_post_count = self.user.post_set.count()
         
-    def test_post_new_post(self):
-        """
-        
-            Yeni gönderi ekleme sayfasına bilgileri gönderir.
-        
-        """
-        
-        count = len(Post.objects.all())
-        latest_post = Post.objects.latest()
-        
-        response = self.client.post(reverse('posts:new'), self.post_informations)
-        
-        
-        latest_post_now = Post.objects.latest()
         
         self.assertRedirects(response, reverse('posts:my_posts'))
-        self.assertEqual(latest_post_now.title, self.post_informations['title'])        
+        self.assertNotEqual(old_post_count, new_post_count)
         
-        self.assertNotEqual(count, len(Post.objects.all()))
-        self.assertNotEqual(latest_post.title, latest_post_now.title)
-            
-
-    def test_edit_post(self):
-        """
+        self.assertEqual(old_post_count + 1, new_post_count)
+        self.assertContains(response, u'Gönderi başarı ile eklendi.')
         
-            Gönderiyi düzenleme testi.
+        self.assertEqual(post.title, self.new_data['title'])
+        self.assertEqual(post.content, self.new_data['content'])
         
-        """
+        self.assertEqual(post.category.id, self.new_data['category'])
+        self.assertEqual(post.published, self.new_data['published'])
         
-        post = Post.objects.latest()
         
-        response = self.client.get(reverse('posts:edit', args=[post.id]))
+    def test_get_edit(self):
+        response = self.client.get(reverse('posts:edit', args=[self.post.id]))
+        form     = response.context['form']
+        
         
         self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(response.context['post'])
+        self.assertTrue(response.context['form'])
         
-        self.assertEqual(response.context['post'].title, post.title)
-        self.assertIsNotNone(response.context['form'])
+        self.assertEqual(form['title'].value(), self.post.title)
+        self.assertEqual(form['category'].value(), self.post.category.id)
+        
+        self.assertEqual(form['content'].value(), self.post.content)
+        self.assertEqual(form['published'].value(), self.post.published)        
         
         
-    def test_update_post(self):
-        """
-        
-            Gönderiyi bilgilere göre düzenleme testi.
-        
-        """
-        
-        post = Post.objects.latest()
-                
-        response = self.client.post(reverse('posts:edit', args=[post.id]), self.new_informations)
+    def test_post_edit(self):        
+        response = self.client.post(reverse('posts:edit', args=[self.post.id]), self.edit_data, follow=True)
+        new_post = self.user.post_set.all()[0]
         
         self.assertRedirects(response, reverse('posts:my_posts'))
-        self.assertNotEqual(post.title, self.new_informations['title'])
+        self.assertContains(response, u'Gönderi başarı ile düzenlendi.')
         
-        self.assertEqual(Post.objects.latest().title, self.new_informations['title'])
-        
-        
-        
-    def test_delete_post(self):
-        """
-            
-            Gönderiyi silme testi.
-            
-        """
-        
-        post = Post.objects.latest()
-        count = len(Post.objects.all())
-        
-        response = self.client.get(reverse('posts:delete', args=[post.id]))
+        self.assertNotEqual(self.post.title, new_post.title)
+        self.assertNotEqual(self.post.content, new_post.content)
+        self.assertNotEqual(self.post.category, new_post.category)
+        self.assertNotEqual(self.post.published, new_post.published)
         
         
-        self.assertRedirects(response, reverse('posts:my_posts'))
-        self.assertNotEqual(count, len(Post.objects.all()))
-        
+    def test_get_delete(self):
+        old_post_count = self.user.post_set.count()
+        response       = self.client.get(reverse('posts:delete', args=[self.post.id]), follow=True)
+        new_post_count = self.user.post_set.count()
         
 
+        self.assertNotEqual(old_post_count, new_post_count)
+        self.assertRedirects(response, reverse('posts:my_posts'))
         
-class CategoryFunctionals(TestCase):
-    """
+        # Dikkat!
+        # " karakteri &quot; değerinde HTML'de
+        # assertContains'de "" != &quot;&quot;
+        
+        self.assertContains(response, u'&quot;%s&quot; başlıklı gönderi başarı ile silindi' % self.post.title)
+        
+        
+    def login_orhan(self):
+        """
+            orhan adlı kullanıcı ile giriş yapılır.
+        """
+        
+        self.client.logout()
+        self.client.login(username='orhan', password='1234')
     
-        'Category' modeli ile ilgili functional test.
-        
-    """
     
-    fixtures = ['posts.json']
+    # Yazar sadece kendi gönderilerini düzenleyebilir, silebilir.
+    # Eğer düzenlenen veya silinen gönderi yazara ait değilse
+    # /errors/access_denied/ sayfasına yönlendirilir.
         
+    def test_only_posts_author_can_edit(self):
+        self.login_orhan()
+        
+        response = self.client.get(reverse('posts:edit', args=[self.post.id]), follow=True)        
+        self.assertRedirects(response, reverse('access_denied'))
+        
+        
+    def test_only_posts_author_can_delete(self):
+        self.login_orhan()
+        
+        response = self.client.get(reverse('posts:delete', args=[self.post.id]), follow=True)
+        self.assertRedirects(response, reverse('access_denied'))
+
+
+# Aynı testi giriş yapmış kullanıcı için yapmaya gerek yok.
+# Çünkü bu testlerde giriş ile ilgili bir şey bulunmuyor.
+
+class CategoryAnonymousFunctionalTests(TestCase):
+    fixtures = fixtures
     
-    def test_should_get_show_category(self):
-        """
+    
+    def test_get_category_show(self):
+        category   = Category.objects.get(pk=1)
+        posts      = Post.objects.filter(published=True, category=category)
+        post_count = category.post_set.filter(published=True).count()
         
-            Her kategorideye bağlı gönderileri listeleme
-            testi.
+        response = self.client.get(reverse('posts:show_category', args=[category.slug]))
+        
+        self.assertTrue(response.context['post_list'])
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['post_list']), post_count)
+        
+        
+        for post in response.context['post_list']:
+            self.assertTrue(post.category == category)
+            self.assertTrue(post.published)
             
-        """
+    
+    def test_get_wrong_category(self):
+        category_slug = 'noncategory'
         
-        categories = Category.objects.all()
+        response = self.client.get(reverse('posts:show_category', args=[category_slug]))
         
-        for cat in categories:
-            response = self.client.get(cat.get_absolute_url())
-            
-            self.assertEqual(response.status_code, 200)
-            self.assertIsNotNone(response.context['post_list'])
-        
-            self.assertEqual(cat.post_set.count(), len(response.context['post_list']))
-            
-            
-    def test_should_raise_404_with_bad_id(self):
-        """
-        
-            Yanlış id verilirse 404 döndürmelidir.
-            
-        """
-        
-        response = self.client.get(reverse('posts:show_category', args=['hatali']))
-        
-        self.assertEqual(response.status_code, 404)
-         
+        self.assertEqual(response.status_code, 404)        

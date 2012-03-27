@@ -132,7 +132,7 @@ INSTALLED_APPS = (
     'pythontr_org.posts',
     'pythontr_org.links',
     'pythontr_org.users',
-    'pythontr_org.extra',    
+    'pythontr_org.main',    
     
     'disqus',
     'south',

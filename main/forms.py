@@ -2,8 +2,7 @@
 
 from django import forms
 
-class ContactForm(forms.Form):
-    
+class ContactForm(forms.Form):    
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
         

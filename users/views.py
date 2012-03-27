@@ -4,6 +4,10 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
 from django.contrib.auth import authenticate, login
+from django.forms.formsets import formset_factory
+
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView, DetailView, TemplateView
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -11,16 +15,60 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.contrib.auth import logout
 
-from pythontr_org.users.forms import UserSettings, ProfileForm
+from pythontr_org.users.forms import UserSettings, ProfileForm, InviteFriendForm
 from pythontr_org.users.models import Profile
 
-from pythontr_org.utils import AuthorListView, UserPostListView, SettingsView
 
-# class-based generic views
+class SettingsView(TemplateView):
+    template_name='users/settings.html'
+    
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SettingsView, self).dispatch(*args, **kwargs)
 
-profile = UserPostListView.as_view()
-authors = AuthorListView.as_view()
-settings = SettingsView.as_view()
+
+class AuthorListView(ListView):
+    template_name='users/authors.html'
+    paginate_by=4
+    
+    template_object_name='user'
+    
+    group=get_object_or_404(Group, name='Yazarlar')
+    queryset=group.user_set.filter(is_active=True)
+
+
+class UserPostListView(ListView):
+    paginate_by=6
+    template_name='users/profile.html'
+    
+    template_object_name='post'
+    
+    
+    def get_queryset(self):
+        self.tuser = get_object_or_404(User, username=self.kwargs['username'])
+        self.profile = self.tuser.get_profile()
+        
+        self.is_me = self.tuser.username == self.request.user
+        self.group = Group.objects.get(name='Yazarlar')
+        
+        if self.group.user_set.filter(username=self.tuser):
+            return self.tuser.post_set.filter(published=True)
+        else:
+            return []
+        
+    
+    def get_context_data(self, **kwargs):
+        context = super(UserPostListView, self).get_context_data(**kwargs)
+        
+        context.update({
+                            'is_me': self.is_me,
+                            'group': self.group,
+                            'profile': self.profile,
+                            'tuser': self.tuser,
+                        }) 
+        
+        return context
 
 
 def signup(request):
@@ -43,6 +91,23 @@ def signup(request):
         return redirect('users:settings')
         
     return render(request, 'users/signup.html', locals())
+
+
+@login_required
+def invite_friends(request):
+    """
+        Üyelerin arkadaşlarını davet etmesini sağlayan fonksiyon.
+    """
+    
+    friends_formset = formset_factory(FriendForm, extra=3)
+    
+    if request.method == 'POST':
+        pass
+    else:
+        friend_forms = friends_formset()
+        
+    
+    return render(request, 'users/invite_friends.html', locals())
 
 
 @login_required

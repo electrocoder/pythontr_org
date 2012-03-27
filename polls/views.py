@@ -6,14 +6,31 @@ from django.contrib.auth.decorators import login_required
 from pythontr_org.polls.models import Choice, Poll, Vote
 
 from django.core.exceptions import ValidationError
-from django.views.generic.list_detail import object_list
-
-from pythontr_org.utils import PollListView, PollDetailView
+from django.views.generic import ListView, DetailView
 
 
-index = PollListView.as_view()
-detail = PollDetailView.as_view()
-results = PollDetailView.as_view(template_name='polls/results.html')
+class PollListView(ListView):
+    template_name = 'polls/index.html'
+    paginate_by=15
+        
+    model = Poll
+    
+
+class PollDetailView(DetailView):
+    template_name = 'polls/detail.html'
+    model = Poll
+
+
+    def get_context_data(self, **kwargs):
+       context = super(PollDetailView, self).get_context_data(**kwargs)
+       
+       try:
+           vote = Vote.objects.get(user=self.request.user, poll=get_object_or_404(Poll, slug=self.kwargs['slug']))
+           context['vote'] = vote
+       except:
+           pass
+       
+       return context
 
 
 @login_required
@@ -26,6 +43,7 @@ def vote(request, slug):
     
     try:
         selected_choice = poll.choice_set.get(pk=request.POST['choice'])
+        
         vote = Vote(user=request.user, poll=poll, choice=Choice.objects.get(pk=request.POST['choice']))
         vote.save()
         
@@ -35,7 +53,7 @@ def vote(request, slug):
         error_message = u'Bir seçeneği seçmediniz.'
         
         return render(request, 'polls/detail.html', locals())
-    
+        
     except ValidationError:
         error_message = u'Bu ankete zaten oy kullanmışsınız.'
         
@@ -44,8 +62,5 @@ def vote(request, slug):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        
+
         return redirect('polls:results', poll.slug)

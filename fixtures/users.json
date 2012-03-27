@@ -1,12 +1,78 @@
 [
     {
         "pk": 1, 
-        "model": "users.profile", 
+        "model": "auth.user", 
         "fields": {
-            "web_site": "", 
-            "city": null, 
-            "about": "", 
-            "user": 1
+            "username": "yigit", 
+            "first_name": "Yi\u011fit", 
+            "last_name": "Sad\u0131\u00e7", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2012-03-26T21:00:14", 
+            "groups": [
+                1
+            ], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$Yr5ol2m1YRLV$ZYQvg1mY1VzlUQEKzIR6RO2kJklYkPioAmRUhf0j6OI=", 
+            "email": "yigitsadic@gmail.com", 
+            "date_joined": "2012-03-26T20:59:34"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "orhan", 
+            "first_name": "Orhan", 
+            "last_name": "G\u00fcler", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2012-03-26T21:06:41", 
+            "groups": [
+                1
+            ], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$b5J1BB7aA9x5$lYfQQBFYrnxkzv0pwYcElMNJdYMGPlfUF8R3rpdmhBk=", 
+            "email": "orhanguler@hotgmail.com", 
+            "date_joined": "2012-03-26T21:06:41"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "burcu", 
+            "first_name": "Burcu", 
+            "last_name": "Hoppidi", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2012-03-26T21:06:47", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$BeRmQWbxU0KE$pkB/y7602QEazpuNy+FmayEMKn+Zhakc7O+oO3doj3s=", 
+            "email": "hoppidi@hotmail.com", 
+            "date_joined": "2012-03-26T21:06:47"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "niyazi", 
+            "first_name": "Niyazi", 
+            "last_name": "\u015eenorman", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2012-03-26T21:06:52", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$eauuWszEGhCk$2vWv4bhDrz/up8tBzdJguS8+Gnjf8cPNZNzx2GXnAtY=", 
+            "email": "senormanniyazi@gmail.com", 
+            "date_joined": "2012-03-26T21:06:52"
         }
     }
 ]
