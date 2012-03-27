@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block title %} Arkadaşlarını davet et {% endblock %}
+
+{% block content %}
+	
+	<div class="page-header">
+		<h1>Arkadaşlarını davet et</h1>
+	</div>
+		
+	<div class="span8">
+		<form method="POST" class="form-horizontal">{% csrf_token %}
+			{% for form in friend_forms %}
+				<fieldset>
+					{% for field in form %}
+						<div class="control-group{% if field.errors %} error {% endif %}">
+							<label class="control-label" for="id_{{ field.html_name }}">{{ field.label }}</label>
+							<div class="controls">
+								{{ field }}
+								
+								{% if field.errors %}
+									<p class="help-block">{{ field.errors }}</p>
+								{% endif %}
+								
+								{% if field.help_text %}
+									<p class="help-block">{{ field.help_text }}</p>
+								{% endif %}
+							</div>
+						</div>
+					{% endfor %}					
+				</fieldset>				
+			{% endfor %}
+			<div class="form-actions">
+				<input type="hidden" name="next" value="{{ next }}" />
+				<button class="btn btn-primary" type="submit">Gönder</button>
+				<a onclick="history.back()" class="btn">Geri</a>
+			</div>
+		</form>
+	</div>
+	
+{% endblock %}

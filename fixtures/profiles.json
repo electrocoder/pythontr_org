@@ -1,0 +1,42 @@
+[
+    {
+        "pk": 1, 
+        "model": "users.profile", 
+        "fields": {
+            "web_site": "http://pythontr.org/accounts/profile/yigitsadic/", 
+            "city": "34", 
+            "about": "Django, Rails kullanmay\u0131 seviyorum.", 
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "users.profile", 
+        "fields": {
+            "web_site": "", 
+            "city": null, 
+            "about": "", 
+            "user": 2
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "users.profile", 
+        "fields": {
+            "web_site": "", 
+            "city": null, 
+            "about": "", 
+            "user": 3
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "users.profile", 
+        "fields": {
+            "web_site": "", 
+            "city": null, 
+            "about": "", 
+            "user": 4
+        }
+    }
+]

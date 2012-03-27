@@ -1,0 +1,20 @@
+[
+    {
+        "pk": 1, 
+        "model": "posts.category", 
+        "fields": {
+            "image": "category_images/django_square_logo_1.png", 
+            "name": "Django", 
+            "slug": "django"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "posts.category", 
+        "fields": {
+            "image": "category_images/Tk_1.png", 
+            "name": "Tkinter", 
+            "slug": "tkinter"
+        }
+    }
+]
