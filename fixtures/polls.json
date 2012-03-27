@@ -1,0 +1,96 @@
+[
+    {
+        "pk": 2, 
+        "model": "polls.poll", 
+        "fields": {
+            "created_at": "2012-03-27T18:40:58.342", 
+            "question": "Nullam viverra commodo adipiscing. Proin erat ipsum", 
+            "slug": "nullam-viverra-commodo-adipiscing-proin-erat-ipsum", 
+            "updated_at": "2012-03-27T18:42:27.418"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "polls.poll", 
+        "fields": {
+            "created_at": "2012-03-27T18:40:17.302", 
+            "question": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat felis sit amet tortor tincidunt molestie sed eget mi. ", 
+            "slug": "lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-proin-consequat-felis-sit-amet-tortor-tincidunt-molestie-sed-eget-mi", 
+            "updated_at": "2012-03-27T18:40:17.302"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "polls.choice", 
+        "fields": {
+            "votes": -1, 
+            "poll": 1, 
+            "choice": "Phasellus"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "polls.choice", 
+        "fields": {
+            "votes": 0, 
+            "poll": 1, 
+            "choice": "Convallis"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "polls.choice", 
+        "fields": {
+            "votes": 0, 
+            "poll": 1, 
+            "choice": "Maecenas"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "polls.choice", 
+        "fields": {
+            "votes": 0, 
+            "poll": 1, 
+            "choice": "Nullam"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "polls.choice", 
+        "fields": {
+            "votes": 0, 
+            "poll": 2, 
+            "choice": "Pellentesque"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "polls.choice", 
+        "fields": {
+            "votes": 0, 
+            "poll": 2, 
+            "choice": "Vestibulum"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "polls.choice", 
+        "fields": {
+            "votes": 1, 
+            "poll": 2, 
+            "choice": "Vivamus"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "polls.vote", 
+        "fields": {
+            "updated_at": "2012-03-27T18:42:56.862", 
+            "created_at": "2012-03-27T18:42:56.862", 
+            "poll": 2, 
+            "user": 1, 
+            "choice": 7
+        }
+    }
+]
