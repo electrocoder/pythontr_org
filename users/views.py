@@ -76,7 +76,6 @@ class UserPostListView(ListView):
         context = super(UserPostListView, self).get_context_data(**kwargs)
         
         context.update({
-                            'is_me': self.is_me,
                             'group': self.group,
                             'profile': self.profile,
                             'tuser': self.tuser,

@@ -117,6 +117,13 @@ class PollFunctionalTestsForAuthenticatedUser(TestCase):
         self.assertTrue(vote)
         self.assertEqual(vote[0].poll, self.poll1)
         self.assertEqual(vote[0].choice.id, 1)
+        
+    
+    def test_get_vote_back_for_voted(self):
+        response = self.client.get(reverse('polls:vote_back', args=[self.poll2.slug]), follow=True)
+        
+        
+        
 
     
 class VoteUnitTests(TestCase):
