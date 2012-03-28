@@ -1,20 +1,39 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from pythontr_org.users.models import Profile
-
 from django.contrib.auth.admin import UserAdmin
+
 from django.contrib.auth.models import User, Group
 
+from pythontr_org.users.models import Profile
 from pythontr_org.users.mails import decline_author_requests_mail, accept_author_requests_mail
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    search_fields = ['web_site', 'about', 'city']    
+    fieldsets = (
+                 (u'Profil bilgileri', {
+                            'fields': ('user', 'web_site', 'about', 'city')
+                         }),
+                 (u'Profil linkleri',
+                  {
+                            'fields': (
+                                            'django_people_profile',
+                                            'django_snippets_profile',
+                                            'tuxhub_profile',
+                                            'twitter_profile',
+                                            'github_profile'
+                                       )
+                  })
+    )
+    
+    
+    search_fields = ['web_site', 'about', 'city', 'user__username']    
     list_display  = ('user', 'web_site', 'city')
 
 
 class CoolUserAdmin(UserAdmin):
+    save_on_top = True
+    
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
     actions      = [
                     'accept_author_requests',
@@ -26,6 +45,18 @@ class CoolUserAdmin(UserAdmin):
     authors_group        = Group.objects.get(name='Yazarlar')
     standart_users_group = Group.objects.get(name='Sıradan üyeler')
     
+    list_filter = ('groups', 'is_active', 'is_staff')        
+    
+    
+    def save_model(self, request, obj, form, change):
+        if not obj.id:
+            obj.save()
+            
+            Profile.objects.create(user=obj)
+            User.objects.get(username=obj).groups.add(self.standart_users_group)
+        else:
+            obj.save()
+        
     
     def accept_author_requests(self, request, queryset):
         for user in queryset:

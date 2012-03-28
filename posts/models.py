@@ -5,8 +5,16 @@ from django.contrib.auth.models import User, Group
 
 from django.contrib.sitemaps import ping_google
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 
 from pythontr_org.utils import slugify_unicode
+
+
+GOOGLE_CODE_PRETTIFY = (u'''
+    <a href='http://google-code-prettify.googlecode.com/svn/trunk/README.html' target='_blank'>
+        Kod renklendirme için tıklayınız.
+    </a>
+''')
 
 
 class Category(models.Model):
@@ -30,7 +38,7 @@ class Category(models.Model):
     
     
     class Meta:
-        verbose_name = "Kategori"
+        verbose_name        = "Kategori"
         verbose_name_plural = "Kategoriler"
         
         ordering = ['name']
@@ -44,8 +52,9 @@ def validate_user_is_in_authors_group(value):
         Yazar değilse uyarı verir.
     """
     
-    user = User.objects.get(id = value)
+    user  = User.objects.get(id = value)
     group = Group.objects.get(name = 'Yazarlar')
+    
     if not user in group.user_set.all():
         raise ValidationError(u'%s adlı kullanıcı bir yazar değil.' % user.username)
         
@@ -63,8 +72,13 @@ class Post(models.Model):
     """
         Gönderileri depolamak için yapılmış model.
         
-        Gerekli olan alanlar;
-            author, title, category, slug, content, published, tags
+        'short_title': 35 karaktere kadar başlığı yazar
+        ondan sonra '...' koyar.
+        
+        'short_content': 125 karaktere kadar içeriği yazar
+        ondan sonra '...' koyar.
+        
+        'increase_read_count': Okunma sayısını 1 arttırır.
     """
     
     
@@ -83,13 +97,11 @@ class Post(models.Model):
     
     category = models.ForeignKey(Category, verbose_name = "Kategori")
     
-    slug = models.SlugField(
-                            "URL için uygun hali",
-    )
+    slug = models.SlugField("URL için uygun hali")
     
     content = models.TextField(
                                "Gönderinin içeriği",
-                               help_text = 'Bu alanda Textile işaretleme dili kullanabilirsiniz.',
+                               help_text = mark_safe('Bu alanda HTML kullanabilirsiniz. ' + GOOGLE_CODE_PRETTIFY),
     )
     
     published = models.BooleanField(
@@ -105,13 +117,12 @@ class Post(models.Model):
     
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-
     
     objects= PostManager()
     
-    
     def __unicode__(self):
         return self.title
+    
 
     @models.permalink
     def get_absolute_url(self):
@@ -146,14 +157,6 @@ class Post(models.Model):
     def increase_read_count(self):
         self.read_count += 1
         self.save()
-
-    def get_tags_as_list(self):
-        tags = []
-        for tag in self.tags.split(','):
-            tags.append(tag.strip())
-        
-        return tags
-    
          
     class Meta:
         verbose_name = "Gönderi"
@@ -161,4 +164,3 @@ class Post(models.Model):
         
         ordering = ['-created_at']
         get_latest_by = 'created_at'
-

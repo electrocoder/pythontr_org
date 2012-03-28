@@ -8,8 +8,7 @@
 	</div>
 	
 	<div class="span8">
-		<h2>Merhaba, {{ user.username }}.</h2> <br />
-		
+
 		{% if messages %}
 			{% for message in messages %}
 				<div class="alert alert-success">
@@ -18,11 +17,24 @@
 				</div>
 			{% endfor %}	
 		{% endif %}
+				
+		<p>
+			Merhaba <b>{{ user }}</b>, buradan kişisel bilgilerini düzenleme
+			bağlantılarına, profil bilgilerine ve daha bir çok bağlantıya
+			ulaşabilirsin.
+		</p>
 		
-		{% include 'users/_controls.html' %}
-		
-		{% if not perms.posts.add_post %}
+		{% if not perms.posts.add_post and not author_request_send %}
+			<p>
+				Gönderi eklemek mi istiyorsun?<br />
+				Bilgilerini paylaşmak mı istiyorsun?<br />
+				O halde yazarların arasına katıl.
+			</p>
 			<a href="{% url became_an_author %}" class="btn btn-primary btn-large">Yazar olmak istiyorum!</a>
 		{% endif %}
+		
+		<br /><br />
+		{% include 'users/_controls.html' %}
+		
 	</div>
 {% endblock %}

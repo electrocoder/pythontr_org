@@ -16,15 +16,15 @@ def ContactMail(form):
     
     html_content = (loader.get_template('main/mails/contact.txt')).render(c)
     
-    send_mail(subject, html_content, FROM_EMAIL, TO)
+    send_mail(subject, html_content, FROM_EMAIL, TO, True)
 
 
-def AuthorMail(user):
+def AuthorMail(user, form):
     site = Site.objects.get_current()
     subject = u'Yazar olmak isteyen var!'
 
-    c = Context({'user': user, 'site': site})
+    c = Context({'user': user, 'site': site, 'form': form})
     
     html_content = (loader.get_template('main/mails/author.txt')).render(c)
     
-    send_mail(subject, html_content, FROM_EMAIL, TO)
+    send_mail(subject, html_content, FROM_EMAIL, TO, True)

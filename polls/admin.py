@@ -9,7 +9,7 @@ class ChoiceInline(admin.TabularInline):
     extra = 1
 
 
-class PollAdmin(admin.ModelAdmin):
+class PollAdmin(admin.ModelAdmin):        
     fieldsets = [
         (None,               {'fields': ['question', 'slug']}),
     ]

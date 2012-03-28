@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from pythontr_org.posts.models import Post, Category
 from django.contrib import admin
+from django import forms
 
-from tinymce.widgets import TinyMCE
+from pythontr_org.posts.models import Post, Category
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -12,11 +12,27 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
+    fieldsets = (
+                 (u'Yazar ve kategori bilgileri',
+                  {
+                    'fields': ('author', 'category')
+                  }),
+                 (u'Başlık ve içerik',
+                  {
+                    'fields': ('title', 'slug', 'content')
+                 }),
+                 (u'Yayınlanma bilgileri',
+                  {
+                    'fields': ('published', 'tags', 'read_count')
+                  })
+    )
+    
+    save_on_top = True
     prepopulated_fields = {'slug': ('title', )}
     
     list_display  = ('title', 'category', 'author', 'published', 'read_count', 'created_at')    
     search_fields = ['title', 'content', 'tags']    
-    list_filter   = ('published', )
+    list_filter   = ('published', 'category', 'author')
     
     date_hierarchy = 'created_at'
     
@@ -40,7 +56,7 @@ class PostAdmin(admin.ModelAdmin):
     
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'content':
-            return db_field.formfield(widget=TinyMCE(
+            return db_field.formfield(widget=forms.Textarea(
                 attrs={'cols': 100, 'rows': 30},
             ))
         return super(PostAdmin, self).formfield_for_dbfield(db_field, **kwargs)

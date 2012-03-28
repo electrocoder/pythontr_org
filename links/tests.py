@@ -53,7 +53,7 @@ class LinkAnonymousFunctionalTests(TestCase):
         
         
 class LinkAuthenticatedUserFunctionalTests(TestCase):
-    fixtures = ['links.json', 'users.json']
+    fixtures = ['links.json', 'groups.json', 'users.json']
     
     
     def setUp(self):
@@ -104,5 +104,3 @@ class LinkUnitTests(TestCase):
         str  = "<a href='%s' target='_blank'>%s</a>" % (link.href, link.title)
         
         self.assertEqual(link.anchor_tag(), str)
-        
-        

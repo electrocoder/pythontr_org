@@ -9,20 +9,11 @@
 	</div>
 	
 	<div class="span8">
-
-		{% if is_me %}
-			{% include 'users/_controls.html' %}
-		{% endif %}
-
-	    <!--<ul class="thumbnails">
-		    <li class="span3">-->
-		    	<center>
-				    <a href="{{ tuser.get_profile.get_image }}">
-				    	<img src="{{ tuser.get_profile.get_image }}" alt="">
-				    </a>
-			    </center>
-		    <!--</li>
-	    </ul>-->
+    	<center>
+		    <a href="{{ tuser.get_profile.get_image }}">
+		    	<img src="{{ tuser.get_profile.get_image }}" alt="">
+		    </a>
+	    </center>
 		
 		<table class="table table-bordered">
 			<tr>
@@ -55,7 +46,7 @@
 			</tr>
 			<tr>
 				<th>
-					Hakkında
+					Hakkımda
 				</th>
 				<td>
 					{{ profile.about|textile }}
@@ -67,6 +58,78 @@
 					{{ profile.get_city_display }}
 				</td>
 			</tr>
+			
+			{% comment %}			
+				Profil bağlantılarını göster.
+				Böyle göstermek çok çirkin. Daha temiz bir yol bulmalısın!				
+			{% endcomment %}
+			
+			{% if profile.django_people_profile %}
+				<tr>
+					<th>
+						Django people profilim
+					</th>
+					<td>
+						<a href="{{ profile.django_people_profile }}" target="_blank">
+							{{ profile.django_people_profile }}
+						</a>
+					</td>
+				</tr>
+			{% endif %}
+			
+			{% if profile.django_snippets_profile %}
+				<tr>
+					<th>
+						Django snippets profilim
+					</th>
+					<td>
+						<a href="{{ profile.django_snippets_profile }}" target="_blank">
+							{{ profile.django_snippets_profile }}
+						</a>
+					</td>
+				</tr>
+			{% endif %}
+			
+			{% if profile.tuxhub_profile %}
+				<tr>
+					<th>
+						Tuxhub profilim
+					</th>
+					<td>
+						<a href="{{ profile.tuxhub_profile }}" target="_blank">
+							{{ profile.tuxhub_profile }}
+						</a>
+					</td>
+				</tr>
+			{% endif %}
+			
+			{% if profile.twitter_profile %}
+				<tr>
+					<th>
+						Twitter profilim
+					</th>
+					<td>
+						<a href="{{ profile.twitter_profile }}" target="_blank">
+							{{ profile.twitter_profile }}
+						</a>
+					</td>
+				</tr>
+			{% endif %}			
+			
+			{% if profile.github_profile %}
+				<tr>
+					<th>
+						Github profilim
+					</th>
+					<td>
+						<a href="{{ profile.github_profile }}" target="_blank">
+							{{ profile.github_profile }}
+						</a>
+					</td>
+				</tr>
+			{% endif %}									
+			
+			
 			{% if post_list %}
 				<tr>
 					<th>Gönderilerim</th>

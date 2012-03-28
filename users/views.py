@@ -23,6 +23,15 @@ from pythontr_org.users.mails import invite_friend_mail
 class SettingsView(TemplateView):
     template_name='users/settings.html'
     
+    def get_context_data(self, **kwargs):
+        context = super(SettingsView, self).get_context_data(**kwargs)        
+        group   = Group.objects.get(name='Yazar olmak isteyenler')
+        
+        if group.user_set.filter(username=self.request.user):
+            context['author_request_send'] = True
+        
+        return context    
+
     
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -31,7 +40,7 @@ class SettingsView(TemplateView):
 
 class AuthorListView(ListView):
     template_name='users/authors.html'
-    paginate_by=8
+    paginate_by=30
     
     template_object_name='user'
     
@@ -55,7 +64,6 @@ class UserPostListView(ListView):
         self.tuser = get_object_or_404(User, username=self.kwargs['username'])
         self.profile = self.tuser.get_profile()
         
-        self.is_me = self.tuser.username == self.request.user
         self.group = Group.objects.get(name='Yazarlar')
         
         if self.group.user_set.filter(username=self.tuser):
@@ -87,7 +95,7 @@ def signup(request):
     if form.is_valid():
         user = form.save()
         user.backend = 'django.contrib.auth.backends.ModelBackend'
-        user.groups.add(Group.objects.get('Sıradan üyeler'))
+        user.groups.add(Group.objects.get(name='Sıradan üyeler'))
         
         login(request, user)        
         Profile.objects.create(user = user)        

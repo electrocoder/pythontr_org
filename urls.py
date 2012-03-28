@@ -25,8 +25,6 @@ urlpatterns += patterns('',
                        
                        url(r'^accounts/', include('pythontr_org.users.urls', namespace='users')),
                        
-                       url(r'^tinymce/', include('tinymce.urls')),
-                       
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^', include('pythontr_org.main.urls')),                          
                        url(r'^', include('pythontr_org.posts.urls', namespace='posts')),            

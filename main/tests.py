@@ -1,29 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django.test import TestCase
-from django.contrib.flatpages.models import FlatPage
 
 from django.core import mail
 from django.core.urlresolvers import reverse
 
 from pythontr_org.settings import ADMINS
 from django.contrib.auth.models import User, Group
-
-
-class AboutPageTest(TestCase):
-    fixtures=['groups.json', 'flatpages.json']
-    
-    
-    def test_get_about(self):
-        response = self.client.get('/about/')
-        flatpage = FlatPage.objects.get(pk=1)
-        
-        
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.context['flatpage'])
-        
-        self.assertEqual(flatpage.title, response.context['flatpage'].title)
-        self.assertEqual(flatpage.content, response.context['flatpage'].content)
 
 
 class ContactTest(TestCase):
@@ -75,19 +58,24 @@ class AuthorActionsForUser(TestCase):
     
     
     def setUp(self):
+        self.group = Group.objects.get(name='Sıradan üyeler')
         self.client.login(username='niyazi', password='1234')
         self.user = User.objects.get(username='niyazi')
+        
+        self.user.groups.add(self.group)        
         
         
     def test_get_became_an_author(self):
         response = self.client.get(reverse('became_an_author'))
         
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, u'Yazar olmak istiyorum!')
     
     
     def test_post_became_an_author(self):
-        response = self.client.post(reverse('became_an_author'), follow=True)
+        data = {
+                'focused_on': "[GUI programlama]"
+        }
+        response = self.client.post(reverse('became_an_author'), data, follow=True)
         group    = Group.objects.get(name='Yazar olmak isteyenler')
         
         

@@ -13,7 +13,6 @@ Gerekli modüller:
 * South - http://south.aeracode.org/
 * disqus - https://github.com/arthurk/django-disqus
 * textile - https://github.com/jsamsa/python-textile
-* TinyMCE - https://github.com/aljosa/django-tinymce
 	
 
 Kullanım:

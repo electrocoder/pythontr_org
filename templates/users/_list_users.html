@@ -1,6 +1,6 @@
 <ul class="thumbnails">
 	{% for user in user_list %}
-		  <li class="span2">
+		  <li class="span1">
 		    <div class="thumbnail">
 		    	<a href="{% url users:show_profile user.username %}">
 		      		<img src="{{ user.get_profile.get_image }}" alt="">

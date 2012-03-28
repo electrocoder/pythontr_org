@@ -137,7 +137,6 @@ INSTALLED_APPS = (
     
     'disqus',
     'south',
-    'tinymce',
 )
 
 LOGGING = {

@@ -2,18 +2,19 @@
 
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
+
 from django.contrib import admin
+from django import forms
 
-from tinymce.widgets import TinyMCE
 
-
-class TinyMCEFlatPageAdmin(FlatPageAdmin):
+class LargeTextAreaFlatPageAdmin(FlatPageAdmin):
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'content':
-            return db_field.formfield(widget=TinyMCE(
+            return db_field.formfield(widget=forms.Textarea(
                 attrs={'cols': 100, 'rows': 30},
             ))
-        return super(TinyMCEFlatPageAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+        return super(LargeTextAreaFlatPageAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+
 
 admin.site.unregister(FlatPage)
-admin.site.register(FlatPage, TinyMCEFlatPageAdmin)
+admin.site.register(FlatPage, LargeTextAreaFlatPageAdmin)

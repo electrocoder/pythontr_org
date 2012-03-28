@@ -5,7 +5,7 @@
 {% block content %}
 	
 	<div class="page-header">
-		<h1>Yazar olma isteği</h1>
+		<h1>Yazar olma başvurusu</h1>
 	</div>
 	
 	<div class="span8">
@@ -19,12 +19,16 @@
 			<li>Gönderilerinizi silebilme</li>
 		</ul>
 		
-		<form method="POST">
-			{% csrf_token %}
-			
-			<button class="btn btn-primary btn-large">Yazar olmak istiyorum!</button>
-		</form>		
+		Önemli: Lütfen doğru bir e-posta adresi bildiriniz.<br />
+		Başvuru sonucu sizin e-posta adresinize gönderilecektir.<br />
+		E-posta adresini değiştirmek için lütfen
+		<a href="{% url users:update_informations %}">tıklayınız</a>.
+		<br />
 		
+		<fieldset>
+			<legend>Başvuru formu</legend>
+			{% include '_form.html' %}
+		</fieldset>
 	</div>
 	
 {% endblock %}

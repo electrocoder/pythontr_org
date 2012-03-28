@@ -14,7 +14,7 @@ NEW_DATA = {
             'published': True,
 }
 
-fixtures = ['categories.json', 'groups.json', 'users.json', 'posts.json', 'categories.json']
+fixtures = ['categories.json', 'groups.json', 'users.json', 'posts.json']
 
 
 class PostAnonymousFunctionalTests(TestCase):
