@@ -119,6 +119,9 @@ def invite_friends(request):
         
         if friend_formset.is_valid():
             invite_friend_mail(request.user, friend_formset.cleaned_data)
+            
+            messages.success(request, u'Arkadaşlarınıza davetiye gönderildi.')
+            return redirect(reverse('posts:settings'))
     else:
         friend_formset = FriendsFormset()                
     
