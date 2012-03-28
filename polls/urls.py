@@ -9,4 +9,5 @@ urlpatterns = patterns('pythontr_org.polls.views',
     url(r'^(?P<slug>[^/]*)/$', PollDetailView.as_view(), name='detail'),
     url(r'^(?P<slug>[^/]*)/results/$', PollDetailView.as_view(template_name='polls/results.html'), name='results'),
     url(r'^(?P<slug>[^/]*)/vote/$', 'vote', name='vote'),
+    url(r'^(?P<slug>[^/]*)/vote/back/', 'vote_back', name='vote_back'),
 )

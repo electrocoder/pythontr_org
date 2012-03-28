@@ -22,6 +22,7 @@
 			Bu ankete oy kullanmışsınız. <i>{{ vote.created_at|timesince }} önce.</i>
 			<br />
 			Oyunuz <b>{{ vote.choice.choice }}</b>
+			<a href="{% url polls:vote_back poll.slug %}">oyumu geri al</a>
 						
 		{% else %}
 				

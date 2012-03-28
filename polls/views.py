@@ -64,3 +64,15 @@ def vote(request, slug):
         selected_choice.save()
 
         return redirect('polls:results', poll.slug)
+
+    
+@login_required
+def vote_back(request, slug):
+    """ Ankete verilen oyu geri almak için kullanılır."""
+    
+    poll = get_object_or_404(Poll, slug=slug)
+    vote = get_object_or_404(Vote, user=request.user, poll=poll)
+    
+    vote.delete()
+    
+    return redirect('polls:detail', slug)
