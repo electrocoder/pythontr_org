@@ -18,17 +18,31 @@
 			<li>Gönderilerinizi düzenleyebilme</li>
 			<li>Gönderilerinizi silebilme</li>
 		</ul>
+		{% if user.email %}
+			<div class="alert">
+				<strong>Önemli</strong>
+				Lütfen doğru bir e-posta adresi bildiriniz.<br />
+				Başvuru sonucu sizin e-posta adresinize gönderilecektir.<br />
+				E-posta adresini değiştirmek için lütfen
+				<a href="{% url users:update_informations %}">tıklayınız</a>.
+			</div>
+		{% else %}
+			<div class="alert alert-error">
+				Lütfen bir e-posta adresi giriniz. Bu size ulaşmamız için
+				gerekli.<br />
+				
+				<a href="{% url users:update_informations %}">Burada</a>
+				e-posta adresinizi değiştirebilirsiniz.
+			</div>
+		{% endif %}
 		
-		Önemli: Lütfen doğru bir e-posta adresi bildiriniz.<br />
-		Başvuru sonucu sizin e-posta adresinize gönderilecektir.<br />
-		E-posta adresini değiştirmek için lütfen
-		<a href="{% url users:update_informations %}">tıklayınız</a>.
 		<br />
-		
-		<fieldset>
-			<legend>Başvuru formu</legend>
-			{% include '_form.html' %}
-		</fieldset>
+		{% if user.email %}
+			<fieldset>
+				<legend>Başvuru formu</legend>
+				{% include '_form.html' %}
+			</fieldset>
+		{% endif %}
 	</div>
 	
 {% endblock %}
