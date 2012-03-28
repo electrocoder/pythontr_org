@@ -41,7 +41,7 @@ def became_an_author(request):
     if request.method == 'POST':
         # Üyeyi 'Yazar olmak isteyenler' adlı gruba ekle
         
-        if form.is_valid():            
+        if form.is_valid() and request.user.email:            
             group.user_set.add(request.user)        
             AuthorMail(request.user, form.cleaned_data)
             
