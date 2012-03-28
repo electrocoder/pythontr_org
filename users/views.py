@@ -17,7 +17,7 @@ from django.contrib.auth import logout
 
 from pythontr_org.users.forms import UserSettings, ProfileForm, InviteFriendForm
 from pythontr_org.users.models import Profile
-from pythontr_org.users.mails import invite_friend_mail
+from pythontr_org.users.mails import invite_friend_mail, user_signed_up
 
 
 class SettingsView(TemplateView):
@@ -98,6 +98,8 @@ def signup(request):
         
         login(request, user)        
         Profile.objects.create(user = user)        
+        
+        user_signed_up(user)
         
         messages.success(request, u'Sisteme hoşgeldiniz. Sizi aramızda görmek bize büyük bir mutluluk verdi.')
         

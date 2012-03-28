@@ -1,0 +1,7 @@
+Uygulamanızdan haberler var!
+
+{{ site.name }} adlı siteye yeni bir kullanıcı kayıt oldu.
+
+Kullanıcı adı: {{ user }}
+
+{{ site.name }}/admin/auth/user/{{ user.id }}

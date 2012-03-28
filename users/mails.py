@@ -40,5 +40,12 @@ def invite_friend_mail(user, formset):
             
     send_mass_mail(messages, fail_silently=True)
     
+def user_signed_up(user):
+    subject = u'Üye kayıt oldu'
+    site = Site.objects.get_current()
     
+    c = Context({'user': user, 'site': site})
     
+    message = (loader.get_template('users/mails/user_signed_up.txt')).render(c)
+    
+    send_mail(subject, message, FROM_EMAIL, TO)
