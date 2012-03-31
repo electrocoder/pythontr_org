@@ -1,3 +1,5 @@
+{% load url from future %}
+
 Uygulamanızdan haberler var!
 
 {{ site.name }} adlı siteye yeni bir kullanıcı kayıt oldu.
@@ -5,3 +7,4 @@ Uygulamanızdan haberler var!
 Kullanıcı adı: {{ user }}
 
 {{ site.name }}/admin/auth/user/{{ user.id }}
+{{ site.name }}{% url 'users:show_profile' user }
