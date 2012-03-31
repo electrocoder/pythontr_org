@@ -73,7 +73,7 @@ class AuthorActionsForUser(TestCase):
     
     def test_post_became_an_author(self):
         data = {
-                'focused_on': "[GUI programlama]"
+                'focused_on': "GUI programlama"
         }
         response = self.client.post(reverse('became_an_author'), data, follow=True)
         group    = Group.objects.get(name='Yazar olmak isteyenler')
