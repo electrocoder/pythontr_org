@@ -11,9 +11,8 @@ from django.views.generic import ListView, DetailView
 
 class PollListView(ListView):
     template_name = 'polls/index.html'
-    paginate_by=15
-        
-    model = Poll
+    paginate_by   = 15        
+    model         = Poll
     
 
 class PollDetailView(DetailView):

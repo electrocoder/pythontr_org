@@ -12,7 +12,10 @@ fixtures = ['groups.json', 'users.json', 'polls.json']
 
 class PollFunctionalTestsForAnonymousUser(TestCase):
     fixtures = fixtures
-    poll     = Poll.objects.get(pk=1)
+    
+    
+    def setUp(self):
+        self.poll = Poll.objects.get(pk=1)
 
     
     def test_get_index(self):
@@ -122,9 +125,6 @@ class PollFunctionalTestsForAuthenticatedUser(TestCase):
     def test_get_vote_back_for_voted(self):
         response = self.client.get(reverse('polls:vote_back', args=[self.poll2.slug]), follow=True)
         
-        
-        
-
     
 class VoteUnitTests(TestCase):
     pass
