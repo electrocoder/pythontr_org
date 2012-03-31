@@ -49,7 +49,7 @@ class AuthorListView(ListView):
 
 
 class PeopleListView(AuthorListView):
-    template_name='users/people.html'    
+    template_name='users/people.html'
     queryset=Group.objects.get(name='Sıradan üyeler').user_set.filter(is_active=True)
     
 
