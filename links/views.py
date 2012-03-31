@@ -12,11 +12,11 @@ from pythontr_org.links.mails import LinkAddedMail
 
 
 class LinkListView(ListView):
-    template_name='links/index.html'
-    template_object_name='link_list'
+    template_name        = 'links/index.html'
+    template_object_name = 'link_list'
+    paginate_by          = 15
+    queryset             = Link.objects.confirmed()
     
-    queryset=Link.objects.confirmed()
-    paginate_by=15    
 
 
 @login_required
