@@ -45,12 +45,13 @@ class AuthorListView(ListView):
     template_object_name='user'
     
     group=Group.objects.get(name='Yazarlar')
-    queryset=group.user_set.filter(is_active=True)
+    queryset=group.user_set.filter(is_active=True).order_by('-date_joined')
 
 
 class PeopleListView(AuthorListView):
-    template_name='users/people.html'
-    queryset=Group.objects.get(name='Sıradan üyeler').user_set.filter(is_active=True)
+    template_name = 'users/people.html'
+    group         = Group.objects.get(name='Sıradan üyeler')
+    queryset      = group.user_set.filter(is_active=True).order_by('-date_joined')
     
 
 class UserPostListView(ListView):
