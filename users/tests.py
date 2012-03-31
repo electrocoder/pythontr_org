@@ -10,11 +10,12 @@ fixtures = ['groups.json', 'users.json', 'profiles.json', 'categories.json', 'po
 
 
 class UserFunctionalTestsForAnonymousUser(TestCase):
-    fixtures = fixtures
+    fixtures = fixtures    
     
     def setUp(self):
-        self.author_group = Group.objects.get(name='Yazarlar')
-        self.standart_user_group = Group.objects.get(name='Sıradan üyeler')
+        self.author_group          = Group.objects.get(name='Yazarlar')
+        self.standart_user_group   = Group.objects.get(name='Sıradan üyeler')
+        self.password_redirect_url = '%s?next=%s' % (reverse('users:login'), reverse('users:password_change'))
     
     
     def test_get_author_list(self):
@@ -47,19 +48,42 @@ class UserFunctionalTestsForAnonymousUser(TestCase):
         
     
     def test_post_signup(self):
-        pass
+        data = {
+                'username': 'gani',
+                'password1': '1234',
+                'password2': '1234'
+        }
+        
+        response = self.client.post(reverse('users:signup'), data, follow=True)
+        
+        self.assertRedirects(response, reverse('users:settings'))
+        self.assertEqual(User.objects.order_by('-date_joined')[0].username, 'gani')
+        
+        self.assertContains(response, u'Sisteme hoşgeldiniz. Sizi aramızda görmek bize büyük bir mutluluk verdi.')
     
     
     def test_get_login(self):
-        pass
+        response = self.client.get(reverse('users:login'))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['form'])
     
     
     def test_post_login(self):
-        pass
-    
+        data = {
+                'username': 'burcu',
+                'password': '1234'
+        }
+        
+        response = self.client.post(reverse('users:login'), data, follow=True)
+
+        self.assertRedirects(response, reverse('posts:index'))
+        
     
     def test_get_password_change(self):
-        pass
+        response = self.client.get(reverse('users:password_change'), follow=True)
+        
+        self.assertRedirects(response, self.password_redirect_url)
     
     
     def test_post_password_change(self):
