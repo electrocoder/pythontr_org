@@ -6,9 +6,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login
 from django.forms.formsets import formset_factory
 
-from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, TemplateView
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -19,9 +17,11 @@ from pythontr_org.users.forms import UserSettings, ProfileForm, InviteFriendForm
 from pythontr_org.users.models import Profile
 from pythontr_org.users.mails import invite_friend_mail, user_signed_up
 
+from pythontr_org.utils import ProtectedView
 
-class SettingsView(TemplateView):
-    template_name='users/settings.html'
+
+class SettingsView(TemplateView, ProtectedView):
+    template_name = 'users/settings.html'
     
     def get_context_data(self, **kwargs):
         context = super(SettingsView, self).get_context_data(**kwargs)        
@@ -30,22 +30,17 @@ class SettingsView(TemplateView):
         if group.user_set.filter(username=self.request.user):
             context['author_request_send'] = True
         
-        return context    
-
-    
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(SettingsView, self).dispatch(*args, **kwargs)
+        return context
 
 
 class AuthorListView(ListView):
-    template_name='users/authors.html'
-    paginate_by=30
+    template_name = 'users/authors.html'
+    paginate_by   = 30
     
-    template_object_name='user'
+    template_object_name = 'user'
     
-    group=Group.objects.get(name='Yazarlar')
-    queryset=group.user_set.filter(is_active=True).order_by('-date_joined')
+    group    = Group.objects.get(name='Yazarlar')
+    queryset = group.user_set.filter(is_active=True).order_by('-date_joined')
 
 
 class PeopleListView(AuthorListView):
@@ -55,10 +50,10 @@ class PeopleListView(AuthorListView):
     
 
 class UserPostListView(ListView):
-    paginate_by=6
-    template_name='users/profile.html'
+    paginate_by   = 6
+    template_name ='users/profile.html'
     
-    template_object_name='post'
+    template_object_name = 'post'
     
     
     def get_queryset(self):

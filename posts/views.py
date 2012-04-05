@@ -2,13 +2,14 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, permission_required
-from django.utils.decorators import method_decorator
 
 from django.contrib import messages
 from django.views.generic import ListView, CreateView
 
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.posts.forms import PostForm
+
+from pythontr_org.utils import ProtectedView
 
 
 class PostListView(ListView):
@@ -59,19 +60,13 @@ class CategoryListView(ListView):
     template_object_name = 'category_list'
 
 
-class MyPostListView(PostListView):
+class MyPostListView(PostListView, ProtectedView):
     template_name='posts/my_posts.html'
     paginate_by=6
     
     
     def get_queryset(self):
         return self.request.user.post_set.all()
-    
-    
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(MyPostListView, self).dispatch(*args, **kwargs)
-
     
 
 def show(request, category_slug, slug):

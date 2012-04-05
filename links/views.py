@@ -14,6 +14,7 @@ from pythontr_org.links.models import Link
 from pythontr_org.links.forms import LinkForm
 from pythontr_org.links.mails import LinkAddedMail
 
+from pythontr_org.utils import ProtectedView
 
 class LinkListView(ListView):
     template_name        = 'links/index.html'
@@ -22,7 +23,7 @@ class LinkListView(ListView):
     queryset             = Link.objects.confirmed()
 
 
-class NewLinkView(CreateView):
+class NewLinkView(CreateView, ProtectedView):
     template_name = 'links/new.html'    
     form_class    = LinkForm
     initial       = {  'href': 'http://'  }
@@ -38,6 +39,6 @@ class NewLinkView(CreateView):
         return redirect('users:settings')
     
     
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(NewLinkView, self).dispatch(*args, **kwargs)
+    #@method_decorator(login_required)
+    #def dispatch(self, *args, **kwargs):
+    #    return super(NewLinkView, self).dispatch(*args, **kwargs)
