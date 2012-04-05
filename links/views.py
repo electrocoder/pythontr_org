@@ -23,12 +23,9 @@ class LinkListView(ListView):
 
 
 class NewLinkView(CreateView):
-    template_name = 'links/new.html'
-    
-    form_class = LinkForm
-    initial = {
-               'href': 'http://'
-    }
+    template_name = 'links/new.html'    
+    form_class    = LinkForm
+    initial       = {  'href': 'http://'  }
     
     
     def form_valid(self, form):

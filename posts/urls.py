@@ -3,12 +3,13 @@
 from django.conf.urls.defaults import patterns, include, url
 
 from pythontr_org.posts.views import PostListView, PostSearchListView,\
-CategoryPostListView, MyPostListView, CategoryListView
+CategoryPostListView, MyPostListView, CategoryListView, NewPostView
 
 urlpatterns = patterns('pythontr_org.posts.views',
                        
                        url(r'^$', PostListView.as_view(), name='index'),                       
                        url(r'^posts/new/$', 'new', name='new'),
+                       url(r'^posts/new2/$', NewPostView.as_view(), name='new2'),                       
                        
                        url(r'^search/$', PostSearchListView.as_view(), name='search'),
                        url(r'^categories/$', CategoryListView.as_view(), name='categories'),                                         

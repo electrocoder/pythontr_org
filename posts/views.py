@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 
 from django.contrib import messages
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
 from pythontr_org.posts.models import Post, Category
 from pythontr_org.posts.forms import PostForm
@@ -108,6 +108,16 @@ def new(request):
 
     return render(request, 'posts/new.html', locals())
 
+
+class NewPostView(CreateView):
+    template_name = 'posts/new.html'
+    #form_class = PostForm
+    
+    def get_form_class(self):
+        post = Post(author = self.request.user)
+        
+        return PostForm(instance=post)
+    
 
 @permission_required('posts.change_post')
 def edit(request, id):
